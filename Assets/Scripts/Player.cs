@@ -7,6 +7,9 @@ public class Player : MonoBehaviour
     [SerializeField]
     private float moveForce = 10f;
     
+    [SerializeField]
+    private List<GameObject> collectibles;
+    
     private Rigidbody2D myBody;
     
     private SpriteRenderer sr;
@@ -75,5 +78,10 @@ public class Player : MonoBehaviour
         {
             anim.SetBool(BAKER_WALK_HORIZONTAL, false);
         }
+    }
+
+    public void AddCollectible(GameObject collectible)
+    {
+        collectibles.Add(collectible);
     }
 }
