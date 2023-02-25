@@ -11,7 +11,7 @@ public class FoodSpawner : MonoBehaviour
     
     private List<GameObject> spawnedFood;
 
-    [SerializeField] private float SPAWN_INF_TIME = 1f;
+    [SerializeField] private float SPAWN_MIN_TIME = 1f;
     [SerializeField] private float SPAWN_MAX_TIME = 5f;
     [SerializeField] private float DESTROY_TIME = 5f;
     
@@ -36,7 +36,7 @@ public class FoodSpawner : MonoBehaviour
     {
         while (true)
         {
-            yield return new WaitForSeconds(Random.Range(SPAWN_INF_TIME, SPAWN_MAX_TIME));
+            yield return new WaitForSeconds(Random.Range(SPAWN_MIN_TIME, SPAWN_MAX_TIME));
             
             int randomIndex = Random.Range(0, foodReference.Length);
             
@@ -51,10 +51,25 @@ public class FoodSpawner : MonoBehaviour
         }
     }
     
+    /**
+     * Destroys food after a certain time
+     * after it was spawned if it wasn't eaten.
+     */
     IEnumerator DestroyFood(GameObject food)
     {
         yield return new WaitForSeconds(DESTROY_TIME);
+        if (spawnedFood.Contains(food))
+        {
+            spawnedFood.Remove(food);
+            Destroy(food);
+        }
+    }
+    
+    /**
+     * Called by the player when he eats food
+     */
+    public void collectFood(GameObject food)
+    {
         spawnedFood.Remove(food);
-        Destroy(food);
     }
 }
