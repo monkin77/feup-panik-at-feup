@@ -22,19 +22,43 @@ public class Player : MonoBehaviour
     private float movementX;
     private float movementY;
     
+    private bool isAttacking;
+
+    private int weapon_idx = 0;
+
+    [SerializeField] private Weapon weapon;
     private void Awake()
     {
         myBody = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         
         sr = GetComponent<SpriteRenderer>();
+        weapon = transform.GetChild(0).GetChild(weapon_idx).gameObject.GetComponent<Weapon>();
     }
     
     // Update is called once per frame
     void Update()
     {
-        PlayerMoveKeyboard();
+        ListenKbEvents();
         AnimatePlayer();
+    }
+    
+    /**
+     * Checks if attack and move keys were pressed
+     * and act according to it
+     */
+    void ListenKbEvents()
+    {
+        if (!weapon.IsAttacking)
+        {
+            if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0))
+            {
+                Debug.Log("PLAYER SPACE EVENT");
+                weapon.IsAttacking = true;
+            }
+        }
+
+        PlayerMoveKeyboard();
     }
 
     void PlayerMoveKeyboard()
