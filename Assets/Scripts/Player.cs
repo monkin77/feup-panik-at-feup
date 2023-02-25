@@ -79,6 +79,7 @@ public class Player : MonoBehaviour
         }
         else if (movementY < 0)
         {
+            weapon.ChangeOrientation(WeaponOrientation.Down);
             anim.SetBool(BAKER_DOWN_ANIMATION, true);
         } 
         else
@@ -89,6 +90,7 @@ public class Player : MonoBehaviour
 
         if (movementX > 0)
         {
+            weapon.ChangeOrientation(WeaponOrientation.Left);
             anim.SetBool(BAKER_WALK_HORIZONTAL, true); 
             sr.flipX = false;
         }
