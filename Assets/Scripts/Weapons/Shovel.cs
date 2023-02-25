@@ -5,11 +5,10 @@ using UnityEngine;
 
 public class Shovel : Weapon
 {
-
-    public static int MAX_HORIZONTAL_ANGLE = 55;
-    public static int MAX_DOWN_ANGLE = 150;
+    public static int MAX_HORIZONTAL_ANGLE = 65;
+    public static int MAX_DOWN_ANGLE = 100;
     public static int MAX_UP_ANGLE = 40;
-    public static float SHOVEL_ROTATE_SPEED = 1f;
+    public static float SHOVEL_ROTATE_TIME = 0.2f;
     private bool goingUp = false;
 
     /**
@@ -39,12 +38,14 @@ public class Shovel : Weapon
         if (!_isAttacking)
             return;
 
+        float shovelRotateSpeed = maxAngle / SHOVEL_ROTATE_TIME * Time.deltaTime;
+
         // is attacking, rotate the shovel
         if (!goingUp)
         {
             if (transform.rotation.eulerAngles.z < maxAngle)
             {
-                transform.Rotate(new Vector3(0, 0, SHOVEL_ROTATE_SPEED));
+                transform.Rotate(new Vector3(0, 0, shovelRotateSpeed));
             }
             else
             {
@@ -53,9 +54,9 @@ public class Shovel : Weapon
         }
         else
         {
-            if (transform.rotation.eulerAngles.z > SHOVEL_ROTATE_SPEED)
+            if (transform.rotation.eulerAngles.z >= shovelRotateSpeed)
             {
-                transform.Rotate(new Vector3(0, 0, -SHOVEL_ROTATE_SPEED));
+                transform.Rotate(new Vector3(0, 0, -shovelRotateSpeed));
             }
             else
             {

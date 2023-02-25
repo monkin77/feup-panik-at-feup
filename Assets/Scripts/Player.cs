@@ -33,6 +33,7 @@ public class Player : MonoBehaviour
         anim = GetComponent<Animator>();
         
         sr = GetComponent<SpriteRenderer>();
+
         weapon = transform.GetChild(0).GetChild(weapon_idx).gameObject.GetComponent<Weapon>();
     }
     
@@ -49,24 +50,32 @@ public class Player : MonoBehaviour
      */
     void ListenKbEvents()
     {
-        if (!weapon.IsAttacking)
-        {
-            if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0))
-            {
-                Debug.Log("PLAYER SPACE EVENT");
-                weapon.IsAttacking = true;
-            }
-        }
-
+        AttackKeyboard();
         PlayerMoveKeyboard();
     }
 
+    /**
+     * Checks if attack key was pressed
+     */
+    void AttackKeyboard()
+    {
+        if (weapon.IsAttacking)
+            return;
+        
+        if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0))
+        {
+            weapon.IsAttacking = true;
+        }
+    }
+
+    /**
+     * Checks if move keys were pressed
+     */
     void PlayerMoveKeyboard()
     {
         movementX = Input.GetAxisRaw("Horizontal");
         movementY = Input.GetAxisRaw("Vertical");
         
-        //myBody.velocity = new Vector2(movementX * moveForce, myBody.velocity.y);
         transform.position += new Vector3(movementX * moveForce * Time.deltaTime, 
             movementY * moveForce * Time.deltaTime, 0);
     }
@@ -75,6 +84,7 @@ public class Player : MonoBehaviour
     {
         if (movementY > 0)
         {
+            weapon.ChangeOrientation(WeaponOrientation.Up);
             anim.SetBool(BAKER_UP_ANIMATION, true);
         }
         else if (movementY < 0)
@@ -90,12 +100,13 @@ public class Player : MonoBehaviour
 
         if (movementX > 0)
         {
-            weapon.ChangeOrientation(WeaponOrientation.Left);
+            weapon.ChangeOrientation(WeaponOrientation.Right);
             anim.SetBool(BAKER_WALK_HORIZONTAL, true); 
             sr.flipX = false;
         }
         else if (movementX < 0)
         {
+            weapon.ChangeOrientation(WeaponOrientation.Left);
             anim.SetBool(BAKER_WALK_HORIZONTAL, true);
             sr.flipX = true;
         }

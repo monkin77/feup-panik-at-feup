@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -18,12 +19,19 @@ public class Weapon : MonoBehaviour
         get { return _orientation; }
         set { _orientation = value; }
     }
+    
+    private SpriteRenderer sr;
 
     protected bool _isAttacking = false;
     public bool IsAttacking
     {
         get { return _isAttacking; }
         set { _isAttacking = value; }
+    }
+
+    private void Awake()
+    {
+        sr = GetComponent<SpriteRenderer>();
     }
 
     // Update is called once per frame
@@ -51,10 +59,13 @@ public class Weapon : MonoBehaviour
         if (newOrientation == _orientation)
             return;
         
+
         switch (newOrientation)
         {
             case WeaponOrientation.Left:
+                sr.sortingOrder = -1;
                 transform.rotation = Quaternion.Euler(0, 0, 0);
+                transform.localPosition = new Vector3(0.7f, 0.1f, -1f);
                 break;
             case WeaponOrientation.Right:
                 transform.rotation = Quaternion.Euler(0, 0, 180);
@@ -63,8 +74,13 @@ public class Weapon : MonoBehaviour
                 transform.rotation = Quaternion.Euler(0, 0, 90);
                 break;
             case WeaponOrientation.Down:
-                transform.rotation = Quaternion.Euler(0, 60, 0);
+                sr.sortingOrder = 1;
+                transform.rotation = Quaternion.Euler(0, 45, 0);
+                transform.localPosition = new Vector3(0f, 0f, 0f);
+
                 break;
         }
+        
+        _orientation = newOrientation;
     }
 }
