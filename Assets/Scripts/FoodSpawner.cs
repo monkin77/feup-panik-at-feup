@@ -32,23 +32,42 @@ public class FoodSpawner : MonoBehaviour
         StartCoroutine(SpawnFood());
     }
 
+    /**
+     * Spawn a random type of food in a random position
+     * After a certain time, destroy the food
+     */
     IEnumerator SpawnFood()
     {
         while (true)
         {
+            // Wait for a random time
             yield return new WaitForSeconds(Random.Range(SPAWN_MIN_TIME, SPAWN_MAX_TIME));
             
+            // Spawn random type of food
             int randomIndex = Random.Range(0, foodReference.Length);
             
+            // Spawn food at random position
             Vector3 position = new Vector3(Random.Range(SPAWN_X_MIN, SPAWN_X_MAX), 
                 Random.Range(SPAWN_Y_MIN, SPAWN_Y_MAX), 0);
             
+            // Check if food is already spawned at this position
+            List<Vector3> foodPositions = spawnedFood.ConvertAll(food => food.transform.position);
+            while (foodPositions.Contains(position))
+            {
+                position = new Vector3(Random.Range(SPAWN_X_MIN, SPAWN_X_MAX), 
+                    Random.Range(SPAWN_Y_MIN, SPAWN_Y_MAX), 0);
+            }
+
+            // Create new food
             GameObject newFood = Instantiate(foodReference[randomIndex]);
+            newFood.name = newFood.name.Replace("(Clone)", "");
             newFood.transform.position = position;
             
             spawnedFood.Add(newFood);
+            
+            // Destroy food after a certain time
             StartCoroutine(DestroyFood(newFood));
-        }
+        } // end while loop
     }
     
     /**
@@ -63,13 +82,5 @@ public class FoodSpawner : MonoBehaviour
             spawnedFood.Remove(food);
             Destroy(food);
         }
-    }
-    
-    /**
-     * Called by the player when he eats food
-     */
-    public void collectFood(GameObject food)
-    {
-        spawnedFood.Remove(food);
     }
 }

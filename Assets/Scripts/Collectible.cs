@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Collectible : MonoBehaviour
@@ -10,7 +8,7 @@ public class Collectible : MonoBehaviour
         if (target.CompareTag(BAKER_TAG))
         {
             target.GetComponent<Player>().AddCollectible(gameObject);
-            gameObject.SetActive(false);
+            Destroy(gameObject);
         }
     }
 }

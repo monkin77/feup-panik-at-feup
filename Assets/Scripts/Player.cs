@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Player : MonoBehaviour
@@ -8,10 +9,9 @@ public class Player : MonoBehaviour
     private float moveForce = 10f;
     
     [SerializeField]
-    private List<GameObject> collectibles;
+    private List<string> collectibles;
     
     private Rigidbody2D myBody;
-    
     private SpriteRenderer sr;
     
     private Animator anim;
@@ -21,7 +21,6 @@ public class Player : MonoBehaviour
 
     private float movementX;
     private float movementY;
-
     
     private void Awake()
     {
@@ -82,6 +81,7 @@ public class Player : MonoBehaviour
 
     public void AddCollectible(GameObject collectible)
     {
-        collectibles.Add(collectible);
+        collectibles.Add(collectible.name);
+        Debug.Log("Collectible: " + collectible.name +  " list: " + collectibles[0]);
     }
 }
