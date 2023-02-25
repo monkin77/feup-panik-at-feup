@@ -65,13 +65,16 @@ public class Weapon : MonoBehaviour
             case WeaponOrientation.Left:
                 sr.sortingOrder = -1;
                 transform.rotation = Quaternion.Euler(0, 0, 0);
-                transform.localPosition = new Vector3(0.7f, 0.1f, -1f);
+                transform.localPosition = new Vector3(0.7f, 0.1f, 0f);
                 break;
             case WeaponOrientation.Right:
-                transform.rotation = Quaternion.Euler(0, 0, 180);
+                sr.sortingOrder = 1;
+                transform.rotation = Quaternion.Euler(0, 180, 0);
+                transform.localPosition = new Vector3(0.9f, -0.3f, 0f);
                 break;
             case WeaponOrientation.Up:
-                transform.rotation = Quaternion.Euler(0, 0, 90);
+                transform.rotation = Quaternion.Euler(0, 120, 0);
+                transform.localPosition = new Vector3(1.5f, -0.2f, 0f);
                 break;
             case WeaponOrientation.Down:
                 sr.sortingOrder = 1;

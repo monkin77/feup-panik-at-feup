@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 
@@ -7,8 +5,8 @@ public class Shovel : Weapon
 {
     public static int MAX_HORIZONTAL_ANGLE = 65;
     public static int MAX_DOWN_ANGLE = 100;
-    public static int MAX_UP_ANGLE = 40;
-    public static float SHOVEL_ROTATE_TIME = 0.2f;
+    public static int MAX_UP_ANGLE = 50;
+    public static float SHOVEL_ROTATE_TIME = 0.15f;
     private bool goingUp = false;
 
     /**
@@ -34,7 +32,7 @@ public class Shovel : Weapon
                 maxAngle = MAX_HORIZONTAL_ANGLE;
                 break;
         }
-        
+
         if (!_isAttacking)
             return;
 
