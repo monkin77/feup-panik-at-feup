@@ -69,7 +69,7 @@ public class FoodSpawner : MonoBehaviour
             StartCoroutine(DestroyFood(newFood));
         } // end while loop
     }
-    
+
     /**
      * Destroys food after a certain time
      * after it was spawned if it wasn't eaten.

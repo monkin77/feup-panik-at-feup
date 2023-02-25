@@ -82,6 +82,5 @@ public class Player : MonoBehaviour
     public void AddCollectible(GameObject collectible)
     {
         collectibles.Add(collectible.name);
-        Debug.Log("Collectible: " + collectible.name +  " list: " + collectibles[0]);
     }
 }

@@ -8,7 +8,7 @@ public class Collectible : MonoBehaviour
         if (target.CompareTag(BAKER_TAG))
         {
             target.GetComponent<Player>().AddCollectible(gameObject);
-            Destroy(gameObject);
+            gameObject.SetActive(false);
         }
     }
 }
