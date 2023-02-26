@@ -7,8 +7,8 @@ public class Rpg : Weapon
     public static string BULLET_TAG = "Bullet";
     public static float BULLET_SPEED = 5f;
     public static float RECOIL_TIME = 0.15f;
-    public static float MAX_HORIZONTAL_REC_DISTANCE = 0.5f;
-    public static float MAX_VERTICAL_REC_DISTANCE = 0.3f;
+    public static float MAX_HORIZONTAL_REC_DISTANCE = 0.15f;
+    public static float MAX_VERTICAL_REC_DISTANCE = 0.08f;
     private float lastRecoilDistance = 0f;
     private bool recoilling = false;
     private bool firstShot = true;
@@ -29,7 +29,7 @@ public class Rpg : Weapon
         switch (_orientation)
         {
             case WeaponOrientation.Down:
-                recoilDirection = Vector2.down;
+                recoilDirection = Vector2.up;
                 recoilDistance = MAX_VERTICAL_REC_DISTANCE;
                 break;
             case WeaponOrientation.Up:
@@ -37,15 +37,16 @@ public class Rpg : Weapon
                 recoilDistance = MAX_VERTICAL_REC_DISTANCE;
                 break;
             case WeaponOrientation.Left:
-                recoilDirection = Vector2.left;
+                recoilDirection = Vector2.right;
                 recoilDistance = MAX_HORIZONTAL_REC_DISTANCE;
                 break;
             case WeaponOrientation.Right:
-                recoilDirection = Vector2.right;
+                recoilDirection = Vector2.left;
                 recoilDistance = MAX_HORIZONTAL_REC_DISTANCE;
                 break;
         }
         
+        // first shot, create a new bullet
         if (firstShot && rpgAmmo.Count > 0)
         {
             firstShot = false;
@@ -65,7 +66,7 @@ public class Rpg : Weapon
             if (lastRecoilDistance < recoilDistance)
             {
                 Vector2 recoilVector = recoilSpeed * Time.deltaTime * recoilDirection;
-                transform.position -= new Vector3(recoilVector.x, recoilVector.y, 0);
+                transform.position += new Vector3(recoilVector.x, recoilVector.y, 0);
                 lastRecoilDistance += recoilSpeed * Time.deltaTime;
             }
             else
@@ -76,7 +77,7 @@ public class Rpg : Weapon
             if (lastRecoilDistance > 0)
             {
                 Vector2 recoilVector = recoilSpeed * Time.deltaTime * recoilDirection;
-                transform.position += new Vector3(recoilVector.x, recoilVector.y, 0);
+                transform.position -= new Vector3(recoilVector.x, recoilVector.y, 0);
                 lastRecoilDistance -= recoilSpeed * Time.deltaTime;
             }
             else
@@ -111,13 +112,18 @@ public class Rpg : Weapon
                 transform.localPosition = new Vector3(1f, -0.3f, 0f);
                 break;
             case WeaponOrientation.Up:
+                sr.sortingOrder = 1;
+
                 transform.rotation = Quaternion.Euler(0, 120, 0);
                 transform.localPosition = new Vector3(1.8f, -0.1f, 0f);
                 break;
             case WeaponOrientation.Down:
-                sr.sortingOrder = 1;
-                transform.rotation = Quaternion.Euler(0, 120, 0);
-                transform.localPosition = new Vector3(0f, -0.2f, 0f);
+                // Move the weapon behind the player
+                sr.sortingOrder = -1;
+
+                // Adjust the weapon rotation and position
+                transform.rotation = Quaternion.Euler(0, 230, 0);
+                transform.localPosition = new Vector3(0.1f, -0.2f, 0f);
 
                 break;
         }
