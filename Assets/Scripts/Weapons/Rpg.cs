@@ -49,7 +49,7 @@ public class Rpg : Weapon
 
             if (lastRecoilDistance < recoilDistance)
             {
-                transform.position += recoilSpeed * Time.deltaTime * recoilDirection;
+                transform.position -= recoilSpeed * Time.deltaTime * recoilDirection;
                 lastRecoilDistance += recoilSpeed * Time.deltaTime;
             }
             else
@@ -59,7 +59,7 @@ public class Rpg : Weapon
         {
             if (lastRecoilDistance > 0)
             {
-                transform.position -= recoilSpeed * Time.deltaTime * recoilDirection;
+                transform.position += recoilSpeed * Time.deltaTime * recoilDirection;
                 lastRecoilDistance -= recoilSpeed * Time.deltaTime;
             }
             else
