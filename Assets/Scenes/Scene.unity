@@ -759,6 +759,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 780431605, guid: 0780414129f7ba84f8863b16c2e956df, type: 3}
+      propertyPath: m_TagString
+      value: Weapon
+      objectReference: {fileID: 0}
     - target: {fileID: 2075478858, guid: 0780414129f7ba84f8863b16c2e956df, type: 3}
       propertyPath: moveForce
       value: 2

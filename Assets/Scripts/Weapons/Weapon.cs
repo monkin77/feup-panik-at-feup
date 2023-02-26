@@ -63,4 +63,9 @@ public class Weapon : MonoBehaviour
     public virtual void AddAmmo(Collectible ammo)
     {
     }
+
+    /**
+    * Resets the weapon to its original state
+    */
+    protected virtual void stopAttacking() {}
 }

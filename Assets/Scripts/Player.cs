@@ -43,7 +43,7 @@ public class Player : MonoBehaviour
         }
 
         _weaponCount = weaponList.Count;
-        weaponList[weaponIdx].gameObject.SetActive(true);
+        weaponList[this.weaponIdx].gameObject.SetActive(true);
     }
 
     // Update is called once per frame

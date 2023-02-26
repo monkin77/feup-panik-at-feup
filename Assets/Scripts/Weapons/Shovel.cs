@@ -9,6 +9,9 @@ public class Shovel : Weapon
     public static float SHOVEL_ROTATE_TIME = 0.15f;
     private bool goingUp = false;
 
+    // The current max angle for the shovel attack animation (changes w/ orientation)
+    private float _currMaxAngle = MAX_DOWN_ANGLE;
+
     /**
      * Attack method for the shovel.
      * The shovel will rotate back and forth between 0 and MAX_ANGLE degrees.
@@ -16,32 +19,15 @@ public class Shovel : Weapon
      */
     public override void Attack()
     {
-        var maxAngle = 0;
-        switch (_orientation)
-        {
-            case WeaponOrientation.Down:
-                maxAngle = MAX_DOWN_ANGLE;
-                break;
-            case WeaponOrientation.Up:
-                maxAngle = MAX_UP_ANGLE;
-                break;
-            case WeaponOrientation.Left:
-                maxAngle = MAX_HORIZONTAL_ANGLE;
-                break;
-            case WeaponOrientation.Right:
-                maxAngle = MAX_HORIZONTAL_ANGLE;
-                break;
-        }
-
-        if (!_isAttacking)
+        if (!this._isAttacking)
             return;
 
-        float shovelRotateSpeed = maxAngle / SHOVEL_ROTATE_TIME * Time.deltaTime;
+        float shovelRotateSpeed = this._currMaxAngle / SHOVEL_ROTATE_TIME * Time.deltaTime;
 
         // is attacking, rotate the shovel
         if (!goingUp)
         {
-            if (transform.rotation.eulerAngles.z < maxAngle)
+            if (transform.rotation.eulerAngles.z < this._currMaxAngle)
             {
                 transform.Rotate(new Vector3(0, 0, shovelRotateSpeed));
             }
@@ -58,8 +44,7 @@ public class Shovel : Weapon
             }
             else
             {
-                goingUp = false;
-                _isAttacking = false;
+                this.stopAttacking();
             }
         }
     }
@@ -69,34 +54,55 @@ public class Shovel : Weapon
      */
     public override void ChangeOrientation(WeaponOrientation newOrientation)
     {
+        // If the orientation is the same, do nothing
         if (newOrientation == _orientation)
             return;
         
+        if (this._isAttacking) this.stopAttacking();
+
         switch (newOrientation)
         {
             case WeaponOrientation.Left:
+                // Move the shovel behind the player
                 sr.sortingOrder = -1;
+
+                // Adjust the shovel position and rotation
                 transform.rotation = Quaternion.Euler(0, 0, 0);
                 transform.localPosition = new Vector3(0.7f, 0.1f, 0f);
+
+                // Update the current max angle
+                this._currMaxAngle = MAX_HORIZONTAL_ANGLE;
                 break;
             case WeaponOrientation.Right:
                 sr.sortingOrder = 1;
                 transform.rotation = Quaternion.Euler(0, 180, 0);
                 transform.localPosition = new Vector3(0.9f, -0.3f, 0f);
+
+                this._currMaxAngle = MAX_HORIZONTAL_ANGLE;
                 break;
             case WeaponOrientation.Up:
                 transform.rotation = Quaternion.Euler(0, 120, 0);
                 transform.localPosition = new Vector3(1.5f, -0.2f, 0f);
+
+                this._currMaxAngle = MAX_UP_ANGLE;
                 break;
             case WeaponOrientation.Down:
                 sr.sortingOrder = 1;
                 transform.rotation = Quaternion.Euler(0, 45, 0);
                 transform.localPosition = new Vector3(0f, 0f, 0f);
 
+                this._currMaxAngle = MAX_DOWN_ANGLE;
                 break;
         }
         
         _orientation = newOrientation;
     }
     
+    /**
+    * Resets the weapon to its original state
+    */
+    protected override void stopAttacking() {
+        this.goingUp = false;
+        this._isAttacking = false;
+    }
 }
