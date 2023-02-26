@@ -1,15 +1,11 @@
-using System.Collections;
+using System;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class Player : MonoBehaviour
 {
     [SerializeField]
     private float moveForce = 10f;
-    
-    [SerializeField]
-    private List<string> collectibles;
     
     private Rigidbody2D myBody;
     private SpriteRenderer sr;
@@ -24,18 +20,32 @@ public class Player : MonoBehaviour
     
     private bool isAttacking;
 
-    private int weapon_idx = 0;
-
-    [SerializeField] private Weapon weapon;
+    [SerializeField] private int weaponIdx = 0;
+    [SerializeField] private List<Weapon> weaponList;
+    private int _weaponCount;
     private void Awake()
     {
         myBody = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         
         sr = GetComponent<SpriteRenderer>();
-        weapon = transform.GetChild(0).GetChild(weapon_idx).gameObject.GetComponent<Weapon>();
+        weaponList = new List<Weapon>();
     }
-    
+
+    void Start()
+    {
+        for (var i = 0; i < transform.GetChild(0).childCount; i++)
+        {
+            GameObject go = transform.GetChild(0).GetChild(i).gameObject; 
+            Weapon component = go.GetComponent<Weapon>();
+            weaponList.Add(component);
+            component.gameObject.SetActive(false);
+        }
+
+        _weaponCount = weaponList.Count;
+        weaponList[weaponIdx].gameObject.SetActive(true);
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -49,36 +59,89 @@ public class Player : MonoBehaviour
      */
     void ListenKbEvents()
     {
-        if (!weapon.IsAttacking)
+        AttackKeyboard();
+        PlayerMoveKeyboard();
+        ChangeWeaponKb();
+    }
+    
+    /**
+     * Checks if weapon change keys were pressed
+     * and act according to it
+     */
+    void ChangeWeaponKb()
+    {
+        var weapon = weaponList[weaponIdx];
+        if (Input.GetKeyDown(KeyCode.Q))
         {
-            if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0))
+            weapon.gameObject.SetActive(false);
+            if (weaponIdx > 0)
+                weaponIdx--;
+            else
             {
-                Debug.Log("PLAYER SPACE EVENT");
-                weapon.IsAttacking = true;
+                weaponIdx = _weaponCount - 1;
             }
+            weaponList[weaponIdx].gameObject.SetActive(true);
+        } 
+        else if (Input.GetKeyDown(KeyCode.E))
+        {
+            // next weapon
+            weapon.gameObject.SetActive(false);
+            if (weaponIdx < _weaponCount - 1)
+                weaponIdx++;
+            else
+                weaponIdx = 0;
+            weapon = weaponList[weaponIdx];
+            weapon.gameObject.SetActive(true);
         }
 
-        PlayerMoveKeyboard();
     }
 
+    /**
+     * Checks if attack key was pressed
+     */
+    void AttackKeyboard()
+    {
+        var weapon = weaponList[weaponIdx];
+        if (weapon.IsAttacking)
+            return;
+        
+        if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0))
+        {
+            weapon.IsAttacking = true;
+        }
+    }
+
+    /**
+     * Checks if move keys were pressed
+     */
     void PlayerMoveKeyboard()
     {
         movementX = Input.GetAxisRaw("Horizontal");
         movementY = Input.GetAxisRaw("Vertical");
         
-        //myBody.velocity = new Vector2(movementX * moveForce, myBody.velocity.y);
         transform.position += new Vector3(movementX * moveForce * Time.deltaTime, 
             movementY * moveForce * Time.deltaTime, 0);
     }
     
+    void setWeaponsOrientation(WeaponOrientation orientation)
+    {
+        foreach (var weapon in weaponList)
+        {
+            weapon.ChangeOrientation(orientation);
+        }
+    }
+    
     void AnimatePlayer()
     {
+        var weapon = weaponList[weaponIdx];
         if (movementY > 0)
         {
+            setWeaponsOrientation(WeaponOrientation.Up);
             anim.SetBool(BAKER_UP_ANIMATION, true);
         }
         else if (movementY < 0)
         {
+            setWeaponsOrientation(WeaponOrientation.Down);
             anim.SetBool(BAKER_DOWN_ANIMATION, true);
         } 
         else
@@ -89,11 +152,13 @@ public class Player : MonoBehaviour
 
         if (movementX > 0)
         {
+            setWeaponsOrientation(WeaponOrientation.Right);
             anim.SetBool(BAKER_WALK_HORIZONTAL, true); 
             sr.flipX = false;
         }
         else if (movementX < 0)
         {
+            setWeaponsOrientation(WeaponOrientation.Left);
             anim.SetBool(BAKER_WALK_HORIZONTAL, true);
             sr.flipX = true;
         }
@@ -103,8 +168,11 @@ public class Player : MonoBehaviour
         }
     }
 
-    public void AddCollectible(GameObject collectible)
+    public void AddCollectible(Collectible collectible)
     {
-        collectibles.Add(collectible.name);
+        foreach (var weapon in weaponList)
+        {
+            weapon.AddAmmo(collectible);
+        }
     }
 }
