@@ -10,7 +10,7 @@ public class Shovel : Weapon
     private bool goingUp = false;
 
     // The current max angle for the shovel attack animation (changes w/ orientation)
-    private float _currMaxAngle = MAX_HORIZONTAL_ANGLE;
+    private float _currMaxAngle = MAX_DOWN_ANGLE;
 
     /**
      * Attack method for the shovel.
