@@ -19,7 +19,7 @@ public class Shovel : Weapon
      */
     public override void Attack()
     {
-        if (!_isAttacking)
+        if (!this._isAttacking)
             return;
 
         float shovelRotateSpeed = this._currMaxAngle / SHOVEL_ROTATE_TIME * Time.deltaTime;
@@ -44,8 +44,7 @@ public class Shovel : Weapon
             }
             else
             {
-                goingUp = false;
-                _isAttacking = false;
+                this.stopAttacking();
             }
         }
     }
@@ -55,9 +54,12 @@ public class Shovel : Weapon
      */
     public override void ChangeOrientation(WeaponOrientation newOrientation)
     {
+        // If the orientation is the same, do nothing
         if (newOrientation == _orientation)
             return;
         
+        if (this._isAttacking) this.stopAttacking();
+
         switch (newOrientation)
         {
             case WeaponOrientation.Left:
@@ -96,4 +98,11 @@ public class Shovel : Weapon
         _orientation = newOrientation;
     }
     
+    /**
+    * Resets the weapon to its original state
+    */
+    protected override void stopAttacking() {
+        this.goingUp = false;
+        this._isAttacking = false;
+    }
 }

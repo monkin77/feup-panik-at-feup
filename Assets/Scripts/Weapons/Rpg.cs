@@ -139,7 +139,7 @@ public class Rpg : Weapon
     /**
     * Resets the weapon to its original state
     */
-    private void stopAttacking()
+    protected override void stopAttacking()
     {
         this._isAttacking = false;
         this.recoilling = false;
