@@ -5,7 +5,7 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     [SerializeField]
-    private float moveForce = 10f;
+    private float moveForce = 2f;
     
     private Rigidbody2D myBody;
     private SpriteRenderer sr;

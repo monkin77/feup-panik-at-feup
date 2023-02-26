@@ -122,8 +122,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6dcccde2972475e4491322f95dcb2a83, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveForce: 10
-  collectibles: []
+  moveForce: 2
   weaponIdx: 0
   weaponList: []
 --- !u!95 &2075478859
