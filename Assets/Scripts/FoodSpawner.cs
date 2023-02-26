@@ -65,7 +65,6 @@ public class FoodSpawner : MonoBehaviour
             
             spawnedFood.Add(newFood);
             
-            // Destroy food after a certain time
             StartCoroutine(DestroyFood(newFood));
         } // end while loop
     }
@@ -77,7 +76,7 @@ public class FoodSpawner : MonoBehaviour
     IEnumerator DestroyFood(GameObject food)
     {
         yield return new WaitForSeconds(DESTROY_TIME);
-        if (spawnedFood.Contains(food))
+        if (spawnedFood.Contains(food) && !food.CompareTag("Bullet"))
         {
             spawnedFood.Remove(food);
             Destroy(food);

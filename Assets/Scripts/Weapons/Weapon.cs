@@ -59,4 +59,8 @@ public class Weapon : MonoBehaviour
     {
 
     }
+    
+    public virtual void AddAmmo(Collectible ammo)
+    {
+    }
 }

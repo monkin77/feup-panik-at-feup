@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -5,9 +6,6 @@ public class Player : MonoBehaviour
 {
     [SerializeField]
     private float moveForce = 10f;
-    
-    [SerializeField]
-    private List<string> collectibles;
     
     private Rigidbody2D myBody;
     private SpriteRenderer sr;
@@ -170,8 +168,11 @@ public class Player : MonoBehaviour
         }
     }
 
-    public void AddCollectible(GameObject collectible)
+    public void AddCollectible(Collectible collectible)
     {
-        collectibles.Add(collectible.name);
+        foreach (var weapon in weaponList)
+        {
+            weapon.AddAmmo(collectible);
+        }
     }
 }

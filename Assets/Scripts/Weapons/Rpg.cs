@@ -4,11 +4,15 @@ using UnityEngine;
 
 public class Rpg : Weapon
 {
+    public static string BULLET_TAG = "Bullet";
+    public static float BULLET_SPEED = 5f;
     public static float RECOIL_TIME = 0.15f;
     public static float MAX_HORIZONTAL_REC_DISTANCE = 0.5f;
     public static float MAX_VERTICAL_REC_DISTANCE = 0.3f;
     private float lastRecoilDistance = 0f;
     private bool recoilling = false;
+    private bool firstShot = true;
+    private Queue<Collectible> rpgAmmo = new Queue<Collectible>();
     
     /**
      * Attack method for the shovel.
@@ -19,28 +23,39 @@ public class Rpg : Weapon
     {
         if (!_isAttacking)
             return;
-
+        
         float recoilDistance = 0f;
-        Vector3 recoilDirection = Vector3.zero;
+        Vector2 recoilDirection = Vector2.zero;
         switch (_orientation)
         {
             case WeaponOrientation.Down:
-                recoilDirection = Vector3.down;
+                recoilDirection = Vector2.down;
                 recoilDistance = MAX_VERTICAL_REC_DISTANCE;
                 break;
             case WeaponOrientation.Up:
-                recoilDirection = Vector3.up;
+                recoilDirection = Vector2.up;
                 recoilDistance = MAX_VERTICAL_REC_DISTANCE;
                 break;
             case WeaponOrientation.Left:
-                recoilDirection = Vector3.left;
+                recoilDirection = Vector2.left;
                 recoilDistance = MAX_HORIZONTAL_REC_DISTANCE;
                 break;
             case WeaponOrientation.Right:
-                recoilDirection = Vector3.right;
+                recoilDirection = Vector2.right;
                 recoilDistance = MAX_HORIZONTAL_REC_DISTANCE;
                 break;
         }
+        
+        if (firstShot && rpgAmmo.Count > 0)
+        {
+            firstShot = false;
+            Collectible ammo = rpgAmmo.Dequeue();
+            GameObject bullet = ammo.gameObject;
+            bullet.transform.position = transform.position;
+            bullet.SetActive(true);
+            bullet.GetComponent<Rigidbody2D>().velocity = recoilDirection * BULLET_SPEED;
+        }
+        
         
         float recoilSpeed = recoilDistance / RECOIL_TIME;
 
@@ -49,7 +64,8 @@ public class Rpg : Weapon
 
             if (lastRecoilDistance < recoilDistance)
             {
-                transform.position -= recoilSpeed * Time.deltaTime * recoilDirection;
+                Vector2 recoilVector = recoilSpeed * Time.deltaTime * recoilDirection;
+                transform.position -= new Vector3(recoilVector.x, recoilVector.y, 0);
                 lastRecoilDistance += recoilSpeed * Time.deltaTime;
             }
             else
@@ -59,13 +75,15 @@ public class Rpg : Weapon
         {
             if (lastRecoilDistance > 0)
             {
-                transform.position += recoilSpeed * Time.deltaTime * recoilDirection;
+                Vector2 recoilVector = recoilSpeed * Time.deltaTime * recoilDirection;
+                transform.position += new Vector3(recoilVector.x, recoilVector.y, 0);
                 lastRecoilDistance -= recoilSpeed * Time.deltaTime;
             }
             else
             {
                 _isAttacking = false;
                 recoilling = false;
+                firstShot = true;
             }
         }
     }
@@ -105,5 +123,11 @@ public class Rpg : Weapon
         }
         
         _orientation = newOrientation;
+    }
+    
+    public override void AddAmmo(Collectible ammo)
+    {
+        ammo.tag = BULLET_TAG;
+        rpgAmmo.Enqueue(ammo);
     }
 }
