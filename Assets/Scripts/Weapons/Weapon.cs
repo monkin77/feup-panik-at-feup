@@ -20,7 +20,7 @@ public class Weapon : MonoBehaviour
         set { _orientation = value; }
     }
     
-    private SpriteRenderer sr;
+    protected SpriteRenderer sr;
 
     protected bool _isAttacking = false;
     public bool IsAttacking
@@ -51,39 +51,12 @@ public class Weapon : MonoBehaviour
         // Base attack method for all weapons
     }
     
+    
     /**
      * Sets the weapon orientation according to the player orientation
      */
-    public void ChangeOrientation(WeaponOrientation newOrientation)
+    public virtual void ChangeOrientation(WeaponOrientation newOrientation)
     {
-        if (newOrientation == _orientation)
-            return;
-        
 
-        switch (newOrientation)
-        {
-            case WeaponOrientation.Left:
-                sr.sortingOrder = -1;
-                transform.rotation = Quaternion.Euler(0, 0, 0);
-                transform.localPosition = new Vector3(0.7f, 0.1f, 0f);
-                break;
-            case WeaponOrientation.Right:
-                sr.sortingOrder = 1;
-                transform.rotation = Quaternion.Euler(0, 180, 0);
-                transform.localPosition = new Vector3(0.9f, -0.3f, 0f);
-                break;
-            case WeaponOrientation.Up:
-                transform.rotation = Quaternion.Euler(0, 120, 0);
-                transform.localPosition = new Vector3(1.5f, -0.2f, 0f);
-                break;
-            case WeaponOrientation.Down:
-                sr.sortingOrder = 1;
-                transform.rotation = Quaternion.Euler(0, 45, 0);
-                transform.localPosition = new Vector3(0f, 0f, 0f);
-
-                break;
-        }
-        
-        _orientation = newOrientation;
     }
 }
