@@ -29,13 +29,13 @@ public class Rpg : Weapon
      */
     public override void Attack()
     {
-        if (!_isAttacking)
+        if (!this._isAttacking)
             return;
         
         // first shot, create a new bullet
-        if (firstShot && rpgAmmo.Count > 0)
+        if (this.firstShot && rpgAmmo.Count > 0)
         {
-            firstShot = false;
+            this.firstShot = false;
             Collectible ammo = rpgAmmo.Dequeue();
             GameObject bullet = ammo.gameObject;
             bullet.transform.position = transform.position;
@@ -47,7 +47,7 @@ public class Rpg : Weapon
         float recoilSpeed = this._currMaxRecoilDist / RECOIL_TIME;
 
         // weapon is attacking, recoil it
-        if (!recoilling) {
+        if (!this.recoilling) {
             // if the weapon hasn't reached its max recoil distance, recoil it
             if (this._currRecoilDistance < this._currMaxRecoilDist)
             {
@@ -56,7 +56,7 @@ public class Rpg : Weapon
                 this._currRecoilDistance += recoilSpeed * Time.deltaTime;
             }
             else
-                recoilling = true; 
+                this.recoilling = true; 
         } else {
             // if the weapon hasn't reached its original position, recoil it back
             if (this._currRecoilDistance > 0)
@@ -67,11 +67,7 @@ public class Rpg : Weapon
             }
             else
             {
-                _isAttacking = false;
-                recoilling = false;
-                firstShot = true;
-
-                this._currRecoilDistance = 0f;
+                this.stopAttacking();
             }
         }
     }
@@ -83,9 +79,13 @@ public class Rpg : Weapon
      */
     public override void ChangeOrientation(WeaponOrientation newOrientation)
     {
+        // If the orientation is the same, do nothing
         if (newOrientation == _orientation)
             return;
         
+        // If the weapon is attacking, stop it
+        if (this._isAttacking) this.stopAttacking();
+
         switch (newOrientation)
         {
             case WeaponOrientation.Left:
@@ -134,5 +134,17 @@ public class Rpg : Weapon
     {
         ammo.tag = BULLET_TAG;
         rpgAmmo.Enqueue(ammo);
+    }
+
+    /**
+    * Resets the weapon to its original state
+    */
+    private void stopAttacking()
+    {
+        this._isAttacking = false;
+        this.recoilling = false;
+        this.firstShot = true;
+
+        this._currRecoilDistance = 0f;
     }
 }
