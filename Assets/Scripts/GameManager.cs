@@ -5,10 +5,6 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
-
-    [SerializeField]
-    private GameObject playerInstance;
-    
     private void Awake()
     {
         if (instance == null)
@@ -19,6 +15,13 @@ public class GameManager : MonoBehaviour
         else
             Destroy(gameObject);
     }
+    
+    public void GameOver()
+    {
+        Debug.Log("Game Over :(");
+    }
+    
+    
     
     
     // Start is called before the first frame update

@@ -7,6 +7,8 @@ public class Player : MonoBehaviour
     [SerializeField]
     private float moveSpeed = 2f;
     
+    [SerializeField] private float hp = 100f;
+    
     private Rigidbody2D rigidBody;
     private SpriteRenderer sr;
     
@@ -230,6 +232,21 @@ public class Player : MonoBehaviour
         foreach (var weapon in weaponList)
         {
             weapon.AddAmmo(collectible);
+        }
+    }
+    
+    /**
+     * Called when the player is hit by an enemy or projectile
+     * @param damage The amount of damage the player takes
+     */
+    public void TakeDamage(int damage)
+    {
+        hp -= damage;
+        if (hp <= 0)
+        {
+            // TODO: do something when the player dies
+            Destroy(this.gameObject);
+            GameManager.instance.GameOver();
         }
     }
 }

@@ -123,6 +123,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 2
+  hp: 100
   weaponIdx: 0
   weaponList: []
   movementFilter:
@@ -335,7 +336,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8650088570620251, guid: 78d82c6f02f73584f9cb00fe82f636ee, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 260002350129294719, guid: 78d82c6f02f73584f9cb00fe82f636ee, type: 3}
       propertyPath: m_RootOrder
