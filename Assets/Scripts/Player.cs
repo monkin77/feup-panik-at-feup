@@ -5,9 +5,9 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     [SerializeField]
-    private float moveForce = 2f;
+    private float moveSpeed = 2f;
     
-    private Rigidbody2D myBody;
+    private Rigidbody2D rigidBody;
     private SpriteRenderer sr;
     
     private Animator anim;
@@ -23,9 +23,18 @@ public class Player : MonoBehaviour
     [SerializeField] private int weaponIdx = 0;
     [SerializeField] private List<Weapon> weaponList;
     private int _weaponCount;
+
+    // Stores the settings that determine where a collision can occur. Such as layers to collide with
+    [SerializeField] private ContactFilter2D movementFilter;
+
+    // Stores the collisions that occur during movement
+    [SerializeField] private List<RaycastHit2D> castCollisions = new List<RaycastHit2D>();
+    // Collision offset to prevent the player from getting stuck in walls
+    [SerializeField] private float collisionOffset = 0.01f;
+
     private void Awake()
     {
-        myBody = GetComponent<Rigidbody2D>();
+        this.rigidBody = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         
         sr = GetComponent<SpriteRenderer>();
@@ -119,8 +128,56 @@ public class Player : MonoBehaviour
         movementX = Input.GetAxisRaw("Horizontal");
         movementY = Input.GetAxisRaw("Vertical");
         
-        transform.position += new Vector3(movementX * moveForce * Time.deltaTime, 
-            movementY * moveForce * Time.deltaTime, 0);
+        // if there's no movement, do nothing
+        if (movementX == 0 && movementY == 0)
+            return;
+
+        // Determine the speed in each direction
+        float speedX = movementX * moveSpeed * Time.deltaTime;
+        float speedY = movementY * moveSpeed * Time.deltaTime;
+
+        // Try to move the player in the given direction
+        bool success = tryMove(new Vector2(movementX, movementY), speedX, speedY);
+
+        // If the initial move was diagonal and failed, try moving in the X and Y directions separately
+        if (!success && (movementX != 0 && movementY != 0)) {
+            // If the player couldn't move in the given direction, try moving in the X direction
+            success = tryMove(new Vector2(movementX, 0), speedX, 0);
+
+            if (!success) {
+                // If the player couldn't move in the X direction, try moving in the Y direction
+                success = tryMove(new Vector2(0, movementY), 0, speedY);
+            }
+        }
+        
+    }
+
+    /**
+    * Moves the player in the given direction
+    * @param direction The direction to move the player in. X and Y values between -1 and 1 that represent the direction of movement
+    * @param speedX The speed to move the player in the X direction
+    * @param speedY The speed to move the player in the Y direction
+    * @return true if the player was able to move, false if there was a collision
+    */
+    private bool tryMove(Vector2 direction, float speedX, float speedY) {
+        // Check if there are collisions with the environment
+        int count = this.rigidBody.Cast(
+            direction,
+            this.movementFilter, 
+            this.castCollisions,
+            moveSpeed * Time.deltaTime + this.collisionOffset
+        );
+
+        if (count == 0) {
+            transform.position += new Vector3(
+                speedX, 
+                speedY, 
+                0
+            );
+            return true;
+        }
+
+        return false;
     }
     
     void setWeaponsOrientation(WeaponOrientation orientation)

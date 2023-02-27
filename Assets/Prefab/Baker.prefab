@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2075478855}
   - component: {fileID: 2075478858}
   - component: {fileID: 2075478859}
-  - component: {fileID: 1751761132}
+  - component: {fileID: 8129270641830237371}
   m_Layer: 0
   m_Name: Baker
   m_TagString: Baker
@@ -122,9 +122,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6dcccde2972475e4491322f95dcb2a83, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveForce: 2
+  moveSpeed: 2
   weaponIdx: 0
   weaponList: []
+  movementFilter:
+    useTriggers: 0
+    useLayerMask: 0
+    useDepth: 0
+    useOutsideDepth: 0
+    useNormalAngle: 0
+    useOutsideNormalAngle: 0
+    layerMask:
+      serializedVersion: 2
+      m_Bits: 0
+    minDepth: 0
+    maxDepth: 0
+    minNormalAngle: 0
+    maxNormalAngle: 0
+  collisionOffset: 0.01
 --- !u!95 &2075478859
 Animator:
   serializedVersion: 5
@@ -145,8 +160,8 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
---- !u!70 &1751761132
-CapsuleCollider2D:
+--- !u!61 &8129270641830237371
+BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -158,9 +173,19 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.011141539}
-  m_Size: {x: 0.17, y: 0.25771695}
-  m_Direction: 0
+  m_Offset: {x: 0.0010529384, y: -0.114770085}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 0.17, y: 0.28}
+    newSize: {x: 0.17, y: 0.28}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.16368236, y: 0.050459772}
+  m_EdgeRadius: 0
 --- !u!1 &8045328471192379379
 GameObject:
   m_ObjectHideFlags: 0
