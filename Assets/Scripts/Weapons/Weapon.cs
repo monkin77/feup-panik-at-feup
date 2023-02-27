@@ -68,4 +68,19 @@ public class Weapon : MonoBehaviour
     * Resets the weapon to its original state
     */
     protected virtual void stopAttacking() {}
+
+    public static Vector2 vecFromOrientation(WeaponOrientation orientation) {
+        switch (orientation) {
+            case WeaponOrientation.Left:
+                return Vector2.left;
+            case WeaponOrientation.Right:
+                return Vector2.right;
+            case WeaponOrientation.Up:
+                return Vector2.up;
+            case WeaponOrientation.Down:
+                return Vector2.down;
+            default:
+                return Vector2.down;
+        }
+    }
 }

@@ -40,7 +40,7 @@ public class Rpg : Weapon
             GameObject bullet = ammo.gameObject;
             bullet.transform.position = transform.position;
             bullet.SetActive(true);
-            bullet.GetComponent<Rigidbody2D>().velocity = this._currRecoilDirection * BULLET_SPEED;
+            bullet.GetComponent<Rigidbody2D>().velocity = Weapon.vecFromOrientation(this._orientation) * BULLET_SPEED;
         }
         
         
