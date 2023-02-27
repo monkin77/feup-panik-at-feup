@@ -5,9 +5,9 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     [SerializeField]
-    private float moveForce = 2f;
+    private float moveSpeed = 2f;
     
-    private Rigidbody2D myBody;
+    private Rigidbody2D rigidBody;
     private SpriteRenderer sr;
     
     private Animator anim;
@@ -23,9 +23,18 @@ public class Player : MonoBehaviour
     [SerializeField] private int weaponIdx = 0;
     [SerializeField] private List<Weapon> weaponList;
     private int _weaponCount;
+
+    // Stores the settings that determine where a collision can occur. Such as layers to collide with
+    [SerializeField] private ContactFilter2D movementFilter;
+
+    // Stores the collisions that occur during movement
+    [SerializeField] private List<RaycastHit2D> castCollisions = new List<RaycastHit2D>();
+    // Collision offset to prevent the player from getting stuck in walls
+    [SerializeField] private float collisionOffset = 0.02f;
+
     private void Awake()
     {
-        myBody = GetComponent<Rigidbody2D>();
+        this.rigidBody = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         
         sr = GetComponent<SpriteRenderer>();
@@ -119,8 +128,26 @@ public class Player : MonoBehaviour
         movementX = Input.GetAxisRaw("Horizontal");
         movementY = Input.GetAxisRaw("Vertical");
         
-        transform.position += new Vector3(movementX * moveForce * Time.deltaTime, 
-            movementY * moveForce * Time.deltaTime, 0);
+        // if there's no movement, do nothing
+        if (movementX == 0 && movementY == 0)
+            return;
+
+        // Determine the speed in each direction
+        float speedX = movementX * moveSpeed * Time.deltaTime;
+        float speedY = movementY * moveSpeed * Time.deltaTime;
+
+        // Check if there are collisions with the environment
+        int count = this.rigidBody.Cast(
+            new Vector2(movementX, movementY), // X and Y values between -1 and 1 that represent the direction of movement
+            this.movementFilter, 
+            this.castCollisions,
+            moveSpeed * Time.deltaTime + this.collisionOffset
+        );
+        Debug.Log("Count: " + count);
+
+        if (count == 0)
+            transform.position += new Vector3(movementX * moveSpeed * Time.deltaTime, 
+                movementY * moveSpeed * Time.deltaTime, 0);
     }
     
     void setWeaponsOrientation(WeaponOrientation orientation)
