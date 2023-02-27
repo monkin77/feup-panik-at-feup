@@ -27,13 +27,13 @@ AnimationClip:
       value: {fileID: 21300000, guid: 4e4c4ead9b2cb6c4bac858bc981d9e2a, type: 3}
     - time: 0.125
       value: {fileID: 21300000, guid: a93312b3d47cbf44d850aa9465ecc68b, type: 3}
-    - time: 0.20833333
+    - time: 0.16666667
       value: {fileID: 21300000, guid: 0fc28757b51eae04ea3f724d4e99c22c, type: 3}
-    - time: 0.25
+    - time: 0.20833333
       value: {fileID: 21300000, guid: 96bb52392cab68d4f8fd0a079764ea7a, type: 3}
-    - time: 0.29166666
+    - time: 0.25
       value: {fileID: 21300000, guid: cc211960e56b92b4a8dd3fc09b60beb6, type: 3}
-    - time: 0.33333334
+    - time: 0.29166666
       value: {fileID: 21300000, guid: 1a0950e92aa872a47952cac54522bcb5, type: 3}
     attribute: m_Sprite
     path: 
@@ -67,7 +67,7 @@ AnimationClip:
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 0.375
+    m_StopTime: 0.3333333
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0
@@ -87,7 +87,7 @@ AnimationClip:
   m_HasGenericRootTransform: 0
   m_HasMotionFloatCurves: 0
   m_Events:
-  - time: 0.33333334
+  - time: 0.29166666
     functionName: AttackBaker
     data: 
     objectReferenceParameter: {fileID: 0}
