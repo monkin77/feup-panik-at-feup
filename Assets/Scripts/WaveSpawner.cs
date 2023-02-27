@@ -1,0 +1,111 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class WaveSpawner : MonoBehaviour
+{
+    // List of possible enemies
+    [SerializeField] private List<GameObject> enemies = new List<GameObject>();    // TODO: change to Enemy
+    // List of enemies prefabs to spawn in the current wave
+    private List<GameObject> enemiesToSpawn = new List<GameObject>();
+
+    private int currWave = 0;
+
+    [SerializeField] private float timeBetweenWaves = 5f;
+
+    [SerializeField]
+    private float spawnFrequency = 1f;
+    // Stores the time to spawn the next enemy
+    private float spawnTimer;
+
+    // boolean to check if a wave is currently in progress
+    private bool waveInProgress = false;
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        // Generate the first wave
+        generateWave();
+    }
+
+    // fixedUpdate is called at a fixed interval
+    void FixedUpdate()
+    {
+        // If there are still enemies to spawn in the current wave
+        if (this.enemiesToSpawn.Count > 0) {
+            if (this.spawnTimer <= 0) {
+            // Spawn an enemy
+      
+            // TODO: Change this to spawn at a random position
+            Vector3 spawnPos = new Vector3(Random.Range(-3f, 3f), Random.Range(-1.5f, 2f), 0);
+
+            // Instantiate the enemy
+            Instantiate(this.enemiesToSpawn[0], spawnPos, Quaternion.identity);
+            this.enemiesToSpawn.RemoveAt(0);
+
+            // Reset the spawn timer
+            this.spawnTimer = this.spawnFrequency;
+            } else {
+                this.spawnTimer -= Time.fixedDeltaTime;
+            }
+        }
+    }
+
+    /**
+    Prepares a new wave by generating a list of enemies to spawn
+    This method will be called upon Start or when the current wave is completed
+    */
+    public void generateWave() {
+        if (this.waveInProgress) {
+            return;
+        }
+
+        // wait for a certain amount of time before starting the next wave
+        StartCoroutine(waitForNextWave());
+
+        List<GameObject> generatedEnemies = new List<GameObject>();
+
+        // Increment the wave number
+        this.currWave++;
+        int waveValue = GetWaveValue(this.currWave);
+
+        // Verify if current wave is a Boss Wave (Panike TIME!)
+        if (this.currWave % 4 == 0) {
+            // TODO: Enemies have increased stats
+        }
+
+        // while the wave value is greater than 0
+        while (waveValue > 0) {
+            int randEnemyIdx = Random.Range(0, this.enemies.Count);
+            int enemyCost = this.enemies[randEnemyIdx].cost;    // TODO: still has error since Enemy class is not created
+
+            if (waveValue - enemyCost >= 0) {
+                generatedEnemies.Add(this.enemies[randEnemyIdx].enemyPrefab);
+                waveValue -= enemyCost;
+            } else {
+                break;
+            }
+        }
+
+        this.enemiesToSpawn.Clear();
+        this.enemiesToSpawn = generatedEnemies;
+
+        this.spawnTimer = this.spawnFrequency;
+        this.waveInProgress = true;
+    }
+
+    /**
+    @param wave: the wave number
+    @return The wave value that will be used to determine the number of enemies to spawn
+    */
+    private static int GetWaveValue(int wave) {
+        return wave * 10;
+    }
+
+    /**
+    Waits for a certain amount of time before starting the next wave
+    */
+    private IEnumerator waitForNextWave() {
+        yield return new WaitForSeconds(this.timeBetweenWaves);
+    }
+}

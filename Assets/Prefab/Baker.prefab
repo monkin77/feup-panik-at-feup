@@ -140,7 +140,7 @@ MonoBehaviour:
     maxDepth: 0
     minNormalAngle: 0
     maxNormalAngle: 0
-  collisionOffset: 0.01
+  collisionOffset: 0.02
 --- !u!95 &2075478859
 Animator:
   serializedVersion: 5
