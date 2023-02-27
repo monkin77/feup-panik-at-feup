@@ -32905,6 +32905,10 @@ PrefabInstance:
       propertyPath: moveSpeed
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 2075478858, guid: 0780414129f7ba84f8863b16c2e956df, type: 3}
+      propertyPath: collisionOffset
+      value: 0.01
+      objectReference: {fileID: 0}
     - target: {fileID: 3231158629717410912, guid: 0780414129f7ba84f8863b16c2e956df, type: 3}
       propertyPath: m_RootOrder
       value: 4

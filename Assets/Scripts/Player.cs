@@ -30,7 +30,7 @@ public class Player : MonoBehaviour
     // Stores the collisions that occur during movement
     [SerializeField] private List<RaycastHit2D> castCollisions = new List<RaycastHit2D>();
     // Collision offset to prevent the player from getting stuck in walls
-    [SerializeField] private float collisionOffset = 0.02f;
+    [SerializeField] private float collisionOffset = 0.01f;
 
     private void Awake()
     {
@@ -136,18 +136,48 @@ public class Player : MonoBehaviour
         float speedX = movementX * moveSpeed * Time.deltaTime;
         float speedY = movementY * moveSpeed * Time.deltaTime;
 
+        // Try to move the player in the given direction
+        bool success = tryMove(new Vector2(movementX, movementY), speedX, speedY);
+
+        // If the initial move was diagonal and failed, try moving in the X and Y directions separately
+        if (!success && (movementX != 0 && movementY != 0)) {
+            // If the player couldn't move in the given direction, try moving in the X direction
+            success = tryMove(new Vector2(movementX, 0), speedX, 0);
+
+            if (!success) {
+                // If the player couldn't move in the X direction, try moving in the Y direction
+                success = tryMove(new Vector2(0, movementY), 0, speedY);
+            }
+        }
+        
+    }
+
+    /**
+    * Moves the player in the given direction
+    * @param direction The direction to move the player in. X and Y values between -1 and 1 that represent the direction of movement
+    * @param speedX The speed to move the player in the X direction
+    * @param speedY The speed to move the player in the Y direction
+    * @return true if the player was able to move, false if there was a collision
+    */
+    private bool tryMove(Vector2 direction, float speedX, float speedY) {
         // Check if there are collisions with the environment
         int count = this.rigidBody.Cast(
-            new Vector2(movementX, movementY), // X and Y values between -1 and 1 that represent the direction of movement
+            direction,
             this.movementFilter, 
             this.castCollisions,
             moveSpeed * Time.deltaTime + this.collisionOffset
         );
-        Debug.Log("Count: " + count);
 
-        if (count == 0)
-            transform.position += new Vector3(movementX * moveSpeed * Time.deltaTime, 
-                movementY * moveSpeed * Time.deltaTime, 0);
+        if (count == 0) {
+            transform.position += new Vector3(
+                speedX, 
+                speedY, 
+                0
+            );
+            return true;
+        }
+
+        return false;
     }
     
     void setWeaponsOrientation(WeaponOrientation orientation)
