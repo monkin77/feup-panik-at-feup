@@ -6,6 +6,8 @@ using Random = UnityEngine.Random;
 
 public class FoodSpawner : MonoBehaviour
 {
+    public static FoodSpawner Instance { get; private set; }
+    
     [SerializeField]
     private GameObject[] foodReference;
     
@@ -23,6 +25,11 @@ public class FoodSpawner : MonoBehaviour
     private void Awake()
     {
         spawnedFood = new List<GameObject>();
+        
+        if (Instance == null)
+            Instance = this;
+        else
+            Destroy(gameObject);
     }
 
 
@@ -68,6 +75,15 @@ public class FoodSpawner : MonoBehaviour
             StartCoroutine(DestroyFood(newFood));
         } // end while loop
     }
+    
+    /**
+     * Removes food from the list of spawned food
+     * when it is collected.
+     */
+    public void removeFood(GameObject food)
+    {
+        spawnedFood.Remove(food);
+    }
 
     /**
      * Destroys food after a certain time
@@ -76,7 +92,7 @@ public class FoodSpawner : MonoBehaviour
     IEnumerator DestroyFood(GameObject food)
     {
         yield return new WaitForSeconds(DESTROY_TIME);
-        if (spawnedFood.Contains(food) && !food.CompareTag("Bullet"))
+        if (spawnedFood.Contains(food))
         {
             spawnedFood.Remove(food);
             Destroy(food);

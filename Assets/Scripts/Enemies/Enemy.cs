@@ -1,7 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 public class Enemy : MonoBehaviour
 {
@@ -65,7 +62,7 @@ public class Enemy : MonoBehaviour
         else
             sr.flipX = false;
     }
-    
+
     /**
      * Check if the enemy is in attack range of the baker
      */
