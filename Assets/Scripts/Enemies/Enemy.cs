@@ -5,7 +5,7 @@ public class Enemy : MonoBehaviour
 {
     public int cost;
 
-    [SerializeField] private int health = 100;
+    [SerializeField] protected int health = 100;
     public int Health
     {
         get { return health; }
@@ -13,7 +13,7 @@ public class Enemy : MonoBehaviour
     }
     
     [SerializeField] protected int ENEMY_DAMAGE = 30;
-    [SerializeField] private float speed = 1f;
+    [SerializeField] protected float speed = 1f;
     public float Speed
     {
         get { return speed; }
@@ -82,10 +82,9 @@ public class Enemy : MonoBehaviour
 
         // move towards the baker
         Vector2 newPos = Vector2.MoveTowards(transform.position, bakerPos, speed * Time.fixedDeltaTime);
-        
         Vector2 direction = newPos - new Vector2(transform.position.x, transform.position.y);
 
-        // Check if there are collisions
+        // Check if there are collisions with players or walls
         int count = this.myBody.Cast(
             direction, 
             this.movementFilter,
@@ -145,4 +144,10 @@ public class Enemy : MonoBehaviour
         }
     }
     
+    /**
+    * Transforms the enemy into a boss with better stats
+    */
+    public virtual void transfBoss() {
+        throw new System.NotImplementedException();
+    }
 }

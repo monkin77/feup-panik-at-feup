@@ -12,7 +12,6 @@ public class WaveSpawner : MonoBehaviour
     private int currWave = 0;
 
     [SerializeField] private float timeBetweenWaves = 5f;
-    [SerializeField] private float BOSS_WAVE_SPEED_MULTIPLIER = 4f;
     [SerializeField] private int BOSS_WAVE = 4;
 
     [SerializeField]
@@ -52,7 +51,7 @@ public class WaveSpawner : MonoBehaviour
             // If the current wave is a boss wave, double the speed of the enemies
             if (this._isBossWave) {
                 print("PANIKE TIME!");
-                enemy.GetComponent<Enemy>().Speed *= BOSS_WAVE_SPEED_MULTIPLIER;
+                enemy.GetComponent<Enemy>().transfBoss();
             }
 
             // Reset the spawn timer
@@ -67,6 +66,7 @@ public class WaveSpawner : MonoBehaviour
             if (enemyInstances.Length > 0) {
                 return;
             }
+
             // If there are no enemies left in the scene, generate a new wave
             this.waveInProgress = false;
             generateWave();
@@ -82,7 +82,8 @@ public class WaveSpawner : MonoBehaviour
             return;
         }
 
-        // wait for a certain amount of time before starting the next wave
+        // wait for a certain amount of time before starting the next wave~
+        // TODO: Change to showing the time left for the next wave
         StartCoroutine(waitForNextWave());
 
         List<GameObject> generatedEnemies = new List<GameObject>();

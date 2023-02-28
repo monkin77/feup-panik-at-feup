@@ -6,6 +6,8 @@ public class Student : Enemy
 {
     private float xCollideOffset = 0.25f;
     private float yCollideOffset = 0.10f;
+
+    public static float BOSS_MULTIPLIER = 2.0f;
     
     /**
      * Check if the baker is in attack range of the enemy
@@ -39,5 +41,9 @@ public class Student : Enemy
             baker.GetComponent<Player>().TakeDamage(ENEMY_DAMAGE);
         else 
             anim.SetBool(WALK_ANIMATION, true);
+    }
+
+    public override void transfBoss() {
+        this.speed *= BOSS_MULTIPLIER;
     }
 }
