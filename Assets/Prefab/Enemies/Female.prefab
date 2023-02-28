@@ -12,8 +12,8 @@ GameObject:
   - component: {fileID: 2609643167819765340}
   - component: {fileID: 5956279574282335915}
   - component: {fileID: 6434710543834176383}
-  - component: {fileID: 5691808634403042097}
   - component: {fileID: 47286086}
+  - component: {fileID: -4687237776676257649}
   m_Layer: 0
   m_Name: Female
   m_TagString: Enemy
@@ -129,23 +129,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
---- !u!114 &5691808634403042097
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2609643167819765329}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 467856b9d0925b34a9f60ca0010602e6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cost: 2
-  health: 100
-  speed: 1
-  ENEMY_DAMAGE: 50
-  baker: {fileID: 0}
 --- !u!61 &47286086
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -172,3 +155,20 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 2.7217555, y: 4.606912}
   m_EdgeRadius: 0
+--- !u!114 &-4687237776676257649
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2609643167819765329}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 03621dbb9ea7c124aa6ec8efc82050a4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cost: 2
+  health: 100
+  speed: 1
+  ENEMY_DAMAGE: 30
+  baker: {fileID: 0}

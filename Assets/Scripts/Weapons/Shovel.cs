@@ -14,11 +14,9 @@ public class Shovel : Weapon
     
     private string ENEMY_TAG = "Enemy";
     private int _damage = 100;
-    private bool _attackedEnemy = false;
 
     // The current max angle for the shovel attack animation (changes w/ orientation)
     private float _currMaxAngle = MAX_DOWN_ANGLE;
-    
 
     /**
      * Attack method for the shovel.
@@ -29,24 +27,7 @@ public class Shovel : Weapon
     {
         if (!this._isAttacking)
             return;
-
-        if (!this._attackedEnemy)
-        {
-            this._attackedEnemy = true;
-            // get all objects with Tag "Enemy"
-            GameObject[] enemies = GameObject.FindGameObjectsWithTag(ENEMY_TAG);
-            // check if any of the enemies are in range and if so attack them
-            // player can only attack one enemy at a time
-            foreach (var enemy in enemies)
-            {
-                if (IsInAttackRange(enemy.transform.position))
-                {
-                    enemy.GetComponent<Enemy>().TakeDamage(_damage);
-                    break;
-                }
-            }
-        }
-
+        
         float shovelRotateSpeed = this._currMaxAngle / SHOVEL_ROTATE_TIME * Time.deltaTime;
 
         // is attacking, rotate the shovel
@@ -58,6 +39,9 @@ public class Shovel : Weapon
             }
             else
             {
+                // just finished the attack animation, check if there are enemies in range
+                // and attack them
+                AttackEnemiesInRange();
                 goingUp = true;
             }
         }
@@ -70,7 +54,6 @@ public class Shovel : Weapon
             else
             {
                 this.stopAttacking();
-                
             }
         }
     }
@@ -130,9 +113,7 @@ public class Shovel : Weapon
     protected override void stopAttacking() {
         this.goingUp = false;
         this._isAttacking = false;
-        this._attackedEnemy = false;
     }
-    
 
     /**
      * Handles the collision with enemies
@@ -143,7 +124,24 @@ public class Shovel : Weapon
     {
         Vector2 shovelPosition = transform.position;
         float distance = Vector2.Distance(shovelPosition, position);
-        print("Distance: " + distance);
         return distance < MAX_ENEMY_DISTANCE;
+    }
+
+    /**
+     * Attack all enemies in range
+     */
+    private void AttackEnemiesInRange()
+    {
+        // get all enemies
+        GameObject[] enemies = GameObject.FindGameObjectsWithTag(ENEMY_TAG);
+
+        // attack all enemies in range
+        foreach (var enemy in enemies)
+        {
+            if (IsInAttackRange(enemy.transform.position))
+            {
+                enemy.GetComponent<Enemy>().TakeDamage(_damage);
+            }
+        }
     }
 }
