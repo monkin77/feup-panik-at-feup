@@ -140,6 +140,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 467856b9d0925b34a9f60ca0010602e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cost: 2
   speed: 1
   ENEMY_DAMAGE: 50
   baker: {fileID: 0}

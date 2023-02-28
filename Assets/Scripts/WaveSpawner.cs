@@ -5,7 +5,7 @@ using UnityEngine;
 public class WaveSpawner : MonoBehaviour
 {
     // List of possible enemies
-    [SerializeField] private List<GameObject> enemies = new List<GameObject>();    // TODO: change to Enemy
+    [SerializeField] private List<GameObject> enemies = new List<GameObject>();
     // List of enemies prefabs to spawn in the current wave
     private List<GameObject> enemiesToSpawn = new List<GameObject>();
 
@@ -16,14 +16,19 @@ public class WaveSpawner : MonoBehaviour
     [SerializeField]
     private float spawnFrequency = 1f;
     // Stores the time to spawn the next enemy
-    private float spawnTimer;
+    private float spawnTimer = 1f;
 
     // boolean to check if a wave is currently in progress
     private bool waveInProgress = false;
 
+    void Awake() {
+        Debug.Log("WaveSpawner: Awake()");
+    }
+
     // Start is called before the first frame update
     void Start()
     {
+        Debug.Log("WaveSpawner: Start()");
         // Generate the first wave
         generateWave();
     }
@@ -31,6 +36,8 @@ public class WaveSpawner : MonoBehaviour
     // fixedUpdate is called at a fixed interval
     void FixedUpdate()
     {
+        Debug.Log("WaveSpawner: FixedUpdate()");
+
         // If there are still enemies to spawn in the current wave
         if (this.enemiesToSpawn.Count > 0) {
             if (this.spawnTimer <= 0) {
@@ -48,6 +55,11 @@ public class WaveSpawner : MonoBehaviour
             } else {
                 this.spawnTimer -= Time.fixedDeltaTime;
             }
+        } else {    // If there are no more enemies to spawn in the current wave
+            // Check if there are any enemies left in the scene. If so, do nothing
+
+            // If there are no enemies left in the scene, generate a new wave
+
         }
     }
 
@@ -100,7 +112,7 @@ public class WaveSpawner : MonoBehaviour
     @return The wave value that will be used to determine the number of enemies to spawn
     */
     private static int GetWaveValue(int wave) {
-        return wave * 10;
+        return 4 + wave * 2;
     }
 
     /**
