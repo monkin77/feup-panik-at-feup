@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Enemy : MonoBehaviour
@@ -31,6 +32,14 @@ public class Enemy : MonoBehaviour
     protected string IDLE_ANIMATION = "Idle";
     protected string DIE_ANIMATION = "Die";
     
+
+    // Stores the settings that determine where a collision can occur. Such as layers to collide with
+    [SerializeField] private ContactFilter2D movementFilter;
+
+    // Stores the collisions that occur during movement
+    [SerializeField] private List<RaycastHit2D> castCollisions = new List<RaycastHit2D>();
+    // Collision offset to prevent the player from getting stuck in walls
+    private float collisionOffset = 0.02f;
 
     void Awake()
     {
@@ -71,8 +80,23 @@ public class Enemy : MonoBehaviour
             return;
         }
 
-        transform.position = Vector2.MoveTowards(
-            transform.position, new Vector2(bakerX, bakerY), speed * Time.fixedDeltaTime);
+        // move towards the baker
+        Vector2 newPos = Vector2.MoveTowards(transform.position, bakerPos, speed * Time.fixedDeltaTime);
+        
+        Vector2 direction = newPos - new Vector2(transform.position.x, transform.position.y);
+
+        // Check if there are collisions
+        int count = this.myBody.Cast(
+            direction, 
+            this.movementFilter,
+            this.castCollisions, 
+            this.collisionOffset
+        );
+        if (count == 0) {
+            // no collisions
+            transform.position = newPos;
+        }
+
 
         if (transform.position.x > bakerX)
             sr.flipX = true;
