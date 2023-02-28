@@ -12,6 +12,8 @@ public class WaveSpawner : MonoBehaviour
     private int currWave = 0;
 
     [SerializeField] private float timeBetweenWaves = 5f;
+    [SerializeField] private float BOSS_WAVE_SPEED_MULTIPLIER = 4f;
+    [SerializeField] private int BOSS_WAVE = 4;
 
     [SerializeField]
     private float spawnFrequency = 1f;
@@ -20,6 +22,10 @@ public class WaveSpawner : MonoBehaviour
 
     // boolean to check if a wave is currently in progress
     private bool waveInProgress = false;
+    
+    private string ENEMY_TAG = "Enemy";
+    
+    private bool _isBossWave = false;
 
     // Start is called before the first frame update
     void Start()
@@ -40,19 +46,30 @@ public class WaveSpawner : MonoBehaviour
             Vector3 spawnPos = new Vector3(Random.Range(-3f, 3f), Random.Range(-1.5f, 2f), 0);
 
             // Instantiate the enemy
-            Instantiate(this.enemiesToSpawn[0], spawnPos, Quaternion.identity);
+            GameObject enemy = Instantiate(this.enemiesToSpawn[0], spawnPos, Quaternion.identity);
             this.enemiesToSpawn.RemoveAt(0);
+            
+            // If the current wave is a boss wave, double the speed of the enemies
+            if (this._isBossWave) {
+                print("PANIKE TIME!");
+                enemy.GetComponent<Enemy>().Speed *= BOSS_WAVE_SPEED_MULTIPLIER;
+            }
 
             // Reset the spawn timer
             this.spawnTimer = this.spawnFrequency;
             } else {
                 this.spawnTimer -= Time.fixedDeltaTime;
             }
-        } else {    // If there are no more enemies to spawn in the current wave
+        } else {
+            // If there are no more enemies to spawn in the current wave
             // Check if there are any enemies left in the scene. If so, do nothing
-
+            GameObject[] enemyInstances = GameObject.FindGameObjectsWithTag(ENEMY_TAG);
+            if (enemyInstances.Length > 0) {
+                return;
+            }
             // If there are no enemies left in the scene, generate a new wave
-
+            this.waveInProgress = false;
+            generateWave();
         }
     }
 
@@ -75,14 +92,15 @@ public class WaveSpawner : MonoBehaviour
         int waveValue = GetWaveValue(this.currWave);
 
         // Verify if current wave is a Boss Wave (Panike TIME!)
-        if (this.currWave % 4 == 0) {
-            // TODO: Enemies have increased stats
-        }
+        this._isBossWave = this.currWave % BOSS_WAVE == 0;
+        // if the current wave is a boss wave, double the speed of the enemies
+        
 
         // while the wave value is greater than 0
         while (waveValue > 0) {
             int randEnemyIdx = Random.Range(0, this.enemies.Count);
             Enemy currEnemy = this.enemies[randEnemyIdx].GetComponent<Enemy>();
+            
             int enemyCost = currEnemy.cost;
 
             if (waveValue - enemyCost >= 0) {

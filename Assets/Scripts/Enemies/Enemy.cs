@@ -10,8 +10,9 @@ public class Enemy : MonoBehaviour
         get { return health; }
         set { health = value; }
     }
-    [SerializeField] private float speed = 1f;
+    
     [SerializeField] protected int ENEMY_DAMAGE = 30;
+    [SerializeField] private float speed = 1f;
     public float Speed
     {
         get { return speed; }
