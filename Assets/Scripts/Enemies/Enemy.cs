@@ -22,7 +22,7 @@ public class Enemy : MonoBehaviour
 
     [SerializeField] protected GameObject baker;
 
-    private Rigidbody2D myBody;
+    private Rigidbody2D rigidBody;
     private SpriteRenderer sr;
     
     protected Animator anim;
@@ -43,7 +43,7 @@ public class Enemy : MonoBehaviour
 
     void Awake()
     {
-        myBody = GetComponent<Rigidbody2D>();
+        rigidBody = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         baker = GameObject.FindWithTag(BAKER_TAG);
         sr = GetComponent<SpriteRenderer>();
@@ -82,10 +82,26 @@ public class Enemy : MonoBehaviour
 
         // move towards the baker
         Vector2 newPos = Vector2.MoveTowards(transform.position, bakerPos, speed * Time.fixedDeltaTime);
-        Vector2 direction = newPos - new Vector2(transform.position.x, transform.position.y);
+        Vector2 moveVector = newPos - new Vector2(transform.position.x, transform.position.y);
+        Vector2 direction = moveVector.normalized;
 
-        // Check if there are collisions with players or walls
-        int count = this.myBody.Cast(
+        // Try to move the enemy in the given direction
+        bool success = tryMove(direction, moveVector, Mathf.Max(Mathf.Abs(moveVector.x), Mathf.Abs(moveVector.y)));
+
+        // If the initial move was diagonal and failed, try moving in the X and Y directions separately
+        if (!success && (moveVector.x != 0 && moveVector.y != 0)) {
+            // If the enemy couldn't move in the given direction, try moving in the X direction
+            success = tryMove(new Vector2(direction.x, 0), new Vector2(moveVector.x, 0), Mathf.Abs(moveVector.x));
+
+            if (!success) {
+                // If the enemy couldn't move in the X direction, try moving in the Y direction
+                success = tryMove(new Vector2(0, direction.y), new Vector2(0, moveVector.y), Mathf.Abs(moveVector.y));
+            }
+        }
+
+
+        /* // Check if there are collisions with players or walls
+        int count = this.rigidBody.Cast(
             direction, 
             this.movementFilter,
             this.castCollisions, 
@@ -94,7 +110,7 @@ public class Enemy : MonoBehaviour
         if (count == 0) {
             // no collisions
             transform.position = newPos;
-        }
+        } */
 
 
         if (transform.position.x > bakerX)
@@ -149,5 +165,33 @@ public class Enemy : MonoBehaviour
     */
     public virtual void transfBoss() {
         throw new System.NotImplementedException();
+    }
+
+    /**
+    * Moves the Enemy in the given direction
+    * @param direction The direction to move the player in. X and Y values between -1 and 1 that represent the direction of movement
+    * @param speedVec The speed to move the player at (x, y)
+    * @param moveSpeed The speed to move the player at
+    * @return true if the player was able to move, false if there was a collision
+    */
+    private bool tryMove(Vector2 direction, Vector2 speedVec, float moveSpeed) {
+        // Check if there are collisions with players or walls
+        int count = this.rigidBody.Cast(
+            direction,
+            this.movementFilter, 
+            this.castCollisions,
+            moveSpeed + this.collisionOffset
+        );
+
+        if (count == 0) {
+            transform.position += new Vector3(
+                speedVec.x, 
+                speedVec.y, 
+                0
+            );
+            return true;
+        }
+
+        return false;
     }
 }
