@@ -180,6 +180,9 @@ public class Player : MonoBehaviour
         return false;
     }
     
+    /**
+     * Changes the orientation of each weapon to the desired orientatio
+     */
     void setWeaponsOrientation(WeaponOrientation orientation)
     {
         foreach (var weapon in weaponList)
@@ -188,6 +191,11 @@ public class Player : MonoBehaviour
         }
     }
     
+    /**
+     * Animates the player
+     * To do so, rotates the weapons to the respective orientations
+     * and starts the animation
+     */
     void AnimatePlayer()
     {
         var weapon = weaponList[weaponIdx];
@@ -225,6 +233,11 @@ public class Player : MonoBehaviour
         }
     }
 
+    /**
+     * Adds a collectible to the user.
+     * The collectibles of this game are ammo for the
+     * rpg weapon
+     */
     public void AddCollectible(Collectible collectible)
     {
         foreach (var weapon in weaponList)

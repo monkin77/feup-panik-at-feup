@@ -382,6 +382,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4320378930466626758, guid: 78d82c6f02f73584f9cb00fe82f636ee, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 9010550974024973173, guid: 78d82c6f02f73584f9cb00fe82f636ee, type: 3}
       propertyPath: m_FlipX
       value: 0
@@ -405,24 +409,3 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 260002350129294719, guid: 78d82c6f02f73584f9cb00fe82f636ee, type: 3}
   m_PrefabInstance: {fileID: 4591910394201859419}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &4586640350941309952 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8650088570620251, guid: 78d82c6f02f73584f9cb00fe82f636ee, type: 3}
-  m_PrefabInstance: {fileID: 4591910394201859419}
-  m_PrefabAsset: {fileID: 0}
---- !u!70 &6341954015551471955
-CapsuleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4586640350941309952}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: -1.3086272, y: 1.1952302}
-  m_Size: {x: 4.584461, y: 5.2913084}
-  m_Direction: 0

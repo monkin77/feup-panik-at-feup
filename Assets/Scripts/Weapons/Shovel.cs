@@ -1,9 +1,11 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 
 public class Shovel : Weapon
 {
+    public static int MAX_ENEMY_DISTANCE = 1;
     public static int MAX_HORIZONTAL_ANGLE = 65;
     public static int MAX_DOWN_ANGLE = 100;
     public static int MAX_UP_ANGLE = 50;
@@ -12,9 +14,11 @@ public class Shovel : Weapon
     
     private string ENEMY_TAG = "Enemy";
     private int _damage = 100;
+    private bool _attackedEnemy = false;
 
     // The current max angle for the shovel attack animation (changes w/ orientation)
     private float _currMaxAngle = MAX_DOWN_ANGLE;
+    
 
     /**
      * Attack method for the shovel.
@@ -25,6 +29,23 @@ public class Shovel : Weapon
     {
         if (!this._isAttacking)
             return;
+
+        if (!this._attackedEnemy)
+        {
+            this._attackedEnemy = true;
+            // get all objects with Tag "Enemy"
+            GameObject[] enemies = GameObject.FindGameObjectsWithTag(ENEMY_TAG);
+            // check if any of the enemies are in range and if so attack them
+            // player can only attack one enemy at a time
+            foreach (var enemy in enemies)
+            {
+                if (IsInAttackRange(enemy.transform.position))
+                {
+                    enemy.GetComponent<Enemy>().TakeDamage(_damage);
+                    break;
+                }
+            }
+        }
 
         float shovelRotateSpeed = this._currMaxAngle / SHOVEL_ROTATE_TIME * Time.deltaTime;
 
@@ -49,6 +70,7 @@ public class Shovel : Weapon
             else
             {
                 this.stopAttacking();
+                
             }
         }
     }
@@ -108,17 +130,19 @@ public class Shovel : Weapon
     protected override void stopAttacking() {
         this.goingUp = false;
         this._isAttacking = false;
+        this._attackedEnemy = false;
     }
+    
 
     /**
      * Handles the collision with enemies
+     * @returns true if enemy's distance to the shovel is lower
+     * than a max_distance, false otherwise
      */
-    private void OnCollisionEnter2D(Collision2D col)
+    private bool IsInAttackRange(Vector2 position)
     {
-        print("COLLISION");
-        if (col.gameObject.CompareTag(ENEMY_TAG) && this._isAttacking && this.goingUp)
-        {
-            col.gameObject.GetComponent<Enemy>().TakeDamage(_damage);
-        }
+        Vector2 shovelPosition = transform.position;
+        float distance = Vector2.Distance(shovelPosition, position);
+        return distance < MAX_ENEMY_DISTANCE;
     }
 }

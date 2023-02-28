@@ -5,6 +5,11 @@ public class Enemy : MonoBehaviour
     public int cost;
 
     [SerializeField] private int health = 100;
+    public int Health
+    {
+        get { return health; }
+        set { health = value; }
+    }
     [SerializeField] private float speed = 1f;
     [SerializeField] private int ENEMY_DAMAGE = 30;
     public float Speed
@@ -116,7 +121,12 @@ public class Enemy : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
-        this.health -= damage;
+        Health -= damage;
+        
+        if (Health <= 0)
+        {
+            SetDieState();
+        }
     }
     
 }
