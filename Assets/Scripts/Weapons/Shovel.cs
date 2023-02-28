@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 
@@ -8,6 +9,9 @@ public class Shovel : Weapon
     public static int MAX_UP_ANGLE = 50;
     public static float SHOVEL_ROTATE_TIME = 0.15f;
     private bool goingUp = false;
+    
+    private string ENEMY_TAG = "Enemy";
+    private int _damage = 100;
 
     // The current max angle for the shovel attack animation (changes w/ orientation)
     private float _currMaxAngle = MAX_DOWN_ANGLE;
@@ -104,5 +108,17 @@ public class Shovel : Weapon
     protected override void stopAttacking() {
         this.goingUp = false;
         this._isAttacking = false;
+    }
+
+    /**
+     * Handles the collision with enemies
+     */
+    private void OnCollisionEnter2D(Collision2D col)
+    {
+        print("COLLISION");
+        if (col.gameObject.CompareTag(ENEMY_TAG) && this._isAttacking && this.goingUp)
+        {
+            col.gameObject.GetComponent<Enemy>().TakeDamage(_damage);
+        }
     }
 }

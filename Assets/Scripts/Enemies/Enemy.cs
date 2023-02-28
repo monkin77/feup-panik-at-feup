@@ -4,6 +4,7 @@ public class Enemy : MonoBehaviour
 {
     public int cost;
 
+    [SerializeField] private int health = 100;
     [SerializeField] private float speed = 1f;
     [SerializeField] private int ENEMY_DAMAGE = 30;
     public float Speed
@@ -111,6 +112,11 @@ public class Enemy : MonoBehaviour
     public void SetDieState()
     {
         anim.SetBool(DIE_ANIMATION, true);
+    }
+
+    public void TakeDamage(int damage)
+    {
+        this.health -= damage;
     }
     
 }
