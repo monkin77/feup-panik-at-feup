@@ -17,7 +17,7 @@ public class Collectible : MonoBehaviour
         } else if (target.CompareTag(ENEMY_TAG) && gameObject.CompareTag(BULLET_TAG))
         {
             // If the bullet hits an enemy, then destroy the bullet and the enemy
-            Destroy(target.gameObject);
+            target.GetComponent<Enemy>().SetDieState();
             Destroy(gameObject);
         }
     }

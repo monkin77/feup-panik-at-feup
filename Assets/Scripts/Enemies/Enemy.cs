@@ -21,6 +21,7 @@ public class Enemy : MonoBehaviour
     private string BAKER_TAG = "Baker";
     private string ATTACK_TRIGGER = "Attack";
     private string IDLE_ANIMATION = "Idle";
+    private string DIE_ANIMATION = "Die";
     
     private float xCollideOffset = 0.25f;
     private float yCollideOffset = 0.10f;
@@ -97,7 +98,17 @@ public class Enemy : MonoBehaviour
             baker.GetComponent<Player>().TakeDamage(ENEMY_DAMAGE);
         else 
             anim.SetBool(WALK_ANIMATION, true);
-        
+    }
+    
+    public void Die()
+    {
+        Destroy(gameObject);
+    }
+
+
+    public void SetDieState()
+    {
+        anim.SetBool(DIE_ANIMATION, true);
     }
     
 }
