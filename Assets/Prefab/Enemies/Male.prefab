@@ -11,10 +11,10 @@ GameObject:
   - component: {fileID: 2609643167819765342}
   - component: {fileID: 2609643167819765340}
   - component: {fileID: 5956279574282335915}
-  - component: {fileID: 5691808634403042097}
   - component: {fileID: 1785113592}
   - component: {fileID: 2628614128113131150}
-  m_Layer: 0
+  - component: {fileID: 6210988456355854044}
+  m_Layer: 6
   m_Name: Male
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -109,22 +109,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &5691808634403042097
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2609643167819765329}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 467856b9d0925b34a9f60ca0010602e6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cost: 2
-  speed: 1
-  ENEMY_DAMAGE: 50
-  baker: {fileID: 0}
 --- !u!95 &1785113592
 Animator:
   serializedVersion: 5
@@ -158,7 +142,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.074534535, y: -0.33541155}
+  m_Offset: {x: -0.22096187, y: -0.96827245}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -169,5 +153,36 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 2.8092744, y: 4.5191765}
+  m_Size: {x: 2.1273675, y: 3.060408}
   m_EdgeRadius: 0
+--- !u!114 &6210988456355854044
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2609643167819765329}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 03621dbb9ea7c124aa6ec8efc82050a4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cost: 2
+  health: 100
+  ENEMY_DAMAGE: 30
+  speed: 1
+  baker: {fileID: 0}
+  movementFilter:
+    useTriggers: 0
+    useLayerMask: 1
+    useDepth: 0
+    useOutsideDepth: 0
+    useNormalAngle: 0
+    useOutsideNormalAngle: 0
+    layerMask:
+      serializedVersion: 2
+      m_Bits: 1
+    minDepth: 0
+    maxDepth: 0
+    minNormalAngle: 0
+    maxNormalAngle: 0

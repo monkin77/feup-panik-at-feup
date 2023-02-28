@@ -1,13 +1,19 @@
+using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 
 public class Shovel : Weapon
 {
+    public static float MAX_ENEMY_DISTANCE = 0.3f;
     public static int MAX_HORIZONTAL_ANGLE = 65;
     public static int MAX_DOWN_ANGLE = 100;
     public static int MAX_UP_ANGLE = 50;
     public static float SHOVEL_ROTATE_TIME = 0.15f;
     private bool goingUp = false;
+    
+    private string ENEMY_TAG = "Enemy";
+    private int _damage = 100;
 
     // The current max angle for the shovel attack animation (changes w/ orientation)
     private float _currMaxAngle = MAX_DOWN_ANGLE;
@@ -21,7 +27,7 @@ public class Shovel : Weapon
     {
         if (!this._isAttacking)
             return;
-
+        
         float shovelRotateSpeed = this._currMaxAngle / SHOVEL_ROTATE_TIME * Time.deltaTime;
 
         // is attacking, rotate the shovel
@@ -33,6 +39,9 @@ public class Shovel : Weapon
             }
             else
             {
+                // just finished the attack animation, check if there are enemies in range
+                // and attack them
+                AttackEnemiesInRange();
                 goingUp = true;
             }
         }
@@ -104,5 +113,35 @@ public class Shovel : Weapon
     protected override void stopAttacking() {
         this.goingUp = false;
         this._isAttacking = false;
+    }
+
+    /**
+     * Handles the collision with enemies
+     * @returns true if enemy's distance to the shovel is lower
+     * than a max_distance, false otherwise
+     */
+    private bool IsInAttackRange(Vector2 position)
+    {
+        Vector2 shovelPosition = transform.position;
+        float distance = Vector2.Distance(shovelPosition, position);
+        return distance < MAX_ENEMY_DISTANCE;
+    }
+
+    /**
+     * Attack all enemies in range
+     */
+    private void AttackEnemiesInRange()
+    {
+        // get all enemies
+        GameObject[] enemies = GameObject.FindGameObjectsWithTag(ENEMY_TAG);
+
+        // attack all enemies in range
+        foreach (var enemy in enemies)
+        {
+            if (IsInAttackRange(enemy.transform.position))
+            {
+                enemy.GetComponent<Enemy>().TakeDamage(_damage);
+            }
+        }
     }
 }

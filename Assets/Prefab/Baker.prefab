@@ -123,7 +123,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 2
-  hp: 100
+  health: 100
   weaponIdx: 0
   weaponList: []
   movementFilter:
@@ -135,7 +135,7 @@ MonoBehaviour:
     useOutsideNormalAngle: 0
     layerMask:
       serializedVersion: 2
-      m_Bits: 0
+      m_Bits: 1
     minDepth: 0
     maxDepth: 0
     minNormalAngle: 0
@@ -381,6 +381,10 @@ PrefabInstance:
     - target: {fileID: 260002350129294719, guid: 78d82c6f02f73584f9cb00fe82f636ee, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4320378930466626758, guid: 78d82c6f02f73584f9cb00fe82f636ee, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9010550974024973173, guid: 78d82c6f02f73584f9cb00fe82f636ee, type: 3}
       propertyPath: m_FlipX

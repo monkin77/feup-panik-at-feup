@@ -7,7 +7,7 @@ public class Player : MonoBehaviour
     [SerializeField]
     private float moveSpeed = 2f;
     
-    [SerializeField] private float hp = 100f;
+    [SerializeField] private int health = 100;
     
     private Rigidbody2D rigidBody;
     private SpriteRenderer sr;
@@ -20,8 +20,6 @@ public class Player : MonoBehaviour
     private float movementX;
     private float movementY;
     
-    private bool isAttacking;
-
     [SerializeField] private int weaponIdx = 0;
     [SerializeField] private List<Weapon> weaponList;
     private int _weaponCount;
@@ -182,6 +180,9 @@ public class Player : MonoBehaviour
         return false;
     }
     
+    /**
+     * Changes the orientation of each weapon to the desired orientatio
+     */
     void setWeaponsOrientation(WeaponOrientation orientation)
     {
         foreach (var weapon in weaponList)
@@ -190,6 +191,11 @@ public class Player : MonoBehaviour
         }
     }
     
+    /**
+     * Animates the player
+     * To do so, rotates the weapons to the respective orientations
+     * and starts the animation
+     */
     void AnimatePlayer()
     {
         var weapon = weaponList[weaponIdx];
@@ -227,6 +233,11 @@ public class Player : MonoBehaviour
         }
     }
 
+    /**
+     * Adds a collectible to the user.
+     * The collectibles of this game are ammo for the
+     * rpg weapon
+     */
     public void AddCollectible(Collectible collectible)
     {
         foreach (var weapon in weaponList)
@@ -241,8 +252,8 @@ public class Player : MonoBehaviour
      */
     public void TakeDamage(int damage)
     {
-        hp -= damage;
-        if (hp <= 0)
+        health -= damage;
+        if (health <= 0)
         {
             // TODO: do something when the player dies
             Destroy(this.gameObject);
