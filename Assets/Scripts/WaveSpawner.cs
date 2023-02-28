@@ -77,10 +77,11 @@ public class WaveSpawner : MonoBehaviour
         // while the wave value is greater than 0
         while (waveValue > 0) {
             int randEnemyIdx = Random.Range(0, this.enemies.Count);
-            int enemyCost = this.enemies[randEnemyIdx].cost;    // TODO: still has error since Enemy class is not created
+            Enemy currEnemy = this.enemies[randEnemyIdx].GetComponent<Enemy>();
+            int enemyCost = currEnemy.cost;
 
             if (waveValue - enemyCost >= 0) {
-                generatedEnemies.Add(this.enemies[randEnemyIdx].enemyPrefab);
+                generatedEnemies.Add(this.enemies[randEnemyIdx]);
                 waveValue -= enemyCost;
             } else {
                 break;

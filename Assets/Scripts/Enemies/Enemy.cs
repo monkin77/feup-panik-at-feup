@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
+    public int cost;
+
     [SerializeField] private float speed = 1f;
     [SerializeField] private int ENEMY_DAMAGE = 30;
     public float Speed
