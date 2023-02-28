@@ -21,14 +21,9 @@ public class WaveSpawner : MonoBehaviour
     // boolean to check if a wave is currently in progress
     private bool waveInProgress = false;
 
-    void Awake() {
-        Debug.Log("WaveSpawner: Awake()");
-    }
-
     // Start is called before the first frame update
     void Start()
     {
-        Debug.Log("WaveSpawner: Start()");
         // Generate the first wave
         generateWave();
     }
@@ -36,8 +31,6 @@ public class WaveSpawner : MonoBehaviour
     // fixedUpdate is called at a fixed interval
     void FixedUpdate()
     {
-        Debug.Log("WaveSpawner: FixedUpdate()");
-
         // If there are still enemies to spawn in the current wave
         if (this.enemiesToSpawn.Count > 0) {
             if (this.spawnTimer <= 0) {

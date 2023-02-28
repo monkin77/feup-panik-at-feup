@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Shovel : Weapon
 {
-    public static int MAX_ENEMY_DISTANCE = 1;
+    public static float MAX_ENEMY_DISTANCE = 0.3f;
     public static int MAX_HORIZONTAL_ANGLE = 65;
     public static int MAX_DOWN_ANGLE = 100;
     public static int MAX_UP_ANGLE = 50;
@@ -143,6 +143,7 @@ public class Shovel : Weapon
     {
         Vector2 shovelPosition = transform.position;
         float distance = Vector2.Distance(shovelPosition, position);
+        print("Distance: " + distance);
         return distance < MAX_ENEMY_DISTANCE;
     }
 }
