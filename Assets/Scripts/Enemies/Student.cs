@@ -5,6 +5,7 @@ using UnityEngine;
 public class Student : Enemy
 {
     // TODO: CHECK THESE COLLIDE OFFSETS
+    // TODO: OFFSETS NEED TO BE CHANGED SINCE THE ZOMBIES ARE NOT ATTACKING THE BAKER DUE TO THE OFFSETS
     private float xCollideOffset = 0.25f;
     private float yCollideOffset = 0.10f;
 
