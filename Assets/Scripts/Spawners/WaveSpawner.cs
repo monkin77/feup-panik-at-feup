@@ -12,6 +12,10 @@ public class WaveSpawner : MonoBehaviour
     private int currWave = 0;
 
     [SerializeField] private float timeBetweenWaves = 5f;
+
+    // Stores the time to start the next wave
+    private float timeForNextWave = 5f;
+
     [SerializeField] private int BOSS_WAVE = 4;
 
     [SerializeField]
@@ -36,6 +40,16 @@ public class WaveSpawner : MonoBehaviour
     // fixedUpdate is called at a fixed interval
     void FixedUpdate()
     {
+        // If there is no wave in progress, generate a new wave
+        if (!this.waveInProgress) {
+            // If the time for the next wave has not passed, do nothing
+            if (!checkNextWave()) return;
+
+            // If the time for the next wave has passed, generate a new wave
+            generateWave();
+            return;
+        }
+
         // If there are still enemies to spawn in the current wave
         if (this.enemiesToSpawn.Count > 0) {
             if (this.spawnTimer <= 0) {
@@ -67,9 +81,8 @@ public class WaveSpawner : MonoBehaviour
                 return;
             }
 
-            // If there are no enemies left in the scene, generate a new wave
+            // If there are no enemies left in the scene, set the wave as completed 
             this.waveInProgress = false;
-            generateWave();
         }
     }
 
@@ -82,9 +95,9 @@ public class WaveSpawner : MonoBehaviour
             return;
         }
 
-        // wait for a certain amount of time before starting the next wave~
+        // wait for a certain amount of time before starting the next wave
         // TODO: Change to showing the time left for the next wave
-        StartCoroutine(waitForNextWave());
+        /* StartCoroutine(waitForNextWave()); */
 
         List<GameObject> generatedEnemies = new List<GameObject>();
 
@@ -120,6 +133,24 @@ public class WaveSpawner : MonoBehaviour
     }
 
     /**
+    @return true if the time for the next wave has passed, false otherwise
+    */
+    public bool checkNextWave() {
+        if (this.timeForNextWave > 0) {
+            // Subtract the time passed since the last frame
+            this.timeForNextWave -= Time.fixedDeltaTime;
+
+            // Show the time left for the next wave
+            print("Next wave in " + this.timeForNextWave + " seconds");
+
+            return false;
+        } else {
+            this.timeForNextWave = this.timeBetweenWaves;
+            return true;
+        }
+    }
+
+    /**
     @param wave: the wave number
     @return The wave value that will be used to determine the number of enemies to spawn
     */
@@ -128,9 +159,14 @@ public class WaveSpawner : MonoBehaviour
     }
 
     /**
+    Unity Coroutines docs: https://docs.unity3d.com/Manual/Coroutines.html
     Waits for a certain amount of time before starting the next wave
     */
     private IEnumerator waitForNextWave() {
-        yield return new WaitForSeconds(this.timeBetweenWaves);
+        for (float secsUntilNextWave = this.timeBetweenWaves; secsUntilNextWave > 0; secsUntilNextWave--) {
+            print("Next wave in " + secsUntilNextWave + " seconds");
+
+            yield return new WaitForSeconds(1f);
+        }
     }
 }
