@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class WaveSpawner : MonoBehaviour
 {
@@ -8,10 +9,16 @@ public class WaveSpawner : MonoBehaviour
     [SerializeField] private List<GameObject> enemies = new List<GameObject>();
     // List of enemies prefabs to spawn in the current wave
     private List<GameObject> enemiesToSpawn = new List<GameObject>();
+    // List of positions where enemies can spawn
+    [SerializeField] private List<Transform> spawnPositions = new List<Transform>();
 
     private int currWave = 0;
 
     [SerializeField] private float timeBetweenWaves = 5f;
+
+    // Stores the time to start the next wave
+    private float timeForNextWave = 5f;
+
     [SerializeField] private int BOSS_WAVE = 4;
 
     [SerializeField]
@@ -26,23 +33,36 @@ public class WaveSpawner : MonoBehaviour
     
     private bool _isBossWave = false;
 
+    // Game Object to store the Text UI element that shows the time left for the next wave
+    [SerializeField] private TextMeshProUGUI timeLeftText;
+
     // Start is called before the first frame update
     void Start()
     {
-        // Generate the first wave
-        generateWave();
+        return;
     }
 
     // fixedUpdate is called at a fixed interval
     void FixedUpdate()
     {
+        // If there is no wave in progress, generate a new wave
+        if (!this.waveInProgress) {
+            // If the time for the next wave has not passed, do nothing
+            if (!checkNextWave()) return;
+
+            // If the time for the next wave has passed, generate a new wave
+            generateWave();
+            return;
+        }
+
         // If there are still enemies to spawn in the current wave
         if (this.enemiesToSpawn.Count > 0) {
             if (this.spawnTimer <= 0) {
             // Spawn an enemy
       
-            // TODO: Change this to spawn at a random position
-            Vector3 spawnPos = new Vector3(Random.Range(-3f, 3f), Random.Range(-1.5f, 2f), 0);
+            // Choose a random spawn position
+            int randSpawnPosIdx = Random.Range(0, this.spawnPositions.Count);
+            Vector3 spawnPos = this.spawnPositions[randSpawnPosIdx].position;
 
             // Instantiate the enemy
             GameObject enemy = Instantiate(this.enemiesToSpawn[0], spawnPos, Quaternion.identity);
@@ -67,9 +87,8 @@ public class WaveSpawner : MonoBehaviour
                 return;
             }
 
-            // If there are no enemies left in the scene, generate a new wave
+            // If there are no enemies left in the scene, set the wave as completed 
             this.waveInProgress = false;
-            generateWave();
         }
     }
 
@@ -81,10 +100,6 @@ public class WaveSpawner : MonoBehaviour
         if (this.waveInProgress) {
             return;
         }
-
-        // wait for a certain amount of time before starting the next wave~
-        // TODO: Change to showing the time left for the next wave
-        StartCoroutine(waitForNextWave());
 
         List<GameObject> generatedEnemies = new List<GameObject>();
 
@@ -120,17 +135,33 @@ public class WaveSpawner : MonoBehaviour
     }
 
     /**
+    @return true if the time for the next wave has passed, false otherwise
+    */
+    public bool checkNextWave() {
+        if (this.timeForNextWave > 0) {
+            // Subtract the time passed since the last frame
+            this.timeForNextWave -= Time.fixedDeltaTime;
+
+            // Show the time left for the next wave
+            int timeLeft = Mathf.RoundToInt(this.timeForNextWave);
+            this.timeLeftText.text = $"Wave {this.currWave + 1} starting in {timeLeft} seconds";
+
+            return false;
+        } else {
+            this.timeForNextWave = this.timeBetweenWaves;
+
+            // Hide the time left for the next wave
+            this.timeLeftText.text = "";
+
+            return true;
+        }
+    }
+
+    /**
     @param wave: the wave number
     @return The wave value that will be used to determine the number of enemies to spawn
     */
     private static int GetWaveValue(int wave) {
         return 4 + wave * 2;
-    }
-
-    /**
-    Waits for a certain amount of time before starting the next wave
-    */
-    private IEnumerator waitForNextWave() {
-        yield return new WaitForSeconds(this.timeBetweenWaves);
     }
 }
