@@ -2,8 +2,10 @@ using UnityEngine;
 
 public class Collectible : MonoBehaviour
 {
-    
-    protected virtual void OnTriggerEnter2D(Collider2D target) {
+    private int _bulletDamage = 100;
+
+    private void OnTriggerEnter2D(Collider2D target)
+    {
         // If the collectible is a bullet, then it was already collected by the baker
         if (target.CompareTag(Utils.BAKER_TAG) && !gameObject.CompareTag(Utils.BULLET_TAG))
         {
@@ -11,9 +13,10 @@ public class Collectible : MonoBehaviour
             // removes the food from the food spawner
             FoodSpawner.Instance.removeFood(gameObject);
             gameObject.SetActive(false);
-        } else if (target.CompareTag(Utils.ENEMY_TAG) && gameObject.CompareTag(Utils.BULLET_TAG)) {
-            // If the bullet hits an enemy, then destroy the bullet and the enemy
-            target.GetComponent<Enemy>().SetDieState();
+        } else if (target.CompareTag(Utils.ENEMY_TAG) && gameObject.CompareTag(Utils.BULLET_TAG))
+        {
+            // If the bullet hits an enemy, then destroy the bullet and deal damage to the enemy
+            target.GetComponent<Enemy>().TakeDamage(_bulletDamage);
             Destroy(gameObject);
         } else if (target.CompareTag(Utils.OBSTACLE_TAG)){
             // If the bullet hits an obstacle or if the food is spawned on an obstacle, then destroy the bullet / food
