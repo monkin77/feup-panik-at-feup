@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class WaveSpawner : MonoBehaviour
 {
@@ -30,11 +31,13 @@ public class WaveSpawner : MonoBehaviour
     
     private bool _isBossWave = false;
 
+    // Game Object to store the Text UI element that shows the time left for the next wave
+    [SerializeField] private TextMeshProUGUI timeLeftText;
+
     // Start is called before the first frame update
     void Start()
     {
-        // Generate the first wave
-        // generateWave();
+        return;
     }
 
     // fixedUpdate is called at a fixed interval
@@ -138,11 +141,15 @@ public class WaveSpawner : MonoBehaviour
 
             // Show the time left for the next wave
             int timeLeft = Mathf.RoundToInt(this.timeForNextWave);
-            print("Next wave in " + this.timeForNextWave + " seconds");
+            this.timeLeftText.text = $"Next wave in {timeLeft} seconds";
 
             return false;
         } else {
             this.timeForNextWave = this.timeBetweenWaves;
+
+            // Hide the time left for the next wave
+            this.timeLeftText.text = "";
+
             return true;
         }
     }
