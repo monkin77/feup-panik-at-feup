@@ -9,6 +9,7 @@ TagManager:
   - Weapon
   - Bullet
   - Enemy
+  - Obstacle
   layers:
   - Default
   - TransparentFX

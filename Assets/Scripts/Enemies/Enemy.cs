@@ -99,20 +99,6 @@ public class Enemy : MonoBehaviour
             }
         }
 
-
-        /* // Check if there are collisions with players or walls
-        int count = this.rigidBody.Cast(
-            direction, 
-            this.movementFilter,
-            this.castCollisions, 
-            this.collisionOffset
-        );
-        if (count == 0) {
-            // no collisions
-            transform.position = newPos;
-        } */
-
-
         if (transform.position.x > bakerX)
             sr.flipX = true;
         else

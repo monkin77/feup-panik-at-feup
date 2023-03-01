@@ -272,7 +272,7 @@ GameObject:
   - component: {fileID: 174354568}
   m_Layer: 0
   m_Name: Tilemap Bg Collidable
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -33054,8 +33054,28 @@ PrefabInstance:
       value: FoodSpawner
       objectReference: {fileID: 0}
     - target: {fileID: 1024243616610746809, guid: d8266921e6c974f46b9042cb8c5ac79d, type: 3}
-      propertyPath: SPAWN_MAX_TIME
+      propertyPath: SPAWN_X_MAX
+      value: 3.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1024243616610746809, guid: d8266921e6c974f46b9042cb8c5ac79d, type: 3}
+      propertyPath: SPAWN_X_MIN
+      value: -3.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1024243616610746809, guid: d8266921e6c974f46b9042cb8c5ac79d, type: 3}
+      propertyPath: SPAWN_Y_MAX
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1024243616610746809, guid: d8266921e6c974f46b9042cb8c5ac79d, type: 3}
+      propertyPath: SPAWN_Y_MIN
+      value: -2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1024243616610746809, guid: d8266921e6c974f46b9042cb8c5ac79d, type: 3}
+      propertyPath: DESTROY_TIME
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1024243616610746809, guid: d8266921e6c974f46b9042cb8c5ac79d, type: 3}
+      propertyPath: SPAWN_MAX_TIME
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 1024243616610746814, guid: d8266921e6c974f46b9042cb8c5ac79d, type: 3}
       propertyPath: m_RootOrder
@@ -33202,7 +33222,7 @@ GameObject:
   - component: {fileID: 1579104562}
   m_Layer: 0
   m_Name: Tilemap L3
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -36099,7 +36119,7 @@ GameObject:
   - component: {fileID: 2010455751}
   m_Layer: 0
   m_Name: Tilemap L2
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
