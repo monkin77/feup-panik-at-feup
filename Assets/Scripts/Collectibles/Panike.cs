@@ -14,4 +14,11 @@ public class Panike : Collectible {
             this.gameObject.SetActive(false);
         }
     }
+
+    /**
+    * Sets the active state of the panike object
+    */
+    public void setActive(bool active) {
+        this.gameObject.SetActive(active);
+    }
 }

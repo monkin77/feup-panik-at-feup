@@ -123,6 +123,17 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!114 &96089775 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 844809364808845948, guid: e62b8c6959ee0f840916ed3f1242d2fe, type: 3}
+  m_PrefabInstance: {fileID: 7197054402485759230}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2632c1b8557b7c541ad08a6eed6872b5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &146566869
 GameObject:
   m_ObjectHideFlags: 0
@@ -32973,7 +32984,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2075478858, guid: 0780414129f7ba84f8863b16c2e956df, type: 3}
       propertyPath: health
-      value: 1000000
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 2075478858, guid: 0780414129f7ba84f8863b16c2e956df, type: 3}
       propertyPath: collisionOffset
@@ -33178,6 +33189,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7655571069750034611, guid: bbd100445815be643afa20d916922e28, type: 3}
+      propertyPath: panike
+      value: 
+      objectReference: {fileID: 96089775}
     - target: {fileID: 7655571069750034611, guid: bbd100445815be643afa20d916922e28, type: 3}
       propertyPath: timeLeftText
       value: 
@@ -36037,6 +36052,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3231158629717410912, guid: 0780414129f7ba84f8863b16c2e956df, type: 3}
   m_PrefabInstance: {fileID: 947007542}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1751761140 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2075478858, guid: 0780414129f7ba84f8863b16c2e956df, type: 3}
+  m_PrefabInstance: {fileID: 947007542}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6dcccde2972475e4491322f95dcb2a83, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1845412494
 GameObject:
   m_ObjectHideFlags: 0
@@ -37205,6 +37231,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 844809364808845948, guid: e62b8c6959ee0f840916ed3f1242d2fe, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 1751761140}
     - target: {fileID: 7197054402545916496, guid: e62b8c6959ee0f840916ed3f1242d2fe, type: 3}
       propertyPath: m_RootOrder
       value: 7
@@ -37252,6 +37282,10 @@ PrefabInstance:
     - target: {fileID: 7197054402545916498, guid: e62b8c6959ee0f840916ed3f1242d2fe, type: 3}
       propertyPath: m_Name
       value: Panike
+      objectReference: {fileID: 0}
+    - target: {fileID: 7197054402545916498, guid: e62b8c6959ee0f840916ed3f1242d2fe, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e62b8c6959ee0f840916ed3f1242d2fe, type: 3}
