@@ -158,8 +158,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 301}
-  m_SizeDelta: {x: 650.5, y: 66.0052}
+  m_AnchoredPosition: {x: 0.0000038147, y: 299}
+  m_SizeDelta: {x: 1581.15, y: 75.75}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &146566871
 MonoBehaviour:
@@ -19682,7 +19682,7 @@ TilemapRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 94c7215b645041544b85aa29c1acefba, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -37198,3 +37198,60 @@ TilemapCollider2D:
   m_Offset: {x: 0, y: 0}
   m_MaximumTileChangeCount: 1000
   m_ExtrusionFactor: 0
+--- !u!1001 &7197054402485759230
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 7197054402545916496, guid: e62b8c6959ee0f840916ed3f1242d2fe, type: 3}
+      propertyPath: m_RootOrder
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 7197054402545916496, guid: e62b8c6959ee0f840916ed3f1242d2fe, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -3.781
+      objectReference: {fileID: 0}
+    - target: {fileID: 7197054402545916496, guid: e62b8c6959ee0f840916ed3f1242d2fe, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.34
+      objectReference: {fileID: 0}
+    - target: {fileID: 7197054402545916496, guid: e62b8c6959ee0f840916ed3f1242d2fe, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7197054402545916496, guid: e62b8c6959ee0f840916ed3f1242d2fe, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7197054402545916496, guid: e62b8c6959ee0f840916ed3f1242d2fe, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7197054402545916496, guid: e62b8c6959ee0f840916ed3f1242d2fe, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7197054402545916496, guid: e62b8c6959ee0f840916ed3f1242d2fe, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7197054402545916496, guid: e62b8c6959ee0f840916ed3f1242d2fe, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7197054402545916496, guid: e62b8c6959ee0f840916ed3f1242d2fe, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7197054402545916496, guid: e62b8c6959ee0f840916ed3f1242d2fe, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7197054402545916498, guid: e62b8c6959ee0f840916ed3f1242d2fe, type: 3}
+      propertyPath: m_Name
+      value: Panike
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: e62b8c6959ee0f840916ed3f1242d2fe, type: 3}
