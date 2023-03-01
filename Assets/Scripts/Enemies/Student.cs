@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Student : Enemy
 {
-    // TODO: CHECK THIS COLLIDE OFFSETS
+    // TODO: CHECK THESE COLLIDE OFFSETS
     private float xCollideOffset = 0.25f;
     private float yCollideOffset = 0.10f;
 

@@ -9,6 +9,8 @@ public class WaveSpawner : MonoBehaviour
     [SerializeField] private List<GameObject> enemies = new List<GameObject>();
     // List of enemies prefabs to spawn in the current wave
     private List<GameObject> enemiesToSpawn = new List<GameObject>();
+    // List of positions where enemies can spawn
+    [SerializeField] private List<Transform> spawnPositions = new List<Transform>();
 
     private int currWave = 0;
 
@@ -58,8 +60,9 @@ public class WaveSpawner : MonoBehaviour
             if (this.spawnTimer <= 0) {
             // Spawn an enemy
       
-            // TODO: Change this to spawn at a random position
-            Vector3 spawnPos = new Vector3(Random.Range(-3f, 3f), Random.Range(-1.5f, 2f), 0);
+            // Choose a random spawn position
+            int randSpawnPosIdx = Random.Range(0, this.spawnPositions.Count);
+            Vector3 spawnPos = this.spawnPositions[randSpawnPosIdx].position;
 
             // Instantiate the enemy
             GameObject enemy = Instantiate(this.enemiesToSpawn[0], spawnPos, Quaternion.identity);
@@ -141,7 +144,7 @@ public class WaveSpawner : MonoBehaviour
 
             // Show the time left for the next wave
             int timeLeft = Mathf.RoundToInt(this.timeForNextWave);
-            this.timeLeftText.text = $"Next wave in {timeLeft} seconds";
+            this.timeLeftText.text = $"Wave {this.currWave + 1} starting in {timeLeft} seconds";
 
             return false;
         } else {
