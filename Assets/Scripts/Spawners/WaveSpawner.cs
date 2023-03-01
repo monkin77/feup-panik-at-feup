@@ -34,7 +34,7 @@ public class WaveSpawner : MonoBehaviour
     void Start()
     {
         // Generate the first wave
-        generateWave();
+        // generateWave();
     }
 
     // fixedUpdate is called at a fixed interval
@@ -95,10 +95,6 @@ public class WaveSpawner : MonoBehaviour
             return;
         }
 
-        // wait for a certain amount of time before starting the next wave
-        // TODO: Change to showing the time left for the next wave
-        /* StartCoroutine(waitForNextWave()); */
-
         List<GameObject> generatedEnemies = new List<GameObject>();
 
         // Increment the wave number
@@ -141,6 +137,7 @@ public class WaveSpawner : MonoBehaviour
             this.timeForNextWave -= Time.fixedDeltaTime;
 
             // Show the time left for the next wave
+            int timeLeft = Mathf.RoundToInt(this.timeForNextWave);
             print("Next wave in " + this.timeForNextWave + " seconds");
 
             return false;
@@ -156,17 +153,5 @@ public class WaveSpawner : MonoBehaviour
     */
     private static int GetWaveValue(int wave) {
         return 4 + wave * 2;
-    }
-
-    /**
-    Unity Coroutines docs: https://docs.unity3d.com/Manual/Coroutines.html
-    Waits for a certain amount of time before starting the next wave
-    */
-    private IEnumerator waitForNextWave() {
-        for (float secsUntilNextWave = this.timeBetweenWaves; secsUntilNextWave > 0; secsUntilNextWave--) {
-            print("Next wave in " + secsUntilNextWave + " seconds");
-
-            yield return new WaitForSeconds(1f);
-        }
     }
 }
