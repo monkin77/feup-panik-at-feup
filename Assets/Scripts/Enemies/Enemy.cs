@@ -4,9 +4,13 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     public int cost;
-
-    [SerializeField] protected int health = 100;
-    public int Health
+    
+    // TODO: CHECK THIS COLLIDE OFFSETS
+    // These offsets are used to determine if the enemy is in attack range
+    // and are the default value on melee enemies. Ranged enemies will override these values
+    [SerializeField] protected float ATTACK_RANGE = 0.3f;
+    [SerializeField] protected float health = 100;
+    public float Health
     {
         get { return health; }
         set { health = value; }
@@ -104,14 +108,7 @@ public class Enemy : MonoBehaviour
         else
             sr.flipX = false;
     }
-
-    /**
-     * Abstract method to Check if the enemy is in attack range of the baker.
-     */
-    protected virtual bool IsInAttackRange()
-    {
-        throw new System.NotImplementedException();
-    }
+    
     
     /**
      * Kill the enemy and remove it from the game
@@ -179,5 +176,21 @@ public class Enemy : MonoBehaviour
         }
 
         return false;
+    }
+    
+    /**
+     * Check if the baker is in attack range of the enemy
+     * @return true if the baker is in attack range of the enemy, false otherwise
+     */
+    protected bool IsInAttackRange()
+    {
+        if (baker.gameObject == null)
+            return false;
+        
+        Vector2 bakerPos = baker.transform.position;
+
+        var distance = Vector2.Distance(bakerPos, transform.position);
+        
+        return distance <= ATTACK_RANGE;
     }
 }

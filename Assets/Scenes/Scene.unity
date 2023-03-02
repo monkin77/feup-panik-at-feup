@@ -283,7 +283,7 @@ GameObject:
   - component: {fileID: 174354568}
   m_Layer: 0
   m_Name: Tilemap Bg Collidable
-  m_TagString: Obstacle
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -33508,6 +33508,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7655571069750034611, guid: bbd100445815be643afa20d916922e28, type: 3}
+      propertyPath: enemies.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7655571069750034611, guid: bbd100445815be643afa20d916922e28, type: 3}
       propertyPath: panikeWaveImageLeft
       value: 
       objectReference: {fileID: 633664805}
@@ -33515,6 +33519,10 @@ PrefabInstance:
       propertyPath: panikeWaveImageRight
       value: 
       objectReference: {fileID: 957660125}
+    - target: {fileID: 7655571069750034611, guid: bbd100445815be643afa20d916922e28, type: 3}
+      propertyPath: enemies.Array.data[2]
+      value: 
+      objectReference: {fileID: 1404343170273848618, guid: 00326e781afbf1e4b9b2a5a0b4e3ef1d, type: 3}
     - target: {fileID: 7655571069750034611, guid: bbd100445815be643afa20d916922e28, type: 3}
       propertyPath: spawnPositions.Array.size
       value: 4
