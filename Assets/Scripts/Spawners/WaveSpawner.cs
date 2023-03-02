@@ -51,12 +51,13 @@ public class WaveSpawner : MonoBehaviour
     [SerializeField] private AudioSource normalBGMusic;
     [SerializeField] private AudioSource bossBGMusic;
     [SerializeField] private AudioSource waveEndMusic;
+    [SerializeField] private AudioSource waveCountdownMusic;
     private WaveAudioManager waveAudioManager;
 
     // Start is called before the first frame update
     void Start()
     {
-        this.waveAudioManager = new WaveAudioManager(this.normalBGMusic, this.bossBGMusic, this.waveEndMusic);
+        this.waveAudioManager = new WaveAudioManager(this.normalBGMusic, this.bossBGMusic, this.waveEndMusic, this.waveCountdownMusic);
     }
 
     // fixedUpdate is called at a fixed interval
@@ -185,6 +186,11 @@ public class WaveSpawner : MonoBehaviour
                         this.panikeImgRight.gameObject.SetActive(true);
                         this.panikeImgLeft.gameObject.SetActive(true);
                     }
+                }
+
+                // Play the countdown music
+                if (this.timeForNextWave <= 2.5) {
+                    this.waveAudioManager.playWaveCountdownMusic();
                 }
             }
 
