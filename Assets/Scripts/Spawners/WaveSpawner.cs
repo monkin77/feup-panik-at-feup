@@ -1,7 +1,7 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 
 public class WaveSpawner : MonoBehaviour
 {
@@ -9,6 +9,9 @@ public class WaveSpawner : MonoBehaviour
     [SerializeField] private List<GameObject> enemies = new List<GameObject>();
     // List of enemies prefabs to spawn in the current wave
     private List<GameObject> enemiesToSpawn = new List<GameObject>();
+    // Number of enemies to spawn in the current wave
+    private int numEnemiesToSpawn = 0;
+
     // List of positions where enemies can spawn
     [SerializeField] private List<Transform> spawnPositions = new List<Transform>();
 
@@ -32,6 +35,14 @@ public class WaveSpawner : MonoBehaviour
     private string ENEMY_TAG = "Enemy";
     
     private bool _isBossWave = false;
+
+    // Reference to the Panike Object that spawns in the boss waves
+    [SerializeField] private Panike panike;
+    // Reference to the Panike Wave UI objects
+    [SerializeField] private TextMeshProUGUI panikeWaveText;
+    [SerializeField] private Image panikeImgRight;
+    [SerializeField] private Image panikeImgLeft;
+
 
     // Game Object to store the Text UI element that shows the time left for the next wave
     [SerializeField] private TextMeshProUGUI timeLeftText;
@@ -58,24 +69,28 @@ public class WaveSpawner : MonoBehaviour
         // If there are still enemies to spawn in the current wave
         if (this.enemiesToSpawn.Count > 0) {
             if (this.spawnTimer <= 0) {
-            // Spawn an enemy
-      
-            // Choose a random spawn position
-            int randSpawnPosIdx = Random.Range(0, this.spawnPositions.Count);
-            Vector3 spawnPos = this.spawnPositions[randSpawnPosIdx].position;
+                // Spawn an enemy
+        
+                // Choose a random spawn position
+                int randSpawnPosIdx = Random.Range(0, this.spawnPositions.Count);
+                Vector3 spawnPos = this.spawnPositions[randSpawnPosIdx].position;
 
-            // Instantiate the enemy
-            GameObject enemy = Instantiate(this.enemiesToSpawn[0], spawnPos, Quaternion.identity);
-            this.enemiesToSpawn.RemoveAt(0);
-            
-            // If the current wave is a boss wave, double the speed of the enemies
-            if (this._isBossWave) {
-                print("PANIKE TIME!");
-                enemy.GetComponent<Enemy>().transfBoss();
-            }
+                // Instantiate the enemy
+                GameObject enemy = Instantiate(this.enemiesToSpawn[0], spawnPos, Quaternion.identity);
+                this.enemiesToSpawn.RemoveAt(0);
+                
+                // If the current wave is a boss wave, double the speed of the enemies
+                if (this._isBossWave) {
+                    enemy.GetComponent<Enemy>().transfBoss();
 
-            // Reset the spawn timer
-            this.spawnTimer = this.spawnFrequency;
+                    // If at least half of the enemies have been spawned, spawn the Panike
+                    if (this.enemiesToSpawn.Count <= this.numEnemiesToSpawn / 2) {
+                        this.panike.setActive(true);
+                    }
+                }
+
+                // Reset the spawn timer
+                this.spawnTimer = this.spawnFrequency;
             } else {
                 this.spawnTimer -= Time.fixedDeltaTime;
             }
@@ -109,7 +124,6 @@ public class WaveSpawner : MonoBehaviour
 
         // Verify if current wave is a Boss Wave (Panike TIME!)
         this._isBossWave = this.currWave % BOSS_WAVE == 0;
-        // if the current wave is a boss wave, double the speed of the enemies
         
 
         // while the wave value is greater than 0
@@ -129,6 +143,7 @@ public class WaveSpawner : MonoBehaviour
 
         this.enemiesToSpawn.Clear();
         this.enemiesToSpawn = generatedEnemies;
+        this.numEnemiesToSpawn = this.enemiesToSpawn.Count;
 
         this.spawnTimer = this.spawnFrequency;
         this.waveInProgress = true;
@@ -146,13 +161,28 @@ public class WaveSpawner : MonoBehaviour
             int timeLeft = Mathf.RoundToInt(this.timeForNextWave);
             this.timeLeftText.text = $"Wave {this.currWave + 1} starting in {timeLeft} seconds";
 
+            // If the next wave is a boss wave
+            if ((this.currWave + 1) % BOSS_WAVE == 0) {
+                if (!this.panikeWaveText.gameObject.activeSelf) {
+                    this.panikeWaveText.gameObject.SetActive(true);
+                    this.panikeImgRight.gameObject.SetActive(true);
+                    this.panikeImgLeft.gameObject.SetActive(true);
+                }
+            }
+
             return false;
         } else {
             this.timeForNextWave = this.timeBetweenWaves;
 
             // Hide the time left for the next wave
             this.timeLeftText.text = "";
-
+            // Hide the Panike Wave UI
+            if (this.panikeWaveText.gameObject.activeSelf) {
+                this.panikeWaveText.gameObject.SetActive(false);
+                this.panikeImgRight.gameObject.SetActive(false);
+                this.panikeImgLeft.gameObject.SetActive(false);
+            }   
+            
             return true;
         }
     }

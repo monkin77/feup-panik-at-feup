@@ -8,6 +8,15 @@ public class Player : MonoBehaviour
     private float moveSpeed = 2f;
     
     [SerializeField] private int health = 100;
+    // max health of the player
+    [SerializeField] private int maxHealth = 500;
+    // health increment when the player collects a panike
+    [SerializeField] private int healthIncrement = 50;
+
+    // max number of panikes
+    [SerializeField] private int maxPanikes = 5;
+    // Current number of panikes
+    private int currPanikes = 0;
     
     private Rigidbody2D rigidBody;
     private SpriteRenderer sr;
@@ -259,5 +268,16 @@ public class Player : MonoBehaviour
             Destroy(this.gameObject);
             GameManager.instance.GameOver();
         }
+    }
+
+    /**
+    Called when the player consumes a Panike
+    */
+    public void EatPanike() {
+        // Increment the player's health
+        this.health = Mathf.Min(this.maxHealth, this.health + this.healthIncrement);
+
+        // Increment the number of panikes
+        this.currPanikes = Mathf.Min(this.maxPanikes, this.currPanikes + 1);
     }
 }

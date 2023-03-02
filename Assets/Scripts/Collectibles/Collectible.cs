@@ -3,9 +3,7 @@ using UnityEngine;
 public class Collectible : MonoBehaviour
 {
     
-
-    private void OnTriggerEnter2D(Collider2D target)
-    {
+    protected virtual void OnTriggerEnter2D(Collider2D target) {
         // If the collectible is a bullet, then it was already collected by the baker
         if (target.CompareTag(Utils.BAKER_TAG) && !gameObject.CompareTag(Utils.BULLET_TAG))
         {
