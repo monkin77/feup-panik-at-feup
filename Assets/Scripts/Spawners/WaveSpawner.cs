@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 
 public class WaveSpawner : MonoBehaviour
 {
@@ -37,6 +38,11 @@ public class WaveSpawner : MonoBehaviour
 
     // Reference to the Panike Object that spawns in the boss waves
     [SerializeField] private Panike panike;
+    // Reference to the Panike Wave UI objects
+    [SerializeField] private TextMeshProUGUI panikeWaveText;
+    [SerializeField] private Image panikeImgRight;
+    [SerializeField] private Image panikeImgLeft;
+
 
     // Game Object to store the Text UI element that shows the time left for the next wave
     [SerializeField] private TextMeshProUGUI timeLeftText;
@@ -118,7 +124,6 @@ public class WaveSpawner : MonoBehaviour
 
         // Verify if current wave is a Boss Wave (Panike TIME!)
         this._isBossWave = this.currWave % BOSS_WAVE == 0;
-        // if the current wave is a boss wave, double the speed of the enemies
         
 
         // while the wave value is greater than 0
@@ -156,13 +161,28 @@ public class WaveSpawner : MonoBehaviour
             int timeLeft = Mathf.RoundToInt(this.timeForNextWave);
             this.timeLeftText.text = $"Wave {this.currWave + 1} starting in {timeLeft} seconds";
 
+            // If the next wave is a boss wave
+            if ((this.currWave + 1) % BOSS_WAVE == 0) {
+                if (!this.panikeWaveText.gameObject.activeSelf) {
+                    this.panikeWaveText.gameObject.SetActive(true);
+                    this.panikeImgRight.gameObject.SetActive(true);
+                    this.panikeImgLeft.gameObject.SetActive(true);
+                }
+            }
+
             return false;
         } else {
             this.timeForNextWave = this.timeBetweenWaves;
 
             // Hide the time left for the next wave
             this.timeLeftText.text = "";
-
+            // Hide the Panike Wave UI
+            if (this.panikeWaveText.gameObject.activeSelf) {
+                this.panikeWaveText.gameObject.SetActive(false);
+                this.panikeImgRight.gameObject.SetActive(false);
+                this.panikeImgLeft.gameObject.SetActive(false);
+            }   
+            
             return true;
         }
     }
