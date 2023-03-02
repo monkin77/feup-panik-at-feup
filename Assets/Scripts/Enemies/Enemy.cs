@@ -8,8 +8,7 @@ public class Enemy : MonoBehaviour
     // TODO: CHECK THIS COLLIDE OFFSETS
     // These offsets are used to determine if the enemy is in attack range
     // and are the default value on melee enemies. Ranged enemies will override these values
-    [SerializeField] protected float xCollideOffset = 0.25f;
-    [SerializeField] protected float yCollideOffset = 0.10f;
+    [SerializeField] protected float ATTACK_RANGE = 0.3f;
     [SerializeField] protected float health = 100;
     public float Health
     {
@@ -189,14 +188,9 @@ public class Enemy : MonoBehaviour
             return false;
         
         Vector2 bakerPos = baker.transform.position;
-        var bakerX = bakerPos.x;
-        var bakerY = bakerPos.y;
+
+        var distance = Vector2.Distance(bakerPos, transform.position);
         
-        var position = transform.position;
-        var xPos = position.x;
-        var yPos = position.y;
-        
-        return bakerX - xCollideOffset < xPos && xPos < bakerX + xCollideOffset &&
-               bakerY - yCollideOffset < yPos && yPos < bakerY + yCollideOffset;
+        return distance <= ATTACK_RANGE;
     }
 }

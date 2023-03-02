@@ -148,8 +148,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cost: 4
-  xCollideOffset: 1.5
-  yCollideOffset: 1
+  ATTACK_RANGE: 1.25
   health: 100
   ENEMY_DAMAGE: 20
   speed: 1
