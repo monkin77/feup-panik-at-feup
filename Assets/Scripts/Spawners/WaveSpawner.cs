@@ -47,10 +47,16 @@ public class WaveSpawner : MonoBehaviour
     // Game Object to store the Text UI element that shows the time left for the next wave
     [SerializeField] private TextMeshProUGUI timeLeftText;
 
+    // Music sources
+    [SerializeField] private AudioSource normalBGMusic;
+    [SerializeField] private AudioSource bossBGMusic;
+    [SerializeField] private AudioSource waveEndMusic;
+    private WaveAudioManager waveAudioManager;
+
     // Start is called before the first frame update
     void Start()
     {
-        return;
+        this.waveAudioManager = new WaveAudioManager(this.normalBGMusic, this.bossBGMusic, this.waveEndMusic);
     }
 
     // fixedUpdate is called at a fixed interval
@@ -104,6 +110,9 @@ public class WaveSpawner : MonoBehaviour
 
             // If there are no enemies left in the scene, set the wave as completed 
             this.waveInProgress = false;
+
+            // Play the end wave sound
+            this.waveAudioManager.playWaveEndMusic();
         }
     }
 
@@ -147,6 +156,13 @@ public class WaveSpawner : MonoBehaviour
 
         this.spawnTimer = this.spawnFrequency;
         this.waveInProgress = true;
+
+        // Start the music for the current wave
+        if (this._isBossWave) {
+            this.waveAudioManager.playBossBGMusic();
+        } else {
+            this.waveAudioManager.playNormalBGMusic();
+        }
     }
 
     /**
@@ -157,16 +173,18 @@ public class WaveSpawner : MonoBehaviour
             // Subtract the time passed since the last frame
             this.timeForNextWave -= Time.fixedDeltaTime;
 
-            // Show the time left for the next wave
-            int timeLeft = Mathf.RoundToInt(this.timeForNextWave);
-            this.timeLeftText.text = $"Wave {this.currWave + 1} starting in {timeLeft} seconds";
+            // Show the time left for the next wave if less than 5 seconds
+            if (this.timeForNextWave <= 5) {
+                int timeLeft = Mathf.RoundToInt(this.timeForNextWave);
+                this.timeLeftText.text = $"Wave {this.currWave + 1} starting in {timeLeft} seconds";
 
-            // If the next wave is a boss wave
-            if ((this.currWave + 1) % BOSS_WAVE == 0) {
-                if (!this.panikeWaveText.gameObject.activeSelf) {
-                    this.panikeWaveText.gameObject.SetActive(true);
-                    this.panikeImgRight.gameObject.SetActive(true);
-                    this.panikeImgLeft.gameObject.SetActive(true);
+                // If the next wave is a boss wave
+                if ((this.currWave + 1) % BOSS_WAVE == 0) {
+                    if (!this.panikeWaveText.gameObject.activeSelf) {
+                        this.panikeWaveText.gameObject.SetActive(true);
+                        this.panikeImgRight.gameObject.SetActive(true);
+                        this.panikeImgLeft.gameObject.SetActive(true);
+                    }
                 }
             }
 
