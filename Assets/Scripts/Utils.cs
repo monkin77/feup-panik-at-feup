@@ -4,4 +4,5 @@ public static class Utils {
     public static string BULLET_TAG = "Bullet";
     public static string ENEMY_TAG = "Enemy";
     public static string OBSTACLE_TAG = "Obstacle";
+    public static string WALL_TAG = "Wall";
 }   

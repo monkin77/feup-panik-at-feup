@@ -147,11 +147,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 35551c72ee203f24cb51dc5886d35e24, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cost: 3
+  cost: 4
   xCollideOffset: 1.5
   yCollideOffset: 1
   health: 100
-  ENEMY_DAMAGE: 50
+  ENEMY_DAMAGE: 20
   speed: 1
   baker: {fileID: 0}
   movementFilter:
@@ -169,8 +169,8 @@ MonoBehaviour:
     minNormalAngle: 0
     maxNormalAngle: 0
   bookPrefab: {fileID: 5509586617747447418, guid: fc2889532a3f84b4ab6b9e5bf860250f, type: 3}
-  _bulletSpeed: 1
-  _attackTime: 1
+  _bulletSpeed: 1.5
+  _attackTime: 1.5
 --- !u!95 &4351872360128840378
 Animator:
   serializedVersion: 5

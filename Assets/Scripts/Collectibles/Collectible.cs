@@ -4,7 +4,7 @@ public class Collectible : MonoBehaviour
 {
     private int _bulletDamage = 100;
 
-    private void OnTriggerEnter2D(Collider2D target)
+    protected virtual void OnTriggerEnter2D(Collider2D target)
     {
         // If the collectible is a bullet, then it was already collected by the baker
         if (target.CompareTag(Utils.BAKER_TAG) && !gameObject.CompareTag(Utils.BULLET_TAG))
@@ -18,7 +18,7 @@ public class Collectible : MonoBehaviour
             // If the bullet hits an enemy, then destroy the bullet and deal damage to the enemy
             target.GetComponent<Enemy>().TakeDamage(_bulletDamage);
             Destroy(gameObject);
-        } else if (target.CompareTag(Utils.OBSTACLE_TAG)){
+        } else if (target.CompareTag(Utils.WALL_TAG)){
             // If the bullet hits an obstacle or if the food is spawned on an obstacle, then destroy the bullet / food
 
             // removes the food from the food spawner if it was a food

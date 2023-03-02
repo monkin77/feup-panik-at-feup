@@ -5,10 +5,11 @@ using UnityEngine;
 public class Teacher : Enemy
 {
     
-    public static float BOSS_MULTIPLIER = 2.0f;
+    public static float BOSS_HP_MULTIPLIER = 2.0f;
+    private static float BOSS_BSPEED_MULTIPLIER = 1.5f;
     [SerializeField] private GameObject bookPrefab;
     [SerializeField] private float _bulletSpeed = 1f;
-    [SerializeField] private int _attackTime = 1;
+    [SerializeField] private float _attackTime = 1.5f;
     
     private bool _isAttacking = false;
     
@@ -24,6 +25,7 @@ public class Teacher : Enemy
         {
             // create a game object with prefab Book and set its velocity towards the baker
             GameObject book = Instantiate(bookPrefab, transform.position, Quaternion.identity);
+            book.GetComponent<Book>().SetDamage(ENEMY_DAMAGE);
             book.GetComponent<Rigidbody2D>().velocity = 
                 (baker.transform.position - transform.position).normalized * _bulletSpeed;
             
@@ -32,9 +34,10 @@ public class Teacher : Enemy
         else 
             anim.SetBool(WALK_ANIMATION, true);
     }
-
+    
     public override void transfBoss() {
-        this.Health *= BOSS_MULTIPLIER;
+        this.Health *= BOSS_HP_MULTIPLIER;
+        this._bulletSpeed *= BOSS_BSPEED_MULTIPLIER;
     }
     
     IEnumerator AttackReset()
