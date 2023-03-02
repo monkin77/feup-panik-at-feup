@@ -5,12 +5,15 @@ public class WaveAudioManager {
     private AudioSource bossBGMusic;
     private AudioSource waveEndMusic;
     private AudioSource waveCountdownMusic;
+    private AudioSource bossWaveCountdownMusic;
 
-    public WaveAudioManager(AudioSource normalBGMusic, AudioSource bossBGMusic, AudioSource waveEndMusic, AudioSource waveCountdownMusic) {
+    public WaveAudioManager(AudioSource normalBGMusic, AudioSource bossBGMusic, AudioSource waveEndMusic, 
+        AudioSource waveCountdownMusic, AudioSource bossWaveCountdownMusic) {
         this.normalBGMusic = normalBGMusic;
         this.bossBGMusic = bossBGMusic;
         this.waveEndMusic = waveEndMusic;
         this.waveCountdownMusic = waveCountdownMusic;
+        this.bossWaveCountdownMusic = bossWaveCountdownMusic;
     }
 
     public void playNormalBGMusic() {
@@ -37,5 +40,12 @@ public class WaveAudioManager {
         if (this.waveCountdownMusic.isPlaying) return;
         
         this.waveCountdownMusic.Play();
+    }
+
+    public void playBossWaveCountdownMusic() {
+        // if bossWaveCountdown music is already playing, do nothing
+        if (this.bossWaveCountdownMusic.isPlaying) return;
+        
+        this.bossWaveCountdownMusic.Play();
     }
 }

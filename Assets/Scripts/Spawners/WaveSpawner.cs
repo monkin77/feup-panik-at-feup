@@ -52,12 +52,15 @@ public class WaveSpawner : MonoBehaviour
     [SerializeField] private AudioSource bossBGMusic;
     [SerializeField] private AudioSource waveEndMusic;
     [SerializeField] private AudioSource waveCountdownMusic;
+    [SerializeField] private AudioSource bossWaveCountdownMusic;
+    private bool playedCountdownMusic = false;
+    private static float WAVE_COUNTDOWN_MUSIC_TIME = 2.5f;
     private WaveAudioManager waveAudioManager;
 
     // Start is called before the first frame update
     void Start()
     {
-        this.waveAudioManager = new WaveAudioManager(this.normalBGMusic, this.bossBGMusic, this.waveEndMusic, this.waveCountdownMusic);
+        this.waveAudioManager = new WaveAudioManager(this.normalBGMusic, this.bossBGMusic, this.waveEndMusic, this.waveCountdownMusic, this.bossWaveCountdownMusic);
     }
 
     // fixedUpdate is called at a fixed interval
@@ -186,12 +189,20 @@ public class WaveSpawner : MonoBehaviour
                         this.panikeImgRight.gameObject.SetActive(true);
                         this.panikeImgLeft.gameObject.SetActive(true);
                     }
+
+                    // Play the boss countdown music
+                    if (!this.playedCountdownMusic && this.timeForNextWave <= WAVE_COUNTDOWN_MUSIC_TIME) {
+                        this.waveAudioManager.playBossWaveCountdownMusic();
+                        this.playedCountdownMusic = true;
+                    }
+                } else {
+                    // Play the normal countdown music
+                    if (!this.playedCountdownMusic && this.timeForNextWave <= WAVE_COUNTDOWN_MUSIC_TIME) {
+                        this.waveAudioManager.playWaveCountdownMusic();
+                        this.playedCountdownMusic = true;
+                    }
                 }
 
-                // Play the countdown music
-                if (this.timeForNextWave <= 2.5) {
-                    this.waveAudioManager.playWaveCountdownMusic();
-                }
             }
 
             return false;
@@ -207,6 +218,9 @@ public class WaveSpawner : MonoBehaviour
                 this.panikeImgLeft.gameObject.SetActive(false);
             }   
             
+            // Reset the countdown music flag
+            this.playedCountdownMusic = false;
+
             return true;
         }
     }
