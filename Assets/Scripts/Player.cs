@@ -295,6 +295,7 @@ public class Player : MonoBehaviour
 
     /**
     * Checks if the currently equipped weapon uses ammo
+    * Currently, only the RPG uses ammo (index 1)
     */
     private bool weaponUsesAmmo() {
         return this.weaponIdx == 1;
