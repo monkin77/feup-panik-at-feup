@@ -184,16 +184,17 @@ public class WaveSpawner : MonoBehaviour
 
                 // If the next wave is a boss wave
                 if ((this.currWave + 1) % BOSS_WAVE == 0) {
-                    if (!this.panikeWaveText.gameObject.activeSelf) {
-                        this.panikeWaveText.gameObject.SetActive(true);
-                        this.panikeImgRight.gameObject.SetActive(true);
-                        this.panikeImgLeft.gameObject.SetActive(true);
-                    }
-
                     // Play the boss countdown music
                     if (!this.playedCountdownMusic && this.timeForNextWave <= WAVE_COUNTDOWN_MUSIC_TIME) {
                         this.waveAudioManager.playBossWaveCountdownMusic();
                         this.playedCountdownMusic = true;
+
+                        // Show the Panike Wave UI
+                        if (!this.panikeWaveText.gameObject.activeSelf) {
+                            this.panikeWaveText.gameObject.SetActive(true);
+                            this.panikeImgRight.gameObject.SetActive(true);
+                            this.panikeImgLeft.gameObject.SetActive(true);
+                        }
                     }
                 } else {
                     // Play the normal countdown music
