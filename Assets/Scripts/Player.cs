@@ -44,6 +44,8 @@ public class Player : MonoBehaviour
     // HealthBar reference
     [SerializeField] private HealthBar healthBar;
 
+    [SerializeField] private WeaponSwitcher weaponSwitcher;
+
     private void Awake()
     {
         this.rigidBody = GetComponent<Rigidbody2D>();
@@ -104,6 +106,9 @@ public class Player : MonoBehaviour
                 weaponIdx = _weaponCount - 1;
             }
             weaponList[weaponIdx].gameObject.SetActive(true);
+
+            // Cycle the weapon in the UI
+            this.weaponSwitcher.cycleWeapon();
         } 
         else if (Input.GetKeyDown(KeyCode.E)) {
             // next weapon
@@ -114,8 +119,10 @@ public class Player : MonoBehaviour
                 weaponIdx = 0;
             weapon = weaponList[weaponIdx];
             weapon.gameObject.SetActive(true);
-        }
 
+            // Cycle the weapon in the UI
+            this.weaponSwitcher.cycleWeapon();
+        }
     }
 
     /**

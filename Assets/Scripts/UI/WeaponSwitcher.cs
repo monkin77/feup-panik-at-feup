@@ -5,16 +5,23 @@ public class WeaponSwitcher : MonoBehaviour {
     private Transform currentWeaponContainer;
     private Transform nextWeaponContainer;
 
-    private Vector3 currWeaponBannerPos;
-    private Vector3 nextWeaponBannerPos;
+    private Vector2 currWeaponBannerPos;
+    private Vector2 nextWeaponBannerPos;
 
     private void Awake() {
-        this.weaponSwitcherContainer = this.transform.Find("WeaponSwitcher");
+        this.weaponSwitcherContainer = GameObject.Find("WeaponSwitcher").transform;
         this.currentWeaponContainer = this.weaponSwitcherContainer.Find("CurrentWeapon");
         this.nextWeaponContainer = this.weaponSwitcherContainer.Find("NextWeapon");
 
-        this.currWeaponBannerPos = this.currentWeaponContainer.Find("Banner").position;
-        this.nextWeaponBannerPos = this.nextWeaponContainer.Find("Banner").position;
+        RectTransform canvasRect = GameObject.Find("Canvas").GetComponent<RectTransform>();
+
+        // Screen position
+        Vector3 currWeaponBannerScreenPos = Camera.main.WorldToScreenPoint(this.currentWeaponContainer.Find("Banner").position);
+        Vector3 nextWeaponBannerScreenPos = Camera.main.WorldToScreenPoint(this.nextWeaponContainer.Find("Banner").position);
+
+        // Convert screen position to Canvas / RectTransform space <- leave camera null if Screen Space Overlay
+        RectTransformUtility.ScreenPointToLocalPointInRectangle(this.currentWeaponContainer.GetComponent<RectTransform>(), currWeaponBannerScreenPos, Camera.main, out this.currWeaponBannerPos);
+        RectTransformUtility.ScreenPointToLocalPointInRectangle(this.nextWeaponContainer.GetComponent<RectTransform>(), nextWeaponBannerScreenPos, Camera.main, out this.nextWeaponBannerPos);
     }
 
     public void cycleWeapon() {
@@ -22,12 +29,15 @@ public class WeaponSwitcher : MonoBehaviour {
         Transform currBanner = this.currentWeaponContainer.Find("Banner");
         Transform nextBanner = this.nextWeaponContainer.Find("Banner");
 
+        Debug.Log("Current Weapon pos: " + this.currWeaponBannerPos);
+        Debug.Log("Next Weapon pos: " + this.nextWeaponBannerPos);
+
         // Set the current weapon banner as the next weapon banner
         currBanner.SetParent(this.nextWeaponContainer);
-        currBanner.position = this.nextWeaponBannerPos;
+        currBanner.localPosition = this.nextWeaponBannerPos;
 
         // Set the next weapon banner as the current weapon banner
         nextBanner.SetParent(this.currentWeaponContainer);
-        nextBanner.position = this.currWeaponBannerPos;
+        nextBanner.localPosition = this.currWeaponBannerPos;
     }
 }
