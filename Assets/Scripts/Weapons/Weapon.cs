@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public enum WeaponOrientation
@@ -60,9 +57,7 @@ public class Weapon : MonoBehaviour
 
     }
     
-    public virtual void AddAmmo(Collectible ammo)
-    {
-    }
+    public virtual void AddAmmo(Collectible ammo) {}
 
     /**
     * Resets the weapon to its original state

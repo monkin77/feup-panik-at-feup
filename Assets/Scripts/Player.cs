@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -59,8 +58,7 @@ public class Player : MonoBehaviour
         this.healthBar.SetHealth(this.health); 
     }
 
-    void Start()
-    {
+    void Start() {
         for (var i = 0; i < transform.GetChild(0).childCount; i++)
         {
             GameObject go = transform.GetChild(0).GetChild(i).gameObject; 
@@ -134,8 +132,7 @@ public class Player : MonoBehaviour
         if (weapon.IsAttacking)
             return;
         
-        if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0))
-        {
+        if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0)) {
             weapon.IsAttacking = true;
         }
     }
@@ -258,10 +255,8 @@ public class Player : MonoBehaviour
      * The collectibles of this game are ammo for the
      * rpg weapon
      */
-    public void AddCollectible(Collectible collectible)
-    {
-        foreach (var weapon in weaponList)
-        {
+    public void AddCollectible(Collectible collectible) {
+        foreach (var weapon in weaponList) {
             weapon.AddAmmo(collectible);
         }
     }
@@ -295,5 +290,13 @@ public class Player : MonoBehaviour
 
         // Increment the number of panikes
         this.currPanikes = Mathf.Min(this.maxPanikes, this.currPanikes + 1);
+    }
+
+
+    /**
+    * Checks if the currently equipped weapon uses ammo
+    */
+    private bool weaponUsesAmmo() {
+        return this.weaponIdx == 1;
     }
 }
