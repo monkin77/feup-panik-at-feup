@@ -93,11 +93,9 @@ public class Player : MonoBehaviour
      * Checks if weapon change keys were pressed
      * and act according to it
      */
-    void ChangeWeaponKb()
-    {
+    void ChangeWeaponKb() {
         var weapon = weaponList[weaponIdx];
-        if (Input.GetKeyDown(KeyCode.Q))
-        {
+        if (Input.GetKeyDown(KeyCode.Q)) {
             weapon.gameObject.SetActive(false);
             if (weaponIdx > 0)
                 weaponIdx--;
@@ -107,8 +105,7 @@ public class Player : MonoBehaviour
             }
             weaponList[weaponIdx].gameObject.SetActive(true);
         } 
-        else if (Input.GetKeyDown(KeyCode.E))
-        {
+        else if (Input.GetKeyDown(KeyCode.E)) {
             // next weapon
             weapon.gameObject.SetActive(false);
             if (weaponIdx < _weaponCount - 1)
