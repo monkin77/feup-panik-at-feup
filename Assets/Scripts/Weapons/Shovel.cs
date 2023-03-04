@@ -13,7 +13,7 @@ public class Shovel : Weapon
     private bool goingUp = false;
     
     private string ENEMY_TAG = "Enemy";
-    private int _damage = 100;
+    private int _damage = 30;
 
     // The current max angle for the shovel attack animation (changes w/ orientation)
     private float _currMaxAngle = MAX_DOWN_ANGLE;

@@ -169,8 +169,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cost: 2
   ATTACK_RANGE: 0.3
-  health: 100
-  ENEMY_DAMAGE: 30
+  health: 30
+  ENEMY_DAMAGE: 10
   speed: 1
   baker: {fileID: 0}
   movementFilter:

@@ -41,6 +41,9 @@ public class Player : MonoBehaviour
     // Collision offset to prevent the player from getting stuck in walls
     [SerializeField] private float collisionOffset = 0.01f;
 
+    // HealthBar reference
+    [SerializeField] private HealthBar healthBar;
+
     private void Awake()
     {
         this.rigidBody = GetComponent<Rigidbody2D>();
@@ -48,6 +51,10 @@ public class Player : MonoBehaviour
         
         sr = GetComponent<SpriteRenderer>();
         weaponList = new List<Weapon>();
+
+        // Set the max health in the UI
+        this.healthBar.setMaxHealth(this.maxHealth);
+        this.healthBar.SetHealth(this.health); 
     }
 
     void Start()
@@ -259,11 +266,13 @@ public class Player : MonoBehaviour
      * Called when the player is hit by an enemy or projectile
      * @param damage The amount of damage the player takes
      */
-    public void TakeDamage(int damage)
-    {
-        health -= damage;
-        if (health <= 0)
-        {
+    public void TakeDamage(int damage) {
+        this.health = Mathf.Max(this.health - damage, 0);
+
+        // Update the health bar
+        this.healthBar.SetHealth(this.health);
+
+        if (health <= 0) {
             // TODO: do something when the player dies
             Destroy(this.gameObject);
             GameManager.instance.GameOver();
@@ -276,6 +285,9 @@ public class Player : MonoBehaviour
     public void EatPanike() {
         // Increment the player's health
         this.health = Mathf.Min(this.maxHealth, this.health + this.healthIncrement);
+
+        // Update the health bar
+        this.healthBar.SetHealth(this.health);
 
         // Increment the number of panikes
         this.currPanikes = Mathf.Min(this.maxPanikes, this.currPanikes + 1);

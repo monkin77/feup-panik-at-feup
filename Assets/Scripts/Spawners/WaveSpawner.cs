@@ -94,8 +94,9 @@ public class WaveSpawner : MonoBehaviour
                     enemy.GetComponent<Enemy>().transfBoss();
 
                     // If at least half of the enemies have been spawned, spawn the Panike
-                    if (this.enemiesToSpawn.Count <= this.numEnemiesToSpawn / 2) {
+                    if ((this.enemiesToSpawn.Count <= this.numEnemiesToSpawn / 2) && !this.panike.getSpawned()) {
                         this.panike.setActive(true);
+                        this.panike.setSpawned(true);
                     }
                 }
 
@@ -164,6 +165,9 @@ public class WaveSpawner : MonoBehaviour
         // Start the music for the current wave
         if (this._isBossWave) {
             this.waveAudioManager.playBossBGMusic();
+
+            // Set the panike spawned state to false
+            this.panike.setSpawned(false);
         } else {
             this.waveAudioManager.playNormalBGMusic();
         }
