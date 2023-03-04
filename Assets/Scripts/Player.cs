@@ -9,7 +9,7 @@ public class Player : MonoBehaviour
     
     [SerializeField] private int health = 100;
     // max health of the player
-    [SerializeField] private int maxHealth = 500;
+    [SerializeField] private int maxHealth = 200;
     // health increment when the player collects a panike
     [SerializeField] private int healthIncrement = 50;
 

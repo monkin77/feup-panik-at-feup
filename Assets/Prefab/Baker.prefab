@@ -125,7 +125,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 2
   health: 100
-  maxHealth: 500
+  maxHealth: 200
   healthIncrement: 50
   maxPanikes: 5
   weaponIdx: 0
