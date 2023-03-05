@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using Vector2 = System.Numerics.Vector2;
 
@@ -13,6 +14,7 @@ public class PoisonedPanike : MonoBehaviour
     private float timeElapsed = 0.0f;
     
     [SerializeField] private GameObject _trail;
+    [SerializeField] private GameObject _poison;
     
     // Start is called before the first frame update
     void Start()
@@ -60,9 +62,9 @@ public class PoisonedPanike : MonoBehaviour
         }
         else
         {
-            // got to the final position, invoke the poison and destroy the panike
+            _poison = Instantiate(_poison, transform.position, Quaternion.identity);
+            Destroy(this.gameObject);
         }
     }
-    
-    
+
 }

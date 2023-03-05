@@ -99,6 +99,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _trail: {fileID: 6633855546973809429, guid: efc7906f33eed504f9cca3fa33c31f04, type: 3}
+  _poison: {fileID: 2799467095016770513, guid: 3167f3d93cce7224b918a5ee4ef8a66d, type: 3}
 --- !u!1001 &3262055298957512900
 PrefabInstance:
   m_ObjectHideFlags: 0
