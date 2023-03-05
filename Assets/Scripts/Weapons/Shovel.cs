@@ -10,6 +10,7 @@ public class Shovel : Weapon
     public static int MAX_DOWN_ANGLE = 100;
     public static int MAX_UP_ANGLE = 50;
     public static float SHOVEL_ROTATE_TIME = 0.15f;
+    
     private bool goingUp = false;
     
     private string ENEMY_TAG = "Enemy";
@@ -25,8 +26,7 @@ public class Shovel : Weapon
      */
     public override void Attack()
     {
-        if (!this._isAttacking)
-            return;
+        if (!this._isAttacking) return;
         
         float shovelRotateSpeed = this._currMaxAngle / SHOVEL_ROTATE_TIME * Time.deltaTime;
 
@@ -34,9 +34,7 @@ public class Shovel : Weapon
         if (!goingUp)
         {
             if (transform.rotation.eulerAngles.z < this._currMaxAngle)
-            {
                 transform.Rotate(new Vector3(0, 0, shovelRotateSpeed));
-            }
             else
             {
                 // just finished the attack animation, check if there are enemies in range
@@ -48,14 +46,17 @@ public class Shovel : Weapon
         else
         {
             if (transform.rotation.eulerAngles.z >= shovelRotateSpeed)
-            {
                 transform.Rotate(new Vector3(0, 0, -shovelRotateSpeed));
-            }
             else
-            {
                 this.stopAttacking();
-            }
         }
+    }
+    
+    public override void PowerUpAttack()
+    {
+        print("Shovel power up attack");
+        this._isAttacking = false;
+        this.IsPowerUp = false;
     }
 
     /**

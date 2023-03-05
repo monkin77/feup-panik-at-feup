@@ -127,6 +127,7 @@ MonoBehaviour:
   maxHealth: 60
   healthIncrement: 20
   maxPanikes: 5
+  _currPanikes: 5
   weaponIdx: 0
   weaponList: []
   movementFilter:
@@ -323,6 +324,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc2335bcbe599404ba8e39f4fb97606b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  poisonPrefab: {fileID: 8089920208145690758, guid: a347df969116f0c46afaedd9afdb69fe, type: 3}
+  finalPositionOffset: 1
+  panikeMoveDuration: 1
 --- !u!1001 &4591910394201859419
 PrefabInstance:
   m_ObjectHideFlags: 0
