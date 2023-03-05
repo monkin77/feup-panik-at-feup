@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class Player : MonoBehaviour
 {
@@ -41,6 +42,9 @@ public class Player : MonoBehaviour
     [SerializeField] private HealthBar healthBar;
 
     [SerializeField] private WeaponSwitcher weaponSwitcher;
+
+    // Reference to the Panike Counter Text UI object
+    [SerializeField] private TextMeshProUGUI panikeCounterText;
 
     private void Awake()
     {
@@ -134,13 +138,12 @@ public class Player : MonoBehaviour
         
         if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0)) {
             weapon.IsAttacking = true;
-        } else if (Input.GetKeyDown(KeyCode.R))
-        {
+        } else if (Input.GetKeyDown(KeyCode.R)) {
             // if there are no panikes player can't power up
             if (_currPanikes == 0)
                 return;
 
-            this._currPanikes = Mathf.Max(0, this._currPanikes - 1);
+            this.setCurrPanikes(this._currPanikes - 1);
 
             weapon.IsPowerUp = true;
             weapon.IsAttacking = true;
@@ -299,7 +302,7 @@ public class Player : MonoBehaviour
         this.healthBar.SetHealth(this.health);
 
         // Increment the number of panikes
-        this._currPanikes = Mathf.Min(this.maxPanikes, this._currPanikes + 1);
+        this.setCurrPanikes(this._currPanikes + 1);
     }
 
 
@@ -309,5 +312,22 @@ public class Player : MonoBehaviour
     */
     private bool weaponUsesAmmo() {
         return this.weaponIdx == 1;
+    }
+
+    /**
+    * Auxiliary function to set the current number of panikes and update the UI
+    */
+    private void setCurrPanikes(int newPanikesNum) {
+        int aux = newPanikesNum;
+        if (newPanikesNum < 0 ) {
+            aux = 0;
+        } else if (newPanikesNum > this.maxPanikes) {
+            aux = this.maxPanikes;
+        }
+
+        this._currPanikes = aux;
+
+        // Update the UI
+        this.panikeCounterText.text = Utils.createAmmoText(this._currPanikes);
     }
 }
