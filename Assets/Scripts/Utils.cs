@@ -8,4 +8,8 @@ public static class Utils {
     public static string BAKER_UP_ANIMATION = "WalkUp";
     public static string BAKER_DOWN_ANIMATION = "WalkDown";
     public static string BAKER_WALK_HORIZONTAL = "WalkHorizontal";
+
+    public static string createAmmoText(int ammoCount) {
+        return $"x{ammoCount}";
+    }
 }   

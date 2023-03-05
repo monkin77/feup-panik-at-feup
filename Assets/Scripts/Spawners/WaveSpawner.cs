@@ -24,6 +24,9 @@ public class WaveSpawner : MonoBehaviour
 
     [SerializeField] private int BOSS_WAVE = 4;
 
+    // Wave multiplier
+    [SerializeField] private int waveMultiplier = 4;
+
     [SerializeField]
     private float spawnFrequency = 1f;
     // Stores the time to spawn the next enemy
@@ -64,8 +67,7 @@ public class WaveSpawner : MonoBehaviour
     }
 
     // fixedUpdate is called at a fixed interval
-    void FixedUpdate()
-    {
+    void FixedUpdate() {
         // If there is no wave in progress, generate a new wave
         if (!this.waveInProgress) {
             // If the time for the next wave has not passed, do nothing
@@ -134,7 +136,7 @@ public class WaveSpawner : MonoBehaviour
 
         // Increment the wave number
         this.currWave++;
-        int waveValue = GetWaveValue(this.currWave);
+        int waveValue = this.GetWaveValue(this.currWave);
 
         // Verify if current wave is a Boss Wave (Panike TIME!)
         this._isBossWave = this.currWave % BOSS_WAVE == 0;
@@ -234,7 +236,7 @@ public class WaveSpawner : MonoBehaviour
     @param wave: the wave number
     @return The wave value that will be used to determine the number of enemies to spawn
     */
-    private static int GetWaveValue(int wave) {
-        return 4 + wave * 2;
+    private int GetWaveValue(int wave) {
+        return 4 + wave * this.waveMultiplier;
     }
 }

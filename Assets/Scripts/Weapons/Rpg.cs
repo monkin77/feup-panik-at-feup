@@ -49,7 +49,7 @@ public class Rpg : Weapon
             bullet.GetComponent<Rigidbody2D>().velocity = Weapon.vecFromOrientation(this._orientation) * BULLET_SPEED;
 
             // Update Ammo Count in the UI
-            this.ammoCountText.text = rpgAmmo.Count.ToString();
+            this.ammoCountText.text = Utils.createAmmoText(rpgAmmo.Count);
         }
 
         float recoilSpeed = this._currMaxRecoilDist / RECOIL_TIME;
@@ -174,7 +174,7 @@ public class Rpg : Weapon
         rpgAmmo.Enqueue(ammo);
 
         // Update Ammo Count in the UI
-        this.ammoCountText.text = rpgAmmo.Count.ToString();
+        this.ammoCountText.text = Utils.createAmmoText(rpgAmmo.Count);
     }
 
     /**
