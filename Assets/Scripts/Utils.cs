@@ -5,4 +5,7 @@ public static class Utils {
     public static string ENEMY_TAG = "Enemy";
     public static string OBSTACLE_TAG = "Obstacle";
     public static string WALL_TAG = "Wall";
+    public static string BAKER_UP_ANIMATION = "WalkUp";
+    public static string BAKER_DOWN_ANIMATION = "WalkDown";
+    public static string BAKER_WALK_HORIZONTAL = "WalkHorizontal";
 }   

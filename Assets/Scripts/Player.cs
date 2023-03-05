@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -16,15 +15,12 @@ public class Player : MonoBehaviour
     // max number of panikes
     [SerializeField] private int maxPanikes = 5;
     // Current number of panikes
-    private int currPanikes = 0;
+    [SerializeField] private int _currPanikes = 0;
     
     private Rigidbody2D rigidBody;
     private SpriteRenderer sr;
     
     private Animator anim;
-    private string BAKER_UP_ANIMATION = "WalkUp";
-    private string BAKER_DOWN_ANIMATION = "WalkDown";
-    private string BAKER_WALK_HORIZONTAL = "WalkHorizontal";
 
     private float movementX;
     private float movementY;
@@ -41,6 +37,11 @@ public class Player : MonoBehaviour
     // Collision offset to prevent the player from getting stuck in walls
     [SerializeField] private float collisionOffset = 0.01f;
 
+    // HealthBar reference
+    [SerializeField] private HealthBar healthBar;
+
+    [SerializeField] private WeaponSwitcher weaponSwitcher;
+
     private void Awake()
     {
         this.rigidBody = GetComponent<Rigidbody2D>();
@@ -48,10 +49,13 @@ public class Player : MonoBehaviour
         
         sr = GetComponent<SpriteRenderer>();
         weaponList = new List<Weapon>();
+
+        // Set the max health in the UI
+        this.healthBar.setMaxHealth(this.maxHealth);
+        this.healthBar.SetHealth(this.health); 
     }
 
-    void Start()
-    {
+    void Start() {
         for (var i = 0; i < transform.GetChild(0).childCount; i++)
         {
             GameObject go = transform.GetChild(0).GetChild(i).gameObject; 
@@ -86,11 +90,9 @@ public class Player : MonoBehaviour
      * Checks if weapon change keys were pressed
      * and act according to it
      */
-    void ChangeWeaponKb()
-    {
+    void ChangeWeaponKb() {
         var weapon = weaponList[weaponIdx];
-        if (Input.GetKeyDown(KeyCode.Q))
-        {
+        if (Input.GetKeyDown(KeyCode.Q)) {
             weapon.gameObject.SetActive(false);
             if (weaponIdx > 0)
                 weaponIdx--;
@@ -99,9 +101,11 @@ public class Player : MonoBehaviour
                 weaponIdx = _weaponCount - 1;
             }
             weaponList[weaponIdx].gameObject.SetActive(true);
+
+            // Cycle the weapon in the UI
+            this.weaponSwitcher.cycleWeapon();
         } 
-        else if (Input.GetKeyDown(KeyCode.E))
-        {
+        else if (Input.GetKeyDown(KeyCode.E)) {
             // next weapon
             weapon.gameObject.SetActive(false);
             if (weaponIdx < _weaponCount - 1)
@@ -110,8 +114,10 @@ public class Player : MonoBehaviour
                 weaponIdx = 0;
             weapon = weaponList[weaponIdx];
             weapon.gameObject.SetActive(true);
-        }
 
+            // Cycle the weapon in the UI
+            this.weaponSwitcher.cycleWeapon();
+        }
     }
 
     /**
@@ -120,11 +126,23 @@ public class Player : MonoBehaviour
     void AttackKeyboard()
     {
         var weapon = weaponList[weaponIdx];
-        if (weapon.IsAttacking)
-            return;
-        
-        if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0))
+        foreach (var wpn in weaponList)
         {
+            if (wpn.IsAttacking)
+                return;
+        }
+        
+        if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0)) {
+            weapon.IsAttacking = true;
+        } else if (Input.GetKeyDown(KeyCode.R))
+        {
+            // if there are no panikes player can't power up
+            if (_currPanikes == 0)
+                return;
+
+            this._currPanikes = Mathf.Max(0, this._currPanikes - 1);
+
+            weapon.IsPowerUp = true;
             weapon.IsAttacking = true;
         }
     }
@@ -211,34 +229,34 @@ public class Player : MonoBehaviour
         if (movementY > 0)
         {
             setWeaponsOrientation(WeaponOrientation.Up);
-            anim.SetBool(BAKER_UP_ANIMATION, true);
+            anim.SetBool(Utils.BAKER_UP_ANIMATION, true);
         }
         else if (movementY < 0)
         {
             setWeaponsOrientation(WeaponOrientation.Down);
-            anim.SetBool(BAKER_DOWN_ANIMATION, true);
+            anim.SetBool(Utils.BAKER_DOWN_ANIMATION, true);
         } 
         else
         {
-            anim.SetBool(BAKER_DOWN_ANIMATION, false);
-            anim.SetBool(BAKER_UP_ANIMATION, false);
+            anim.SetBool(Utils.BAKER_DOWN_ANIMATION, false);
+            anim.SetBool(Utils.BAKER_UP_ANIMATION, false);
         }
 
         if (movementX > 0)
         {
             setWeaponsOrientation(WeaponOrientation.Right);
-            anim.SetBool(BAKER_WALK_HORIZONTAL, true); 
+            anim.SetBool(Utils.BAKER_WALK_HORIZONTAL, true); 
             sr.flipX = false;
         }
         else if (movementX < 0)
         {
             setWeaponsOrientation(WeaponOrientation.Left);
-            anim.SetBool(BAKER_WALK_HORIZONTAL, true);
+            anim.SetBool(Utils.BAKER_WALK_HORIZONTAL, true);
             sr.flipX = true;
         }
         else
         {
-            anim.SetBool(BAKER_WALK_HORIZONTAL, false);
+            anim.SetBool(Utils.BAKER_WALK_HORIZONTAL, false);
         }
     }
 
@@ -247,10 +265,8 @@ public class Player : MonoBehaviour
      * The collectibles of this game are ammo for the
      * rpg weapon
      */
-    public void AddCollectible(Collectible collectible)
-    {
-        foreach (var weapon in weaponList)
-        {
+    public void AddCollectible(Collectible collectible) {
+        foreach (var weapon in weaponList) {
             weapon.AddAmmo(collectible);
         }
     }
@@ -259,11 +275,13 @@ public class Player : MonoBehaviour
      * Called when the player is hit by an enemy or projectile
      * @param damage The amount of damage the player takes
      */
-    public void TakeDamage(int damage)
-    {
-        health -= damage;
-        if (health <= 0)
-        {
+    public void TakeDamage(int damage) {
+        this.health = Mathf.Max(this.health - damage, 0);
+
+        // Update the health bar
+        this.healthBar.SetHealth(this.health);
+
+        if (health <= 0) {
             // TODO: do something when the player dies
             Destroy(this.gameObject);
             GameManager.instance.GameOver();
@@ -277,7 +295,19 @@ public class Player : MonoBehaviour
         // Increment the player's health
         this.health = Mathf.Min(this.maxHealth, this.health + this.healthIncrement);
 
+        // Update the health bar
+        this.healthBar.SetHealth(this.health);
+
         // Increment the number of panikes
-        this.currPanikes = Mathf.Min(this.maxPanikes, this.currPanikes + 1);
+        this._currPanikes = Mathf.Min(this.maxPanikes, this._currPanikes + 1);
+    }
+
+
+    /**
+    * Checks if the currently equipped weapon uses ammo
+    * Currently, only the RPG uses ammo (index 1)
+    */
+    private bool weaponUsesAmmo() {
+        return this.weaponIdx == 1;
     }
 }

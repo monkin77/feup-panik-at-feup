@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class Rpg : Weapon
 {
@@ -21,6 +22,12 @@ public class Rpg : Weapon
     private bool recoilling = false;
     private bool firstShot = true;
     private Queue<Collectible> rpgAmmo = new Queue<Collectible>();
+
+    [SerializeField] private TextMeshProUGUI ammoCountText;
+    
+    [SerializeField] private GameObject poisonPrefab;
+    [SerializeField] private float finalPositionOffset = 1f;
+    [SerializeField] private float panikeMoveDuration = 1f;
     
     /**
      * Attack method for the shovel.
@@ -33,17 +40,18 @@ public class Rpg : Weapon
             return;
         
         // first shot, create a new bullet
-        if (this.firstShot && rpgAmmo.Count > 0)
-        {
+        if (this.firstShot && rpgAmmo.Count > 0) {
             this.firstShot = false;
             Collectible ammo = rpgAmmo.Dequeue();
             GameObject bullet = ammo.gameObject;
             bullet.transform.position = transform.position;
             bullet.SetActive(true);
             bullet.GetComponent<Rigidbody2D>().velocity = Weapon.vecFromOrientation(this._orientation) * BULLET_SPEED;
+
+            // Update Ammo Count in the UI
+            this.ammoCountText.text = rpgAmmo.Count.ToString();
         }
-        
-        
+
         float recoilSpeed = this._currMaxRecoilDist / RECOIL_TIME;
 
         // weapon is attacking, recoil it
@@ -71,7 +79,38 @@ public class Rpg : Weapon
             }
         }
     }
+
+    public override void PowerUpAttack()
+    { 
+        if (!this._isAttacking)
+            return;
+        
+        // first shot, create a new bullet
+        if (this.firstShot)
+        {
+            // creates the panike and sets up its movement initial, final position and duration
+            this.firstShot = false;
+            
+            Vector2 orientation = Weapon.vecFromOrientation(this._orientation);
+            Vector3 initialPosition = transform.position;
+            Vector3 finalPosition = initialPosition + new Vector3(orientation.x, orientation.y, 0) * finalPositionOffset;
+            
+            GameObject poison = Instantiate(poisonPrefab, initialPosition, Quaternion.identity);
+            PoisonedPanike panike = poison.GetComponent<PoisonedPanike>();
+            panike.ParabolDuration = panikeMoveDuration;
+            panike.FinalPosition = finalPosition;
+            StartCoroutine(PowerUpMovementReset());
+        }
+        
+        
+    }
     
+    // Resets the weapon state after poisoned panike reaches its final position
+    private IEnumerator PowerUpMovementReset()
+    {
+        yield return new WaitForSeconds(panikeMoveDuration);
+        stopAttacking();
+    }
 
 
     /**
@@ -130,10 +169,12 @@ public class Rpg : Weapon
         _orientation = newOrientation;
     }
     
-    public override void AddAmmo(Collectible ammo)
-    {
+    public override void AddAmmo(Collectible ammo) {
         ammo.tag = BULLET_TAG;
         rpgAmmo.Enqueue(ammo);
+
+        // Update Ammo Count in the UI
+        this.ammoCountText.text = rpgAmmo.Count.ToString();
     }
 
     /**
@@ -142,9 +183,14 @@ public class Rpg : Weapon
     protected override void stopAttacking()
     {
         this._isAttacking = false;
+        this.IsPowerUp = false;
         this.recoilling = false;
         this.firstShot = true;
 
         this._currRecoilDistance = 0f;
+    }
+
+    public int getAmmoCount() {
+        return rpgAmmo.Count;
     }
 }

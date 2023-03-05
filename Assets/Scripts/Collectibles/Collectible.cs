@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Collectible : MonoBehaviour
 {
-    private int _bulletDamage = 100;
+    private int _bulletDamage = 30;
 
     protected virtual void OnTriggerEnter2D(Collider2D target)
     {
