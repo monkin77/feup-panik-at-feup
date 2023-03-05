@@ -127,7 +127,7 @@ MonoBehaviour:
   maxHealth: 60
   healthIncrement: 20
   maxPanikes: 5
-  _currPanikes: 5
+  _currPanikes: 0
   weaponIdx: 0
   weaponList: []
   movementFilter:
