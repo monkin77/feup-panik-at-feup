@@ -61,13 +61,17 @@ public class WaveSpawner : MonoBehaviour
     private WaveAudioManager waveAudioManager;
 
     // Start is called before the first frame update
-    void Start()
-    {
+    void Start() {
         this.waveAudioManager = new WaveAudioManager(this.normalBGMusic, this.bossBGMusic, this.waveEndMusic, this.waveCountdownMusic, this.bossWaveCountdownMusic);
     }
 
     // fixedUpdate is called at a fixed interval
     void FixedUpdate() {
+        // If the game is over, do nothing
+        if (GameManager.instance.IsGameOver) {
+            return;
+        }
+
         // If there is no wave in progress, generate a new wave
         if (!this.waveInProgress) {
             // If the time for the next wave has not passed, do nothing

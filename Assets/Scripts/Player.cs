@@ -46,8 +46,7 @@ public class Player : MonoBehaviour
     // Reference to the Panike Counter Text UI object
     [SerializeField] private TextMeshProUGUI panikeCounterText;
 
-    private void Awake()
-    {
+    private void Awake() {
         this.rigidBody = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         
@@ -73,8 +72,11 @@ public class Player : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
-    {
+    void Update() {
+        // If the player is dead, don't do anything
+        if (GameManager.instance.IsGameOver)
+            return;
+
         ListenKbEvents();
         AnimatePlayer();
     }
@@ -284,9 +286,8 @@ public class Player : MonoBehaviour
         // Update the health bar
         this.healthBar.SetHealth(this.health);
 
-        if (health <= 0) {
-            // TODO: do something when the player dies
-            Destroy(this.gameObject);
+        if (health <= 0 && !GameManager.instance.IsGameOver) {
+            // Game over
             GameManager.instance.GameOver();
         }
     }
