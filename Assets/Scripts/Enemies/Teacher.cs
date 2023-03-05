@@ -19,8 +19,7 @@ public class Teacher : Enemy
      * This function is called after the attack animation as a trigger
      * and takes damage to the baker in case she is in attack range
      */
-    public void AttackBaker()
-    {
+    public void AttackBaker() {
         if (IsInAttackRange() && !_isAttacking)
         {
             // create a game object with prefab Book and set its velocity towards the baker

@@ -45,8 +45,7 @@ public class Enemy : MonoBehaviour
     // Collision offset to prevent the player from getting stuck in walls
     private float collisionOffset = 0.02f;
 
-    void Awake()
-    {
+    void Awake() {
         rigidBody = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         baker = GameObject.FindWithTag(BAKER_TAG);
@@ -57,15 +56,9 @@ public class Enemy : MonoBehaviour
      * Move the enemy towards the baker if it is not in attack range
      * If the enemy is in attack range, attack the baker
      */
-    private void FixedUpdate()
-    {
-        // if baker is dead then stop chasing her
-        if (!baker)
-        {
-            anim.SetBool(IDLE_ANIMATION, true);
-            anim.SetBool(WALK_ANIMATION, false);
-            return;
-        }
+    private void FixedUpdate() {
+        // if the game is over then don't move the enemy
+        if (GameManager.instance.IsGameOver) return;
         
         // if zombie is not walking then don't move towards the baker
         if (anim.GetBool(WALK_ANIMATION) == false)

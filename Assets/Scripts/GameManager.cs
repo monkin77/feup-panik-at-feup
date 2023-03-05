@@ -1,14 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
-    private void Awake()
-    {
-        if (instance == null)
-        {
+
+    public GameObject gameOverUI;
+
+    // Flag to check if the game is over
+    private bool _isGameOver = false;
+    public bool IsGameOver { get => _isGameOver; }
+
+    private void Awake() {
+        if (instance == null) {
             instance = this;
             DontDestroyOnLoad(gameObject);
         }
@@ -16,21 +22,20 @@ public class GameManager : MonoBehaviour
             Destroy(gameObject);
     }
     
-    public void GameOver()
-    {
-        Debug.Log("Game Over :(");
-    }
-    
-    
-    // Start is called before the first frame update
-    void Start()
-    {
-        
+    /**
+    * Called when the player dies.
+    * It displays the Game Over UI.
+    */
+    public void GameOver() {
+        this.gameOverUI.SetActive(true);
+        this._isGameOver = true;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+    /**
+    * Reloads the current scene.
+    */
+    public void Restart() {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        this._isGameOver = false;
     }
 }
