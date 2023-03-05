@@ -15,15 +15,12 @@ public class Player : MonoBehaviour
     // max number of panikes
     [SerializeField] private int maxPanikes = 5;
     // Current number of panikes
-    private int currPanikes = 0;
+    [SerializeField] private int _currPanikes = 0;
     
     private Rigidbody2D rigidBody;
     private SpriteRenderer sr;
     
     private Animator anim;
-    private string BAKER_UP_ANIMATION = "WalkUp";
-    private string BAKER_DOWN_ANIMATION = "WalkDown";
-    private string BAKER_WALK_HORIZONTAL = "WalkHorizontal";
 
     private float movementX;
     private float movementY;
@@ -129,10 +126,23 @@ public class Player : MonoBehaviour
     void AttackKeyboard()
     {
         var weapon = weaponList[weaponIdx];
-        if (weapon.IsAttacking)
-            return;
+        foreach (var wpn in weaponList)
+        {
+            if (wpn.IsAttacking)
+                return;
+        }
         
         if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0)) {
+            weapon.IsAttacking = true;
+        } else if (Input.GetKeyDown(KeyCode.R))
+        {
+            // if there are no panikes player can't power up
+            if (_currPanikes == 0)
+                return;
+
+            this._currPanikes = Mathf.Max(0, this._currPanikes - 1);
+
+            weapon.IsPowerUp = true;
             weapon.IsAttacking = true;
         }
     }
@@ -219,34 +229,34 @@ public class Player : MonoBehaviour
         if (movementY > 0)
         {
             setWeaponsOrientation(WeaponOrientation.Up);
-            anim.SetBool(BAKER_UP_ANIMATION, true);
+            anim.SetBool(Utils.BAKER_UP_ANIMATION, true);
         }
         else if (movementY < 0)
         {
             setWeaponsOrientation(WeaponOrientation.Down);
-            anim.SetBool(BAKER_DOWN_ANIMATION, true);
+            anim.SetBool(Utils.BAKER_DOWN_ANIMATION, true);
         } 
         else
         {
-            anim.SetBool(BAKER_DOWN_ANIMATION, false);
-            anim.SetBool(BAKER_UP_ANIMATION, false);
+            anim.SetBool(Utils.BAKER_DOWN_ANIMATION, false);
+            anim.SetBool(Utils.BAKER_UP_ANIMATION, false);
         }
 
         if (movementX > 0)
         {
             setWeaponsOrientation(WeaponOrientation.Right);
-            anim.SetBool(BAKER_WALK_HORIZONTAL, true); 
+            anim.SetBool(Utils.BAKER_WALK_HORIZONTAL, true); 
             sr.flipX = false;
         }
         else if (movementX < 0)
         {
             setWeaponsOrientation(WeaponOrientation.Left);
-            anim.SetBool(BAKER_WALK_HORIZONTAL, true);
+            anim.SetBool(Utils.BAKER_WALK_HORIZONTAL, true);
             sr.flipX = true;
         }
         else
         {
-            anim.SetBool(BAKER_WALK_HORIZONTAL, false);
+            anim.SetBool(Utils.BAKER_WALK_HORIZONTAL, false);
         }
     }
 
@@ -289,7 +299,7 @@ public class Player : MonoBehaviour
         this.healthBar.SetHealth(this.health);
 
         // Increment the number of panikes
-        this.currPanikes = Mathf.Min(this.maxPanikes, this.currPanikes + 1);
+        this._currPanikes = Mathf.Min(this.maxPanikes, this._currPanikes + 1);
     }
 
 
