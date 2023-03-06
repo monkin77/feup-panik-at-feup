@@ -25,9 +25,7 @@ public class Rpg : Weapon
 
     [SerializeField] private TextMeshProUGUI ammoCountText;
     
-    [SerializeField] private GameObject poisonPrefab;
-    [SerializeField] private float finalPositionOffset = 1f;
-    [SerializeField] private float panikeMoveDuration = 1f;
+
     
     /**
      * Attack method for the shovel.
@@ -96,21 +94,12 @@ public class Rpg : Weapon
             Vector3 finalPosition = Camera.main.ScreenToWorldPoint(mousePos);
             finalPosition.z = 0;    // set z to 0 since we are working in 2D            
             
-            GameObject poison = Instantiate(poisonPrefab, initialPosition, Quaternion.identity);
+            GameObject poison = Instantiate(powerUpPrefab, initialPosition, Quaternion.identity);
             PoisonedPanike panike = poison.GetComponent<PoisonedPanike>();
-            panike.ParabolDuration = panikeMoveDuration;
+            panike.ParabolDuration = powerUpPfbMoveDuration;
             panike.FinalPosition = finalPosition;
             StartCoroutine(PowerUpMovementReset());
         }
-        
-        
-    }
-    
-    // Resets the weapon state after poisoned panike reaches its final position
-    private IEnumerator PowerUpMovementReset()
-    {
-        yield return new WaitForSeconds(panikeMoveDuration);
-        stopAttacking();
     }
 
 

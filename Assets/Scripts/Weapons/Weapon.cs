@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public enum WeaponOrientation
@@ -25,7 +26,9 @@ public class Weapon : MonoBehaviour
     protected bool _isPowerUp = false;
     public bool IsPowerUp { get => _isPowerUp; set => _isPowerUp = value; }
 
-
+    [SerializeField] protected GameObject powerUpPrefab;
+    [SerializeField] protected float powerUpPositionOffset = 1f;
+    [SerializeField] protected float powerUpPfbMoveDuration = 1f;
     private void Awake()
     {
         sr = GetComponent<SpriteRenderer>();
@@ -61,6 +64,14 @@ public class Weapon : MonoBehaviour
     public virtual void PowerUpAttack()
     {
         // Power up attack method for all weapons
+    }
+    
+    // Resets the weapon state after poisoned panike reaches its final position
+    protected IEnumerator PowerUpMovementReset()
+    {
+        yield return new WaitForSeconds(this.powerUpPfbMoveDuration);
+        
+        stopAttacking();
     }
     
     

@@ -19,6 +19,12 @@ public class Shovel : Weapon
     // The current max angle for the shovel attack animation (changes w/ orientation)
     private float _currMaxAngle = MAX_DOWN_ANGLE;
 
+
+    private void Start()
+    {
+        this.powerUpPfbMoveDuration = 0.5f;
+    }
+
     /**
      * Attack method for the shovel.
      * The shovel will rotate back and forth between 0 and MAX_ANGLE degrees.
@@ -54,9 +60,23 @@ public class Shovel : Weapon
     
     public override void PowerUpAttack()
     {
-        print("Shovel power up attack");
-        this._isAttacking = false;
-        this.IsPowerUp = false;
+        if (!this._isAttacking)
+            return;
+
+        // throws a lightning with the baker
+        if (!this.goingUp)
+        {
+            this.goingUp = true;
+            
+            Vector2 orientation = Weapon.vecFromOrientation(this._orientation);
+            // move the thunder a bit to the side of the baker if the baker is facing left or right
+            Vector3 thunderFinalPos = this.transform.position + 
+                                        new Vector3(orientation.x, orientation.y, 0) * powerUpPositionOffset;
+            
+            Instantiate(this.powerUpPrefab, thunderFinalPos, Quaternion.identity);
+            
+            StartCoroutine(PowerUpMovementReset());
+        }
     }
 
     /**
@@ -114,6 +134,7 @@ public class Shovel : Weapon
     protected override void stopAttacking() {
         this.goingUp = false;
         this._isAttacking = false;
+        this._isPowerUp = false;
     }
 
     /**
