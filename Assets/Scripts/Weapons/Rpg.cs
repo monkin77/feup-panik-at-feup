@@ -86,8 +86,7 @@ public class Rpg : Weapon
             return;
         
         // first shot, create a new bullet
-        if (this.firstShot)
-        {
+        if (this.firstShot) {
             // creates the panike and sets up its movement initial, final position and duration
             this.firstShot = false;
             
