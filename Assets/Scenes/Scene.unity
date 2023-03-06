@@ -233,7 +233,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 762590695}
   m_Father: {fileID: 0}
@@ -58126,8 +58126,8 @@ Camera:
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 16
-  orthographic: 0
-  orthographic size: 1.5
+  orthographic: 1
+  orthographic size: 1.4
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
