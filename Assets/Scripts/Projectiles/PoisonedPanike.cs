@@ -17,8 +17,7 @@ public class PoisonedPanike : MonoBehaviour
     [SerializeField] private GameObject _poison;
     
     // Start is called before the first frame update
-    void Start()
-    {
+    void Start() {
         this._initialPosition = transform.position;
     }
 
@@ -31,8 +30,7 @@ public class PoisonedPanike : MonoBehaviour
         if (timeElapsed <= this.ParabolDuration) {
             float t = timeElapsed / this.ParabolDuration;
             Vector3 currentPos = transform.position;
-            if (_initialPosition.x != _finalPosition.x)
-            {
+            if (_initialPosition.x != _finalPosition.x) {
                 // moving in the x axis
                 Vector3 middlePoint = new Vector3(_initialPosition.x + (_finalPosition.x - _initialPosition.x) / 2.0f, 
                                                   _initialPosition.y +  1, 0f);
@@ -44,8 +42,7 @@ public class PoisonedPanike : MonoBehaviour
                 transform.position = currentPos;
                 _trail.transform.position = currentPos;
             }
-            else
-            {
+            else {
                 // moving in the y axis
                 Vector3 middlePoint = new Vector3(_initialPosition.x + 1, 
                     _initialPosition.y + (_finalPosition.y - _initialPosition.y) / 2.0f, 0f);
@@ -60,8 +57,7 @@ public class PoisonedPanike : MonoBehaviour
             
             transform.position = currentPos;
         }
-        else
-        {
+        else {
             _poison = Instantiate(_poison, transform.position, Quaternion.identity);
             Destroy(this.gameObject);
         }

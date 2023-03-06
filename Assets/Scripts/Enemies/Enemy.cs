@@ -70,8 +70,7 @@ public class Enemy : MonoBehaviour
         var bakerY = bakerPos.y;
         
         // if the enemy is in attack range then attack the baker
-        if (IsInAttackRange())
-        {
+        if (IsInAttackRange()) {
             anim.SetBool(WALK_ANIMATION, false);
             anim.SetTrigger(ATTACK_TRIGGER);
             return;
@@ -126,8 +125,7 @@ public class Enemy : MonoBehaviour
     /**
      * Take damage and if the enemy's health is 0 or less then it dies
      */
-    public void TakeDamage(int damage)
-    {
+    public void TakeDamage(int damage) {
         Health -= damage;
         
         if (Health <= 0)
@@ -175,8 +173,7 @@ public class Enemy : MonoBehaviour
      * Check if the baker is in attack range of the enemy
      * @return true if the baker is in attack range of the enemy, false otherwise
      */
-    protected bool IsInAttackRange()
-    {
+    protected bool IsInAttackRange() {
         if (baker.gameObject == null)
             return false;
         

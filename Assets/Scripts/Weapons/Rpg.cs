@@ -86,14 +86,15 @@ public class Rpg : Weapon
             return;
         
         // first shot, create a new bullet
-        if (this.firstShot)
-        {
+        if (this.firstShot) {
             // creates the panike and sets up its movement initial, final position and duration
             this.firstShot = false;
             
-            Vector2 orientation = Weapon.vecFromOrientation(this._orientation);
             Vector3 initialPosition = transform.position;
-            Vector3 finalPosition = initialPosition + new Vector3(orientation.x, orientation.y, 0) * finalPositionOffset;
+            // Get the mouse position in world space
+            Vector3 mousePos = Input.mousePosition;
+            Vector3 finalPosition = Camera.main.ScreenToWorldPoint(mousePos);
+            finalPosition.z = 0;    // set z to 0 since we are working in 2D            
             
             GameObject poison = Instantiate(poisonPrefab, initialPosition, Quaternion.identity);
             PoisonedPanike panike = poison.GetComponent<PoisonedPanike>();

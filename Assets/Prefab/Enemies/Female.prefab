@@ -172,7 +172,7 @@ MonoBehaviour:
   health: 30
   ENEMY_DAMAGE: 10
   speed: 1
-  baker: {fileID: 0}
+  baker: {fileID: 7175435851525529667, guid: 0780414129f7ba84f8863b16c2e956df, type: 3}
   movementFilter:
     useTriggers: 0
     useLayerMask: 1
