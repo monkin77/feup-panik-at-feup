@@ -58983,6 +58983,10 @@ PrefabInstance:
       propertyPath: powerUpPrefab
       value: 
       objectReference: {fileID: 6502487751398461831, guid: 28fa22660b6f56948934679e6ebcf45d, type: 3}
+    - target: {fileID: 4633214425213010314, guid: 0780414129f7ba84f8863b16c2e956df, type: 3}
+      propertyPath: m_SortingOrder
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5612106783318634095, guid: 0780414129f7ba84f8863b16c2e956df, type: 3}
       propertyPath: ammoCountText
       value: 
@@ -59251,7 +59255,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1024243616610746809, guid: d8266921e6c974f46b9042cb8c5ac79d, type: 3}
       propertyPath: SPAWN_Y_MIN
-      value: -2
+      value: -4.7
       objectReference: {fileID: 0}
     - target: {fileID: 1024243616610746809, guid: d8266921e6c974f46b9042cb8c5ac79d, type: 3}
       propertyPath: DESTROY_TIME
@@ -59259,7 +59263,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1024243616610746809, guid: d8266921e6c974f46b9042cb8c5ac79d, type: 3}
       propertyPath: SPAWN_MAX_TIME
-      value: 4
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1024243616610746809, guid: d8266921e6c974f46b9042cb8c5ac79d, type: 3}
+      propertyPath: SPAWN_MIN_TIME
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1024243616610746814, guid: d8266921e6c974f46b9042cb8c5ac79d, type: 3}
       propertyPath: m_RootOrder

@@ -43,7 +43,7 @@ public class Enemy : MonoBehaviour
     // Stores the collisions that occur during movement
     [SerializeField] private List<RaycastHit2D> castCollisions = new List<RaycastHit2D>();
     // Collision offset to prevent the player from getting stuck in walls
-    private float collisionOffset = 0.02f;
+    private float collisionOffset = 0.04f;
 
     void Awake() {
         rigidBody = GetComponent<Rigidbody2D>();
