@@ -58979,10 +58979,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4591910393644450307, guid: 0780414129f7ba84f8863b16c2e956df, type: 3}
+      propertyPath: powerUpPrefab
+      value: 
+      objectReference: {fileID: 6502487751398461831, guid: 28fa22660b6f56948934679e6ebcf45d, type: 3}
     - target: {fileID: 5612106783318634095, guid: 0780414129f7ba84f8863b16c2e956df, type: 3}
       propertyPath: ammoCountText
       value: 
       objectReference: {fileID: 1640876096}
+    - target: {fileID: 5612106783318634095, guid: 0780414129f7ba84f8863b16c2e956df, type: 3}
+      propertyPath: powerUpPrefab
+      value: 
+      objectReference: {fileID: 8089920208145690758, guid: a347df969116f0c46afaedd9afdb69fe, type: 3}
     - target: {fileID: 7175435851525529667, guid: 0780414129f7ba84f8863b16c2e956df, type: 3}
       propertyPath: m_Name
       value: Baker
