@@ -115,7 +115,826 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: all_bakers_0
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 80
+        width: 30
+        height: 81
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e2fa0e421b10f3046b531b5a7cbac4fe
+      internalID: 493572462
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: all_bakers_1
+      rect:
+        serializedVersion: 2
+        x: 57
+        y: 123
+        width: 17
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 17d3b34e457728a4cb5f5a2dcc8002a5
+      internalID: 503826969
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: all_bakers_2
+      rect:
+        serializedVersion: 2
+        x: 89
+        y: 123
+        width: 18
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b3ed927490a9fac4e95fcc4349038e55
+      internalID: 1253336180
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: all_bakers_3
+      rect:
+        serializedVersion: 2
+        x: 121
+        y: 122
+        width: 17
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: af80680e6fbddec48826876a0d47916a
+      internalID: 566948124
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: all_bakers_4
+      rect:
+        serializedVersion: 2
+        x: 171
+        y: 80
+        width: 30
+        height: 81
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c777a1fb661584a40a2691ec8daa48ff
+      internalID: 873475138
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: all_bakers_5
+      rect:
+        serializedVersion: 2
+        x: 226
+        y: 123
+        width: 17
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 507acb214c585a549b00e6fcacad3651
+      internalID: 1383231186
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: all_bakers_6
+      rect:
+        serializedVersion: 2
+        x: 258
+        y: 123
+        width: 18
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3f66d538d3f3665438c5f7f357b182e8
+      internalID: -306153960
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: all_bakers_7
+      rect:
+        serializedVersion: 2
+        x: 290
+        y: 122
+        width: 17
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4f63817330eda934eb3b3df6562cae7f
+      internalID: 286928804
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: all_bakers_8
+      rect:
+        serializedVersion: 2
+        x: 348
+        y: 81
+        width: 30
+        height: 81
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9922273df906ef9468edf2bf205fbbe0
+      internalID: -1201469050
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: all_bakers_9
+      rect:
+        serializedVersion: 2
+        x: 403
+        y: 124
+        width: 17
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 74d083e3861d5a44db91be4c28320c9f
+      internalID: -486519712
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: all_bakers_10
+      rect:
+        serializedVersion: 2
+        x: 435
+        y: 124
+        width: 18
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 67bfc124fa8952b4e8750a26a046caaa
+      internalID: -444506499
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: all_bakers_11
+      rect:
+        serializedVersion: 2
+        x: 467
+        y: 123
+        width: 17
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4c9c0aba76335f04c8a67eef4d0195ba
+      internalID: 2008121963
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: all_bakers_12
+      rect:
+        serializedVersion: 2
+        x: 57
+        y: 91
+        width: 18
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4cecce74a83960f4f9d196350150b8f1
+      internalID: 777874229
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: all_bakers_13
+      rect:
+        serializedVersion: 2
+        x: 89
+        y: 91
+        width: 18
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 52b663d8ebc593c4fbc5726fcebe9379
+      internalID: -529137776
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: all_bakers_14
+      rect:
+        serializedVersion: 2
+        x: 121
+        y: 91
+        width: 17
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5c155c97601bd4a47af6873d2dbc451b
+      internalID: -494830050
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: all_bakers_15
+      rect:
+        serializedVersion: 2
+        x: 226
+        y: 91
+        width: 18
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: eca9ef85bdc122c4680caffbd01c9830
+      internalID: -869403890
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: all_bakers_16
+      rect:
+        serializedVersion: 2
+        x: 258
+        y: 91
+        width: 18
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8a691d6b0ffd44d4d9a927fbc1c7022b
+      internalID: 377798493
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: all_bakers_17
+      rect:
+        serializedVersion: 2
+        x: 290
+        y: 91
+        width: 17
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4aca6f55c253f9248ac3ed469039353f
+      internalID: -347320583
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: all_bakers_18
+      rect:
+        serializedVersion: 2
+        x: 403
+        y: 92
+        width: 18
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 659e08f412387a54b9e5b34bba8f7e03
+      internalID: -1173474077
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: all_bakers_19
+      rect:
+        serializedVersion: 2
+        x: 435
+        y: 92
+        width: 18
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9f43fb2c1b80acf4b8e8cf887cf0fa37
+      internalID: 919390084
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boss_baker
+      rect:
+        serializedVersion: 2
+        x: 467
+        y: 92
+        width: 17
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b55fa2d08ea4ed64fb2608d3fd28a900
+      internalID: 2044028667
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: all_bakers_21
+      rect:
+        serializedVersion: 2
+        x: 57
+        y: 59
+        width: 18
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b4e2aa76decb07343983efe5bbf12fe0
+      internalID: 1454656686
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: all_bakers_22
+      rect:
+        serializedVersion: 2
+        x: 89
+        y: 59
+        width: 18
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 58994111851eaea479999bf570a10cec
+      internalID: -330838483
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: all_bakers_23
+      rect:
+        serializedVersion: 2
+        x: 121
+        y: 58
+        width: 17
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 83ea4424005465042ae298983bcf6faa
+      internalID: -336115679
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: all_bakers_24
+      rect:
+        serializedVersion: 2
+        x: 226
+        y: 59
+        width: 18
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d7f5a296bd013db44bb84613ece05ad3
+      internalID: -30501096
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: all_bakers_25
+      rect:
+        serializedVersion: 2
+        x: 258
+        y: 59
+        width: 18
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3b5cc8f1bcf98584fa31b6a8c9eae41e
+      internalID: 45414971
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: all_bakers_26
+      rect:
+        serializedVersion: 2
+        x: 290
+        y: 58
+        width: 17
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 18425d2733643a14284440d66fdec4fc
+      internalID: -616017502
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: all_bakers_27
+      rect:
+        serializedVersion: 2
+        x: 403
+        y: 60
+        width: 18
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 393557405b064ed4d8f3e6a4da731a99
+      internalID: 1278803910
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: all_bakers_28
+      rect:
+        serializedVersion: 2
+        x: 435
+        y: 60
+        width: 18
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 399010ddc72abe14d82e82f7b5e9cbb8
+      internalID: 1548151873
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: all_bakers_29
+      rect:
+        serializedVersion: 2
+        x: 467
+        y: 59
+        width: 17
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4774c247fe56c024e803c4326df14714
+      internalID: 911828955
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: all_bakers_30
+      rect:
+        serializedVersion: 2
+        x: 57
+        y: 27
+        width: 18
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 87ed98a6868f347459d8c1c108733645
+      internalID: -258517279
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: all_bakers_31
+      rect:
+        serializedVersion: 2
+        x: 89
+        y: 26
+        width: 17
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5eaa44edc6ac16b4b83db378e5d82841
+      internalID: -249037276
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: all_bakers_32
+      rect:
+        serializedVersion: 2
+        x: 121
+        y: 26
+        width: 17
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a904f1ee28980404cadbbd63456725e0
+      internalID: 1545147352
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: all_bakers_33
+      rect:
+        serializedVersion: 2
+        x: 226
+        y: 27
+        width: 18
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dc34927a02e3602499ce425ceda4f0e7
+      internalID: -491606046
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: all_bakers_34
+      rect:
+        serializedVersion: 2
+        x: 258
+        y: 26
+        width: 17
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b7e15a7d4e000a94ca10061414f8b9c5
+      internalID: 124295894
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: all_bakers_35
+      rect:
+        serializedVersion: 2
+        x: 290
+        y: 26
+        width: 17
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ffe92a03a06facb469c238a66ce00ab9
+      internalID: -838275119
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: all_bakers_36
+      rect:
+        serializedVersion: 2
+        x: 403
+        y: 28
+        width: 18
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5ecf9e83746c5954bb391c1be29e74bc
+      internalID: 1466052159
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: all_bakers_37
+      rect:
+        serializedVersion: 2
+        x: 435
+        y: 27
+        width: 17
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2cfc38100941713458126d310afd4102
+      internalID: 1392058811
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: all_bakers_38
+      rect:
+        serializedVersion: 2
+        x: 467
+        y: 27
+        width: 17
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 60196af3f546b87449201ad48707cb5d
+      internalID: -1086978611
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -126,7 +945,46 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      boss_baker: 2044028667
+      all_bakers_35: -838275119
+      all_bakers_17: -347320583
+      all_bakers_9: -486519712
+      all_bakers_19: 919390084
+      all_bakers_25: 45414971
+      all_bakers_1: 503826969
+      all_bakers_27: 1278803910
+      all_bakers_4: 873475138
+      all_bakers_36: 1466052159
+      all_bakers_37: 1392058811
+      all_bakers_38: -1086978611
+      all_bakers_29: 911828955
+      all_bakers_22: -330838483
+      all_bakers_28: 1548151873
+      all_bakers_0: 493572462
+      all_bakers_23: -336115679
+      all_bakers_15: -869403890
+      all_bakers_11: 2008121963
+      all_bakers_18: -1173474077
+      all_bakers_30: -258517279
+      all_bakers_5: 1383231186
+      all_bakers_12: 777874229
+      all_bakers_14: -494830050
+      all_bakers_32: 1545147352
+      all_bakers_34: 124295894
+      all_bakers_6: -306153960
+      all_bakers_2: 1253336180
+      all_bakers_3: 566948124
+      all_bakers_21: 1454656686
+      all_bakers_8: -1201469050
+      all_bakers_26: -616017502
+      all_bakers_16: 377798493
+      all_bakers_13: -529137776
+      all_bakers_10: -444506499
+      all_bakers_31: -249037276
+      all_bakers_24: -30501096
+      all_bakers_33: -491606046
+      all_bakers_7: 286928804
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
