@@ -32,8 +32,7 @@ public class Rpg : Weapon
      * The shovel will rotate back and forth between 0 and MAX_ANGLE degrees.
      * In the end of the animation, the shovel will return to its original position.
      */
-    public override void Attack()
-    {
+    public override void Attack() {
         if (!this._isAttacking)
             return;
         
@@ -99,6 +98,9 @@ public class Rpg : Weapon
             panike.ParabolDuration = powerUpPfbMoveDuration;
             panike.FinalPosition = finalPosition;
             StartCoroutine(PowerUpMovementReset());
+
+            // Remove 1 panike from the Baker
+            GameObject.FindWithTag(Utils.BAKER_TAG).GetComponent<Player>().decrementPanike();
         }
     }
 

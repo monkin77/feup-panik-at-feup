@@ -46,6 +46,9 @@ public class Player : MonoBehaviour
     // Reference to the Panike Counter Text UI object
     [SerializeField] private TextMeshProUGUI panikeCounterText;
 
+    // Score counter
+    private int score = 0;
+
     private void Awake() {
         this.rigidBody = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
@@ -145,8 +148,6 @@ public class Player : MonoBehaviour
             if (_currPanikes == 0)
                 return;
 
-            this.setCurrPanikes(this._currPanikes - 1);
-
             weapon.IsPowerUp = true;
             weapon.IsAttacking = true;
         }
@@ -231,36 +232,29 @@ public class Player : MonoBehaviour
     void AnimatePlayer()
     {
         var weapon = weaponList[weaponIdx];
-        if (movementY > 0)
-        {
+        if (movementY > 0) {
             setWeaponsOrientation(WeaponOrientation.Up);
             anim.SetBool(Utils.BAKER_UP_ANIMATION, true);
         }
-        else if (movementY < 0)
-        {
+        else if (movementY < 0) {
             setWeaponsOrientation(WeaponOrientation.Down);
             anim.SetBool(Utils.BAKER_DOWN_ANIMATION, true);
         } 
-        else
-        {
+        else {
             anim.SetBool(Utils.BAKER_DOWN_ANIMATION, false);
             anim.SetBool(Utils.BAKER_UP_ANIMATION, false);
         }
 
-        if (movementX > 0)
-        {
+        if (movementX > 0) {
             setWeaponsOrientation(WeaponOrientation.Right);
             anim.SetBool(Utils.BAKER_WALK_HORIZONTAL, true); 
             sr.flipX = false;
         }
-        else if (movementX < 0)
-        {
+        else if (movementX < 0) {
             setWeaponsOrientation(WeaponOrientation.Left);
             anim.SetBool(Utils.BAKER_WALK_HORIZONTAL, true);
             sr.flipX = true;
-        }
-        else
-        {
+        } else {
             anim.SetBool(Utils.BAKER_WALK_HORIZONTAL, false);
         }
     }
@@ -330,5 +324,16 @@ public class Player : MonoBehaviour
 
         // Update the UI
         this.panikeCounterText.text = Utils.createAmmoText(this._currPanikes);
+    }
+
+    /**
+    * Decrements the number of panikes
+    */
+    public void decrementPanike() {
+        this.setCurrPanikes(this._currPanikes - 1);
+    }
+
+    public void addScore(int cost) {
+        this.score += cost;
     }
 }

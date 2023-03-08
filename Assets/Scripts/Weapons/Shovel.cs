@@ -20,8 +20,7 @@ public class Shovel : Weapon
     private float _currMaxAngle = MAX_DOWN_ANGLE;
 
 
-    private void Start()
-    {
+    private void Start() {
         this.powerUpPfbMoveDuration = 0.5f;
     }
 
@@ -64,8 +63,7 @@ public class Shovel : Weapon
             return;
 
         // throws a lightning with the baker
-        if (!this.goingUp)
-        {
+        if (!this.goingUp) {
             this.goingUp = true;
             
             Vector2 orientation = Weapon.vecFromOrientation(this._orientation);
@@ -76,6 +74,9 @@ public class Shovel : Weapon
             Instantiate(this.powerUpPrefab, thunderFinalPos, Quaternion.identity);
             
             StartCoroutine(PowerUpMovementReset());
+
+            // Remove 1 panike from the Baker
+            GameObject.FindWithTag(Utils.BAKER_TAG).GetComponent<Player>().decrementPanike();
         }
     }
 
