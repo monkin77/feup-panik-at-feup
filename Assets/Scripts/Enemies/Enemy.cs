@@ -115,11 +115,13 @@ public class Enemy : MonoBehaviour
     /**
      * Set the die animation state
      */
-    public void SetDieState()
-    {
+    public void SetDieState() {
         anim.SetBool(DIE_ANIMATION, true);
         anim.SetBool(WALK_ANIMATION, false);
         anim.SetBool(IDLE_ANIMATION, false);
+
+        // update the player's score
+        this.baker.GetComponent<Player>().addScore(this.cost);
     }
 
     /**
@@ -128,8 +130,7 @@ public class Enemy : MonoBehaviour
     public void TakeDamage(int damage) {
         Health -= damage;
         
-        if (Health <= 0)
-        {
+        if (Health <= 0) {
             SetDieState();
         }
     }

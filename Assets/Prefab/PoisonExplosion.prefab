@@ -116,11 +116,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 2799467095016770513}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 89a825ca3ec6065498cb5b52271cca49, type: 3}
+  m_Script: {fileID: 11500000, guid: e2c97e20a02449541b747dbde8bc4eae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _poisonDuration: 7
-  _damage: 10
+  _damage: 20
   damageInterval: 0.2
 --- !u!61 &-395348625996704657
 BoxCollider2D:
