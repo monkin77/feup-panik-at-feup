@@ -12,4 +12,8 @@ public static class Utils {
     public static string createAmmoText(int ammoCount) {
         return $"x{ammoCount}";
     }
+
+    public static string createScoreText(int score) {
+        return $"Score: {score}";
+    }
 }   

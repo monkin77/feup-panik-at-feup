@@ -48,6 +48,8 @@ public class Player : MonoBehaviour
 
     // Score counter
     private int score = 0;
+    // Reference to the Score Counter Text UI object
+    [SerializeField] private TextMeshProUGUI scoreCounterText;
 
     private void Awake() {
         this.rigidBody = GetComponent<Rigidbody2D>();
@@ -335,5 +337,8 @@ public class Player : MonoBehaviour
 
     public void addScore(int cost) {
         this.score += cost;
+
+        // Update the UI
+        this.scoreCounterText.text = Utils.createScoreText(this.score);
     }
 }
