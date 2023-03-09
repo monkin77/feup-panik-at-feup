@@ -51,6 +51,9 @@ public class Player : MonoBehaviour
     // Reference to the Score Counter Text UI object
     [SerializeField] private TextMeshProUGUI scoreCounterText;
 
+    // Reference to the GameManager
+    private GameManager gameManager;
+
     private void Awake() {
         this.rigidBody = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
@@ -61,6 +64,8 @@ public class Player : MonoBehaviour
         // Set the max health in the UI
         this.healthBar.setMaxHealth(this.maxHealth);
         this.healthBar.SetHealth(this.health); 
+
+        this.gameManager = GameObject.Find(Utils.GAME_MANAGER_OBJ_NAME).GetComponent<GameManager>();
     }
 
     void Start() {
@@ -79,7 +84,7 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update() {
         // If the player is dead, don't do anything
-        if (GameManager.instance.IsGameOver)
+        if (this.gameManager.IsGameOver)
             return;
 
         ListenKbEvents();
@@ -280,9 +285,9 @@ public class Player : MonoBehaviour
         // Update the health bar
         this.healthBar.SetHealth(this.health);
 
-        if (health <= 0 && !GameManager.instance.IsGameOver) {
+        if (health <= 0 && !this.gameManager.IsGameOver) {
             // Game over
-            GameManager.instance.GameOver();
+            this.gameManager.GameOver();
         }
     }
 

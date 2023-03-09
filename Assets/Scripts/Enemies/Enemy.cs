@@ -45,11 +45,15 @@ public class Enemy : MonoBehaviour
     // Collision offset to prevent the player from getting stuck in walls
     private float collisionOffset = 0.04f;
 
+    // Reference to the GameManager
+    private GameManager gameManager;
+
     void Awake() {
         rigidBody = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         baker = GameObject.FindWithTag(BAKER_TAG);
         sr = GetComponent<SpriteRenderer>();
+        this.gameManager = GameObject.Find(Utils.GAME_MANAGER_OBJ_NAME).GetComponent<GameManager>();
     }
 
     /**
@@ -58,7 +62,7 @@ public class Enemy : MonoBehaviour
      */
     private void FixedUpdate() {
         // if the game is over then don't move the enemy
-        if (GameManager.instance.IsGameOver) return;
+        if (this.gameManager.IsGameOver) return;
         
         // if zombie is not walking then don't move towards the baker
         if (anim.GetBool(WALK_ANIMATION) == false)
