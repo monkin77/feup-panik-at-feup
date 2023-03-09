@@ -19,6 +19,9 @@ public class Shovel : Weapon
     // The current max angle for the shovel attack animation (changes w/ orientation)
     private float _currMaxAngle = MAX_DOWN_ANGLE;
 
+    // Audio for shovel hit
+    [SerializeField] private AudioSource hitAudio;
+
 
     private void Start() {
         this.powerUpPfbMoveDuration = 0.5f;
@@ -153,18 +156,22 @@ public class Shovel : Weapon
     /**
      * Attack all enemies in range
      */
-    private void AttackEnemiesInRange()
-    {
+    private void AttackEnemiesInRange() {
         // get all enemies
         GameObject[] enemies = GameObject.FindGameObjectsWithTag(ENEMY_TAG);
 
+        bool hitEnemy = false;
         // attack all enemies in range
-        foreach (var enemy in enemies)
-        {
-            if (IsInAttackRange(enemy.transform.position))
-            {
+        foreach (var enemy in enemies) {
+            if (IsInAttackRange(enemy.transform.position)) {
                 enemy.GetComponent<Enemy>().TakeDamage(_damage);
+                hitEnemy = true;
             }
+        }
+
+        if (hitEnemy) {
+            // play hit audio
+            this.hitAudio.Play();
         }
     }
 }
