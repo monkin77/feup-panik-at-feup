@@ -60,6 +60,13 @@ public class WaveSpawner : MonoBehaviour
     private static float WAVE_COUNTDOWN_MUSIC_TIME = 2.5f;
     private WaveAudioManager waveAudioManager;
 
+    // Reference to the GameManager
+    private GameManager gameManager;
+
+    private void Awake() {
+        this.gameManager = GameObject.Find(Utils.GAME_MANAGER_OBJ_NAME).GetComponent<GameManager>();
+    }
+
     // Start is called before the first frame update
     void Start() {
         this.waveAudioManager = new WaveAudioManager(this.normalBGMusic, this.bossBGMusic, this.waveEndMusic, this.waveCountdownMusic, this.bossWaveCountdownMusic);
@@ -68,7 +75,7 @@ public class WaveSpawner : MonoBehaviour
     // fixedUpdate is called at a fixed interval
     void FixedUpdate() {
         // If the game is over, do nothing
-        if (GameManager.instance.IsGameOver) {
+        if (this.gameManager.IsGameOver) {
             return;
         }
 

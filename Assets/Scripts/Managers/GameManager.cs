@@ -3,22 +3,11 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    public static GameManager instance;
-
     public GameObject gameOverUI;
 
     // Flag to check if the game is over
     private bool _isGameOver = false;
     public bool IsGameOver { get => _isGameOver; }
-
-    private void Awake() {
-        if (instance == null) {
-            instance = this;
-            DontDestroyOnLoad(gameObject);
-        }
-        else
-            Destroy(gameObject);
-    }
     
     /**
     * Called when the player dies.
@@ -34,6 +23,12 @@ public class GameManager : MonoBehaviour
     */
     public void Restart() {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-        this._isGameOver = false;
+    }
+
+    /**
+    * Loads the main menu scene.
+    */
+    public void Menu() {
+        SceneManager.LoadScene(Utils.MENU_SCENE_INDEX);
     }
 }
