@@ -69,8 +69,7 @@ public class Player : MonoBehaviour
     }
 
     void Start() {
-        for (var i = 0; i < transform.GetChild(0).childCount; i++)
-        {
+        for (var i = 0; i < transform.GetChild(0).childCount; i++) {
             GameObject go = transform.GetChild(0).GetChild(i).gameObject; 
             Weapon component = go.GetComponent<Weapon>();
             weaponList.Add(component);

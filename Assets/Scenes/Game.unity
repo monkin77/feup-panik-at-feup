@@ -59131,6 +59131,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1610060028}
     - target: {fileID: 2075478858, guid: 0780414129f7ba84f8863b16c2e956df, type: 3}
+      propertyPath: collisionOffset
+      value: 0.04
+      objectReference: {fileID: 0}
+    - target: {fileID: 2075478858, guid: 0780414129f7ba84f8863b16c2e956df, type: 3}
       propertyPath: scoreCounterText
       value: 
       objectReference: {fileID: 1803740626}
