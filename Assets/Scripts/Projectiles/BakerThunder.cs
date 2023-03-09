@@ -15,8 +15,7 @@ public class BakerThunder : MonoBehaviour
     
     private float thunder_y_offset = 0.75f;
 
-    private void Start()
-    {
+    private void Start() {
         // apply the y offset
         this.Position = this.transform.position;
         this.transform.position = this.Position;

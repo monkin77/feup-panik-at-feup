@@ -90,8 +90,7 @@ public class Player : MonoBehaviour
      * Checks if attack and move keys were pressed
      * and act according to it
      */
-    void ListenKbEvents()
-    {
+    void ListenKbEvents() {
         AttackKeyboard();
         PlayerMoveKeyboard();
         ChangeWeaponKb();
@@ -134,8 +133,7 @@ public class Player : MonoBehaviour
     /**
      * Checks if attack key was pressed
      */
-    void AttackKeyboard()
-    {
+    void AttackKeyboard() {
         var weapon = weaponList[weaponIdx];
         foreach (var wpn in weaponList)
         {
