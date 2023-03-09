@@ -22,6 +22,8 @@ public class Shovel : Weapon
     // Audio for shovel hit
     [SerializeField] private AudioSource hitAudio;
 
+    [SerializeField] private AudioSource thunderAudio;
+
 
     private void Start() {
         this.powerUpPfbMoveDuration = 0.5f;
@@ -75,6 +77,9 @@ public class Shovel : Weapon
                                         new Vector3(orientation.x, orientation.y, 0) * powerUpPositionOffset;
             
             Instantiate(this.powerUpPrefab, thunderFinalPos, Quaternion.identity);
+
+            // Play the thunder sound
+            this.thunderAudio.Play();
             
             StartCoroutine(PowerUpMovementReset());
 
