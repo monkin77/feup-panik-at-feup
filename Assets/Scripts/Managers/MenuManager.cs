@@ -7,7 +7,7 @@ public class MenuManager : MonoBehaviour
     * Starts the game.
     */
     public void StartGame() {
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene(Utils.GAME_SCENE_INDEX);
     }
 
     public void QuitGame() {
